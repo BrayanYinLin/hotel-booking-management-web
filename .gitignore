@@ -1,0 +1,48 @@
+# Build results
+packages/
+bin/
+obj/
+out/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Auto-generated files
+*.generated.cs
+
+# Packages
+*.nupkg
+*.snupkg
+*.dSYM/
+*.dbmdl
+*.jfm
+
+# Logs
+*.log
+*.tlog
+*.ide.log
+*.ide.log.*
+
+# Visual Studio working folder
+.vs/
+
+# Resharper files
+_ReSharper*/
+
+# ASP.NET Scaffolding
+.scaffolding/
+
+# Web-specific files
+wwwroot/
+
+# Publish directory
+publish/
+PublishProfiles/
+
+# Database and local config
+appsettings*.json
+*.db
+*.

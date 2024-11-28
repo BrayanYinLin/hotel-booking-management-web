@@ -1,0 +1,521 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="hotel_booking_management.Site" %>
+
+<!--COPIAR DESDE AKI -->
+<!DOCTYPE html>
+<html lang="es">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - Dashboard Analytics</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Variables globales para consistencia en colores */
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #4f46e5;
+            --dark-color: #1e1b4b;
+            --light-color: #eef2ff;
+        }
+         /* Reset básico y configuración de altura */
+        html, body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            width: 100%;
+        }
+         /* Reset básico y configuración de altura */
+          /* Reset básico y configuración de altura */
+         body {
+            font-family: 'Poppins', sans-serif;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: var(--light-color);
+            position: relative;
+            overflow-x: hidden;
+            transition: background-image 1s ease-in-out;
+        }
+
+        .content-wrapper {
+            animation: slideIn 0.4s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 280px;
+            background: rgba(30, 27, 75, 0.3);
+            backdrop-filter: blur(5px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem 1.5rem;
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-brand {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--light-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-img {
+            width: 130px;
+            object-fit: contain;
+        }
+
+        .nav-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-grow: 1;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            color: var(--light-color);
+            text-decoration: none;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            gap: 1rem;
+        }
+
+        .nav-link i {
+            font-size: 1.25rem;
+            width: 1.5rem;
+            text-align: center;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(99, 102, 241, 0.2);
+            transform: translateX(5px);
+        }
+
+        .accordion-button {
+            background: transparent !important;
+            color: var(--light-color) !important;
+            padding: 1rem !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background: rgba(99, 102, 241, 0.2) !important;
+        }
+
+        .accordion-button::after {
+            filter: brightness(0) invert(1);
+        }
+
+        .accordion-body {
+            background: transparent !important;
+            padding: 0.5rem 1rem 0.5rem 3rem !important;
+        }
+
+        .accordion-item {
+            background: transparent !important;
+            border: none !important;
+        }
+
+        .sub-nav-link {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            color: var(--light-color);
+            text-decoration: none;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            gap: 1rem;
+        }
+
+        .sub-nav-link:hover {
+            background: rgba(99, 102, 241, 0.2);
+            transform: translateX(5px);
+            color: var(--light-color);
+        }
+
+        .main-content {
+            margin-left: 280px;
+            padding: 2rem;
+            min-height: 100vh;
+            position: relative;
+            width: calc(100% - 280px);
+        }
+        .main-content-container {
+            margin-left: 280px;
+            padding: 2rem;
+            min-height: 100vh;
+            position: relative;
+            width: calc(100% - 280px);
+        }
+
+
+        .content-wrapper {
+            background: rgba(255, 255, 255, 0.4);
+            color: var(--dark-color);
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            min-height: calc(100vh - 7rem);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 280px;
+            right: 0;
+            padding: 0.5rem 2rem;
+            background: rgba(30, 27, 75, 0.3);
+            backdrop-filter: blur(5px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: right;
+            z-index: 900;
+            font-size: 0.875rem;
+        }
+        .top-section {
+            margin-left: 280px;
+            padding: 2rem 2rem 0 2rem;
+            position: relative;
+            width: calc(100% - 280px);
+            height: 180px; /* Altura fija para la cabecera */
+        }
+
+        .top-container {
+            background: rgba(30, 27, 75, 0.4);
+            color: var(--light-color);
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            height: 100%;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.show {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+            .footer {
+                left: 0;
+            }
+            .toggle-sidebar {
+                display: block !important;
+            }
+            .top-section {
+                margin-left: 0;
+                width: 100%;
+            }
+             .main-content-container {
+                margin-left: 0;
+                width: 100%;
+            }
+}
+
+
+        }
+
+        .toggle-sidebar {
+            display: none;
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 1001;
+            background: var(--primary-color);
+            border: none;
+            color: white;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        .validation-message {
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .required::after {
+            content: "*";
+            color: #dc3545;
+            margin-left: 4px;
+        }
+
+        .form-control:invalid {
+            border-color: #dc3545;
+        }
+        .auto-style1 {
+            margin-bottom: 2rem;
+            width: 280px;
+        }
+    </style>
+
+   <div class="top-section">
+    <div class="top-container">
+       <asp:ContentPlaceHolder id="Cabecera" runat="server"></asp:ContentPlaceHolder>
+    </div>
+</div>
+</head>
+<body>
+    <form runat="server" class="needs-validation" novalidate>
+
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="True"></asp:ScriptManager>
+
+        <button class="toggle-sidebar" onclick="toggleSidebar()"><i class="fas fa-bars"></i>
+        </button>
+
+        <nav class="sidebar">
+            <div class="auto-style1">
+                 <!-- RUTA POR DEFECTO  -->
+                <a class="sidebar-brand" runat="server" href="~/Inicio.aspx">
+                     <!--FIN RUTA  -->
+                    <span>Hotel</span><img src="https://i.postimg.cc/fyWYHyhR/logo.png" alt="Logo" class="logo-img">
+                </a>
+            </div>
+
+            <div class="accordion nav-menu" id="sidebarAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#userCollapse">
+                            <i class="fas fa-user-circle me-2"></i> Usuario
+                        </button>
+                    </h2>
+                    <div id="userCollapse" class="accordion-collapse collapse" data-bs-parent="#sidebarAccordion">
+                        <div class="accordion-body">
+                            <!--CAMBIAR RUTA  -->
+                            <a class="sub-nav-link" runat="server" href="~/FrmUsuarios.aspx">
+                                 <!--FIN RUTA  -->
+                                <i class="fas fa-users-cog"></i>
+                                <span>Usuarios</span>
+                            </a>
+                            <!--CAMBIAR RUTA  -->
+                            <a class="sub-nav-link" runat="server" href="~/FrmTipoUsuario.aspx">
+                                <!--FIN RUTA  -->
+                                <i class="fas fa-user-tag"></i>
+                                <span>Tipo de Usuario</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <li class="nav-item">
+                    <!--CAMBIAR RUTA  -->
+                    <a class="nav-link" runat="server" href="~/FrmServicios.aspx">
+                        <!--FIN RUTA  -->
+                        <i class="fas fa-concierge-bell"></i>
+                        <span>Servicio</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <!--CAMBIAR RUTA  -->
+                    <a class="nav-link" runat="server" href="~/FrmHabitaciones.aspx">
+                        <!--FIN RUTA  -->
+                        <i class="fas fa-bed"></i>
+                        <span>Habitación</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <!--CAMBIAR RUTA  -->
+                    <a class="nav-link" runat="server" href="~/FrmHuespedes.aspx">
+                        <!--FIN RUTA  -->
+                        <i class="fas fa-users"></i>
+                        <span>Huespedes</span>
+                    </a>
+                </li>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#reservaCollapse">
+                            <i class="fas fa-calendar-check me-2"></i> Reserva
+                        </button>
+                    </h2>
+                    <div id="reservaCollapse" class="accordion-collapse collapse" data-bs-parent="#sidebarAccordion">
+                        <div class="accordion-body">
+                            <!--CAMBIAR RUTA  -->
+                            <a class="sub-nav-link" runat="server" href="~/FrmReserva.aspx">
+                                <!--FIN RUTA  -->
+                                <i class="fas fa-list-alt"></i>
+                                <span>Reservas</span>
+                            </a>
+                            <!--CAMBIAR RUTA  -->
+                            <a class="sub-nav-link" runat="server" href="~/FrmCrearReserva.aspx">
+                                <!--FIN RUTA  -->
+                                <i class="fas fa-plus-circle"></i>
+                                <span>Crear Reserva</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <li class="nav-item">
+                    <!--CAMBIAR RUTA  -->
+                    <a class="nav-link" runat="server" href="~/FrmReportes.aspx">
+                        <!--FIN RUTA  -->
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Reporte</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <!--CAMBIAR RUTA  -->
+                    <a class="nav-link" runat="server" href="~/FrmMantenimientos.aspx">
+                        <!--FIN RUTA  -->
+                        <i class="fas fa-tools"></i>
+                        <span>Mantenimientos</span>
+                    </a>
+                </li>
+            </div>
+        </nav>
+
+       <div class="main-content-container">
+            <div class="content-wrapper">
+                <asp:ContentPlaceHolder id="Principal" runat="server"></asp:ContentPlaceHolder>
+            </div>
+        </main>
+
+        <footer class="footer">
+            &copy; <%: DateTime.Now.Year %> La Pandilla
+        </footer>
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('show');
+        }
+
+        (function () {
+            'use strict';
+            var forms = document.querySelectorAll('.needs-validation');
+            Array.prototype.slice.call(forms).forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+
+        function showValidationMessage(inputElement, message) {
+            let validationDiv = inputElement.nextElementSibling;
+            if (!validationDiv || !validationDiv.classList.contains('validation-message')) {
+                validationDiv = document.createElement('div');
+                validationDiv.classList.add('validation-message');
+                inputElement.parentNode.insertBefore(validationDiv, inputElement.nextSibling);
+            }
+            validationDiv.textContent = message;
+        }
+    // Arreglo con todas las URLs de fondo
+            const backgroundImages = [
+            'https://i.postimg.cc/Y0hRtzZv/photo-1602217401791-a5fab1b8b775.avif',
+            'https://i.postimg.cc/vZNrNsQt/pexels-photo-8543167.jpg',
+            'https://i.postimg.cc/rs3Jst2Q/photo-1455587734955-081b22074882.avif',
+            'https://i.postimg.cc/y8Yx2vGK/free-photo-of-naturaleza-tiempo-bosque-arboles.jpg',
+            'https://i.postimg.cc/Jhsnztmd/pexels-photo-842711.jpg',
+            'https://i.postimg.cc/2yD8GwWP/pexels-photo-2749481.jpg',
+            'https://i.postimg.cc/XYb2cyXt/free-photo-of-carretera-paisaje-montanas-arena.jpg',
+            'https://i.postimg.cc/x136sTz8/pexels-matheusnatan-3765384.jpg',
+            'https://i.postimg.cc/nVXwHJ6S/pexels-photo-262367.webp',
+            'https://i.postimg.cc/Y2TD0P7r/pexels-photo-29483561.jpg',
+            'https://i.postimg.cc/z3mhNW9N/pexels-photo-3225602.jpg',
+            'https://i.postimg.cc/28vcZxj4/pexels-photo-8143668.jpg'
+
+           
+
+            ];
+
+            let currentImageIndex = 0;
+
+            function changeBackground() {
+        // Crear la cadena del gradiente con la nueva imagen
+        const newBackground = `linear-gradient(135deg, rgba(30, 27, 75, 0.5), rgba(45, 27, 105, 0.5)), url('${backgroundImages[currentImageIndex]}')`;
+
+            // Aplicar el nuevo fondo
+            document.body.style.background = newBackground;
+            document.body.style.backgroundSize = 'cover';
+            document.body.style.backgroundPosition = 'center';
+            document.body.style.backgroundAttachment = 'fixed';
+            document.body.style.backgroundRepeat = 'no-repeat';
+
+            // Incrementar el índice y volver a 0 si llegamos al final
+            currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
+    }
+
+            // Cambiar el fondo cada 10 segundos (10000 milisegundos)
+            setInterval(changeBackground, 10000);
+
+            // Llamar a la función inmediatamente para no esperar los primeros 10 segundos
+            changeBackground();
+    </script>
+</body>
+</html>
