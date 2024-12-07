@@ -1,13 +1,247 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F5A099D0-02C0-4B0A-9465-E6C86094CBFE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ProyHotel_ADO</RootNamespace>
+    <AssemblyName>ProyHotel_ADO</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
-
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="EntityFramework" Version="6.5.1" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
-
+  <ItemGroup>
+    <Compile Include="HotelDatabase.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HotelDatabase.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HotelDatabase.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HotelDatabase.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HotelDatabase.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="tb_habitacion.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_huesped.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_reserva.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_reserva_habitacion.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_reserva_habitacion_huesped.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_reserva_servicio.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_servicio.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_tipo_habitacion.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_tipo_usuario.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_usuario.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_crear_tb_reserva_Result.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_ingreso_tb_usuario_Result.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_listar_tb_habitacion_Result.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_listar_tb_huesped_Result.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_listar_tb_reserva_habitacion_huesped_Result.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_listar_tb_reserva_habitacion_Result.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_listar_tb_reserva_Result.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_listar_tb_reserva_servicio_Result.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_listar_tb_servicio_Result.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_listar_tb_tipo_habitacion_Result.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_listar_tb_tipo_usuario_Result.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_listar_tb_usuario_Result.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_obtener_tb_habitacion_id_Result.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_obtener_tb_habitacion_tipo_id_Result.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_obtener_tb_huesped_id_Result.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_obtener_tb_reserva_habitacion_huesped_id_Result.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_obtener_tb_reserva_habitacion_huesped_Result.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_obtener_tb_reserva_habitacion_huesped_todo_Result.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_obtener_tb_reserva_habitacion_id_Result.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_obtener_tb_reserva_habitacion_reserva_Result.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_obtener_tb_reserva_id_Result.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_obtener_tb_reserva_servicio_id_Result.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_obtener_tb_reserva_servicio_reserva_Result.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_obtener_tb_servicio_id_Result.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_obtener_tb_tipo_habitacion_id_Result.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_obtener_tb_tipo_usuario_id_Result.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_obtener_tb_usuario_id_Result.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsuarioADO.cs" />
+    <Compile Include="vw_habitacion.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vw_huesped.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vw_reserva.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vw_reserva_habitacion.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vw_reserva_habitacion_huesped.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vw_reserva_servicio.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vw_servicio.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vw_tipo_habitacion.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vw_tipo_usuario.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vw_usuario.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="HotelDatabase.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>HotelDatabase.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="HotelDatabase.edmx.diagram">
+      <DependentUpon>HotelDatabase.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="HotelDatabase.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>HotelDatabase.Context.cs</LastGenOutput>
+      <DependentUpon>HotelDatabase.edmx</DependentUpon>
+    </Content>
+    <Content Include="HotelDatabase.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HotelDatabase.edmx</DependentUpon>
+      <LastGenOutput>HotelDatabase.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ProyHotel_BE\ProyHotel_BE.csproj">
+      <Project>{cda25f92-266e-41a6-a3d4-3708c17d9c25}</Project>
+      <Name>ProyHotel_BE</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
