@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="93fb5552a805445fa691317580c49799" Name="Diagram1">
+        <EntityTypeShape EntityType="HotelDatabase.tb_habitacion" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelDatabase.tb_huesped" Width="1.5" PointX="8.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelDatabase.tb_reserva" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelDatabase.tb_reserva_habitacion" Width="1.5" PointX="7.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelDatabase.tb_reserva_habitacion_huesped" Width="1.5" PointX="10.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelDatabase.tb_servicio" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelDatabase.tb_tipo_habitacion" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelDatabase.tb_tipo_usuario" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelDatabase.tb_usuario" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelDatabase.tb_reserva_servicio" Width="1.5" PointX="7.5" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelDatabase.vw_habitacion" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelDatabase.vw_huesped" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelDatabase.vw_reserva" Width="1.5" PointX="10.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelDatabase.vw_reserva_habitacion" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelDatabase.vw_reserva_habitacion_huesped" Width="1.5" PointX="12.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelDatabase.vw_reserva_servicio" Width="1.5" PointX="7.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelDatabase.vw_servicio" Width="1.5" PointX="12.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelDatabase.vw_tipo_habitacion" Width="1.5" PointX="12.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelDatabase.vw_tipo_usuario" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelDatabase.vw_usuario" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
+        <AssociationConnector Association="HotelDatabase.FK__tb_habita__tipo___7A3223E8" ManuallyRouted="false" />
+        <AssociationConnector Association="HotelDatabase.FK__tb_reserv__habit__00DF2177" ManuallyRouted="false" />
+        <AssociationConnector Association="HotelDatabase.FK__tb_reserv__habit__0A688BB1" ManuallyRouted="false" />
+        <AssociationConnector Association="HotelDatabase.FK__tb_reserv__huesp__04AFB25B" ManuallyRouted="false" />
+        <AssociationConnector Association="HotelDatabase.FK__tb_reserv__reser__09746778" ManuallyRouted="false" />
+        <AssociationConnector Association="HotelDatabase.FK__tb_reserv__reser__7B264821" ManuallyRouted="false" />
+        <AssociationConnector Association="HotelDatabase.FK__tb_reserv__reser__7FEAFD3E" ManuallyRouted="false" />
+        <AssociationConnector Association="HotelDatabase.FK__tb_reserv__usuar__76619304" ManuallyRouted="false" />
+        <AssociationConnector Association="HotelDatabase.FK__tb_reserv__servi__7C1A6C5A" ManuallyRouted="false" />
+        <AssociationConnector Association="HotelDatabase.FK__tb_usuari__tipo___756D6ECB" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

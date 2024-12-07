@@ -1,0 +1,2521 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HotelDatabase.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tb_habitacion">
+          <Key>
+            <PropertyRef Name="habitacion_id" />
+          </Key>
+          <Property Name="habitacion_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo_habitacion_id" Type="int" Nullable="false" />
+          <Property Name="habitacion_aforo" Type="tinyint" />
+          <Property Name="estado_habitacion" Type="bit" Nullable="false" />
+          <Property Name="habitacion_nombre" Type="char" MaxLength="4" />
+          <Property Name="fecha_ult_modificacion" Type="datetime" />
+          <Property Name="usuario_ult_modificacion" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_huesped">
+          <Key>
+            <PropertyRef Name="huesped_id" />
+          </Key>
+          <Property Name="huesped_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="huesped_nombre" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="huesped_telefono" Type="char" MaxLength="9" />
+          <Property Name="huesped_dni" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+          <Property Name="fecha_ult_modificacion" Type="datetime" />
+          <Property Name="huesped_correo" Type="varchar" MaxLength="99" />
+          <Property Name="huesped_sexo" Type="char" MaxLength="1" />
+          <Property Name="usuario_ult_modificacion" Type="int" />
+          <Property Name="huesped_estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="tb_reserva">
+          <Key>
+            <PropertyRef Name="reserva_id" />
+          </Key>
+          <Property Name="reserva_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usuario_id" Type="int" Nullable="false" />
+          <Property Name="usuario_dni" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="usuario_telefono" Type="char" MaxLength="9" />
+          <Property Name="precio_total" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="reserva_estado" Type="bit" />
+          <Property Name="fecha_registro" Type="datetime" />
+          <Property Name="fecha_modificacion" Type="datetime" />
+          <Property Name="fecha_pago" Type="datetime" />
+          <Property Name="estado_pago" Type="bit" Nullable="false" />
+          <Property Name="reserva_nombre" Type="varchar" MaxLength="255" />
+          <Property Name="usuario_ult_modificacion" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_reserva_habitacion">
+          <Key>
+            <PropertyRef Name="reserva_id" />
+            <PropertyRef Name="habitacion_id" />
+          </Key>
+          <Property Name="reserva_id" Type="int" Nullable="false" />
+          <Property Name="habitacion_id" Type="int" Nullable="false" />
+          <Property Name="precio_estadia" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="fecha_checkin" Type="datetime" Nullable="false" />
+          <Property Name="fecha_checkout" Type="datetime" Nullable="false" />
+          <Property Name="fecha_registro" Type="datetime" Nullable="false" />
+          <Property Name="fecha_ult_modificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tb_reserva_habitacion_huesped">
+          <Key>
+            <PropertyRef Name="reserva_id" />
+            <PropertyRef Name="habitacion_id" />
+            <PropertyRef Name="huesped_id" />
+          </Key>
+          <Property Name="reserva_id" Type="int" Nullable="false" />
+          <Property Name="habitacion_id" Type="int" Nullable="false" />
+          <Property Name="huesped_id" Type="int" Nullable="false" />
+          <Property Name="asistencia_confirmada" Type="bit" />
+          <Property Name="comentario_huesped" Type="varchar" MaxLength="255" />
+          <Property Name="fecha_creacion" Type="datetime" />
+          <Property Name="fecha_ult_modificacion" Type="datetime" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'hotel_database.dbo.tb_reserva_servicio' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="tb_reserva_servicio">
+          <Key>
+            <PropertyRef Name="reserva_id" />
+            <PropertyRef Name="servicio_id" />
+            <PropertyRef Name="cantidad" />
+            <PropertyRef Name="precio_total" />
+            <PropertyRef Name="fecha_creacion" />
+          </Key>
+          <Property Name="reserva_id" Type="int" Nullable="false" />
+          <Property Name="servicio_id" Type="int" Nullable="false" />
+          <Property Name="cantidad" Type="int" Nullable="false" />
+          <Property Name="precio_total" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+          <Property Name="fecha_ult_modificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tb_servicio">
+          <Key>
+            <PropertyRef Name="servicio_id" />
+          </Key>
+          <Property Name="servicio_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="servicio_descripcion" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="servicio_precio" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="fecha_creacion" Type="datetime" />
+          <Property Name="servicio_estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="tb_tipo_habitacion">
+          <Key>
+            <PropertyRef Name="tipo_habitacion_id" />
+          </Key>
+          <Property Name="tipo_habitacion_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo_habitacion_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="costo_noche" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_tipo_usuario">
+          <Key>
+            <PropertyRef Name="tipo_usuario_id" />
+          </Key>
+          <Property Name="tipo_usuario_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo_usuario_descripcion" Type="nvarchar" MaxLength="99" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_usuario">
+          <Key>
+            <PropertyRef Name="usuario_id" />
+          </Key>
+          <Property Name="usuario_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo_usuario_id" Type="int" Nullable="false" />
+          <Property Name="usuario_nombre" Type="nvarchar" MaxLength="99" Nullable="false" />
+          <Property Name="usuario_correo" Type="varchar" MaxLength="99" Nullable="false" />
+          <Property Name="usuario_password" Type="varchar" MaxLength="99" Nullable="false" />
+          <Property Name="usuario_estado" Type="bit" Nullable="false" />
+          <Property Name="fecha_ult_modificacion" Type="datetime" />
+          <Property Name="fecha_creacion" Type="datetime" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_habitacion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vw_habitacion">
+          <Key>
+            <PropertyRef Name="Habitacion Id" />
+            <PropertyRef Name="Tipo Habitacion Id" />
+            <PropertyRef Name="Tipo Habitacion" />
+            <PropertyRef Name="Estado Numero" />
+            <PropertyRef Name="Estado" />
+          </Key>
+          <Property Name="Habitacion Id" Type="int" Nullable="false" />
+          <Property Name="Tipo Habitacion Id" Type="int" Nullable="false" />
+          <Property Name="Habitacion Nombre" Type="char" MaxLength="4" />
+          <Property Name="Tipo Habitacion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Costo Noche" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="Habitacion Aforo" Type="tinyint" />
+          <Property Name="Estado Numero" Type="bit" Nullable="false" />
+          <Property Name="Fecha Ultima Modificacion" Type="datetime" />
+          <Property Name="Usuario Ultima Modificacion Id" Type="int" />
+          <Property Name="Usuario Ultima Modificacion" Type="nvarchar" MaxLength="99" />
+          <Property Name="Estado" Type="varchar" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_huesped' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vw_huesped">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="DNI" />
+            <PropertyRef Name="Fecha Creacion" />
+            <PropertyRef Name="Estado" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Telefono" Type="char" MaxLength="9" />
+          <Property Name="DNI" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="Correo" Type="varchar" MaxLength="99" />
+          <Property Name="Sexo" Type="char" MaxLength="1" />
+          <Property Name="Fecha Creacion" Type="datetime" Nullable="false" />
+          <Property Name="Fecha Ultima Modificacion" Type="datetime" />
+          <Property Name="Usuario Ultima Modificacion" Type="int" />
+          <Property Name="Estado" Type="varchar" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_reserva' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vw_reserva">
+          <Key>
+            <PropertyRef Name="Reserva Id" />
+            <PropertyRef Name="Usuario Id" />
+            <PropertyRef Name="Tipo Usuario Id" />
+            <PropertyRef Name="Creado por" />
+            <PropertyRef Name="Tipo Usuario" />
+            <PropertyRef Name="DNI" />
+            <PropertyRef Name="Precio" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="Estado Pago Numero" />
+            <PropertyRef Name="Estado Pago" />
+          </Key>
+          <Property Name="Reserva Id" Type="int" Nullable="false" />
+          <Property Name="Usuario Id" Type="int" Nullable="false" />
+          <Property Name="Tipo Usuario Id" Type="int" Nullable="false" />
+          <Property Name="Creado por" Type="nvarchar" MaxLength="99" Nullable="false" />
+          <Property Name="Tipo Usuario" Type="nvarchar" MaxLength="99" Nullable="false" />
+          <Property Name="DNI" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="Telefono" Type="char" MaxLength="9" />
+          <Property Name="A Nombre de" Type="varchar" MaxLength="255" />
+          <Property Name="Precio" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="Estado Numero" Type="bit" />
+          <Property Name="Estado" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="Fecha Creacion" Type="datetime" />
+          <Property Name="Fecha Ultima Modificacion" Type="datetime" />
+          <Property Name="Usuario Ultima Modificacion" Type="varchar" MaxLength="99" />
+          <Property Name="Fecha Pago" Type="datetime" />
+          <Property Name="Estado Pago Numero" Type="bit" Nullable="false" />
+          <Property Name="Estado Pago" Type="varchar" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_reserva_habitacion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vw_reserva_habitacion">
+          <Key>
+            <PropertyRef Name="Reserva Id" />
+            <PropertyRef Name="Habitacion Id" />
+            <PropertyRef Name="Fecha de Entrada" />
+            <PropertyRef Name="Fecha de Salida" />
+            <PropertyRef Name="Fecha Creacion" />
+          </Key>
+          <Property Name="Reserva Id" Type="int" Nullable="false" />
+          <Property Name="Habitacion Id" Type="int" Nullable="false" />
+          <Property Name="Habitacion Nombre" Type="char" MaxLength="4" />
+          <Property Name="Precio de Estadia" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="Fecha de Entrada" Type="datetime" Nullable="false" />
+          <Property Name="Fecha de Salida" Type="datetime" Nullable="false" />
+          <Property Name="Fecha Creacion" Type="datetime" Nullable="false" />
+          <Property Name="Fecha Ultima Modificacion" Type="datetime" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_reserva_habitacion_huesped' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vw_reserva_habitacion_huesped">
+          <Key>
+            <PropertyRef Name="Reserva Id" />
+            <PropertyRef Name="Habitacion Id" />
+            <PropertyRef Name="Huesped Id" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="Huesped Nombre" />
+          </Key>
+          <Property Name="Reserva Id" Type="int" Nullable="false" />
+          <Property Name="Habitacion Id" Type="int" Nullable="false" />
+          <Property Name="Huesped Id" Type="int" Nullable="false" />
+          <Property Name="Numero Estado" Type="bit" />
+          <Property Name="Estado" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Comentarios del Huesped" Type="varchar" MaxLength="255" />
+          <Property Name="Huesped Nombre" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Habitacion del huesped" Type="char" MaxLength="4" />
+          <Property Name="Fecha Creacion" Type="datetime" />
+          <Property Name="Fecha Ultima Modificacion" Type="datetime" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_reserva_servicio' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vw_reserva_servicio">
+          <Key>
+            <PropertyRef Name="Reserva Id" />
+            <PropertyRef Name="Servicio Id" />
+            <PropertyRef Name="Servicio" />
+            <PropertyRef Name="Cantidad" />
+            <PropertyRef Name="Precio Total" />
+            <PropertyRef Name="Fecha de Creacion" />
+          </Key>
+          <Property Name="Reserva Id" Type="int" Nullable="false" />
+          <Property Name="Servicio Id" Type="int" Nullable="false" />
+          <Property Name="Servicio" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="Precio Total" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="Fecha de Creacion" Type="datetime" Nullable="false" />
+          <Property Name="Fecha de Ultima Modificacion" Type="datetime" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_servicio' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vw_servicio">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Servicio Descripcion" />
+            <PropertyRef Name="Precio" />
+            <PropertyRef Name="Estado" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Servicio Descripcion" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Precio" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="Fecha Creacion" Type="datetime" />
+          <Property Name="Estado" Type="varchar" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_tipo_habitacion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vw_tipo_habitacion">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Habitacion Descripcion" />
+            <PropertyRef Name="Precio" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Habitacion Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Precio" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_tipo_usuario' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vw_tipo_usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Tipo Descripcion" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tipo Descripcion" Type="nvarchar" MaxLength="99" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_usuario' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vw_usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Usuario" />
+            <PropertyRef Name="Contraseña" />
+            <PropertyRef Name="Tipo" />
+            <PropertyRef Name="Correo" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Usuario" Type="nvarchar" MaxLength="99" Nullable="false" />
+          <Property Name="Contraseña" Type="varchar" MaxLength="99" Nullable="false" />
+          <Property Name="Tipo" Type="nvarchar" MaxLength="99" Nullable="false" />
+          <Property Name="Correo" Type="varchar" MaxLength="99" Nullable="false" />
+          <Property Name="Fecha Ultima Modificacion" Type="datetime" />
+          <Property Name="Estado" Type="varchar" MaxLength="8" />
+          <Property Name="fecha_creacion" Type="datetime" />
+        </EntityType>
+        <Association Name="FK__tb_habita__tipo___7A3223E8">
+          <End Role="tb_tipo_habitacion" Type="Self.tb_tipo_habitacion" Multiplicity="1" />
+          <End Role="tb_habitacion" Type="Self.tb_habitacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_tipo_habitacion">
+              <PropertyRef Name="tipo_habitacion_id" />
+            </Principal>
+            <Dependent Role="tb_habitacion">
+              <PropertyRef Name="tipo_habitacion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_reserv__habit__00DF2177">
+          <End Role="tb_habitacion" Type="Self.tb_habitacion" Multiplicity="1" />
+          <End Role="tb_reserva_habitacion_huesped" Type="Self.tb_reserva_habitacion_huesped" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_habitacion">
+              <PropertyRef Name="habitacion_id" />
+            </Principal>
+            <Dependent Role="tb_reserva_habitacion_huesped">
+              <PropertyRef Name="habitacion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_reserv__habit__0A688BB1">
+          <End Role="tb_habitacion" Type="Self.tb_habitacion" Multiplicity="1" />
+          <End Role="tb_reserva_habitacion" Type="Self.tb_reserva_habitacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_habitacion">
+              <PropertyRef Name="habitacion_id" />
+            </Principal>
+            <Dependent Role="tb_reserva_habitacion">
+              <PropertyRef Name="habitacion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_reserv__huesp__04AFB25B">
+          <End Role="tb_huesped" Type="Self.tb_huesped" Multiplicity="1" />
+          <End Role="tb_reserva_habitacion_huesped" Type="Self.tb_reserva_habitacion_huesped" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_huesped">
+              <PropertyRef Name="huesped_id" />
+            </Principal>
+            <Dependent Role="tb_reserva_habitacion_huesped">
+              <PropertyRef Name="huesped_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_reserv__reser__09746778">
+          <End Role="tb_reserva" Type="Self.tb_reserva" Multiplicity="1" />
+          <End Role="tb_reserva_habitacion" Type="Self.tb_reserva_habitacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_reserva">
+              <PropertyRef Name="reserva_id" />
+            </Principal>
+            <Dependent Role="tb_reserva_habitacion">
+              <PropertyRef Name="reserva_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_reserv__reser__7B264821">
+          <End Role="tb_reserva" Type="Self.tb_reserva" Multiplicity="1" />
+          <End Role="tb_reserva_servicio" Type="Self.tb_reserva_servicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_reserva">
+              <PropertyRef Name="reserva_id" />
+            </Principal>
+            <Dependent Role="tb_reserva_servicio">
+              <PropertyRef Name="reserva_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_reserv__reser__7FEAFD3E">
+          <End Role="tb_reserva" Type="Self.tb_reserva" Multiplicity="1" />
+          <End Role="tb_reserva_habitacion_huesped" Type="Self.tb_reserva_habitacion_huesped" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_reserva">
+              <PropertyRef Name="reserva_id" />
+            </Principal>
+            <Dependent Role="tb_reserva_habitacion_huesped">
+              <PropertyRef Name="reserva_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_reserv__servi__7C1A6C5A">
+          <End Role="tb_servicio" Type="Self.tb_servicio" Multiplicity="1" />
+          <End Role="tb_reserva_servicio" Type="Self.tb_reserva_servicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_servicio">
+              <PropertyRef Name="servicio_id" />
+            </Principal>
+            <Dependent Role="tb_reserva_servicio">
+              <PropertyRef Name="servicio_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_reserv__usuar__76619304">
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="1" />
+          <End Role="tb_reserva" Type="Self.tb_reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_usuario">
+              <PropertyRef Name="usuario_id" />
+            </Principal>
+            <Dependent Role="tb_reserva">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_usuari__tipo___756D6ECB">
+          <End Role="tb_tipo_usuario" Type="Self.tb_tipo_usuario" Multiplicity="1" />
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_tipo_usuario">
+              <PropertyRef Name="tipo_usuario_id" />
+            </Principal>
+            <Dependent Role="tb_usuario">
+              <PropertyRef Name="tipo_usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="usp_actualizar_estado_usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_actualizar_tb_habitacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="habitacion_id" Type="int" Mode="In" />
+          <Parameter Name="habitacion_nombre" Type="char" Mode="In" />
+          <Parameter Name="habitacion_aforo" Type="tinyint" Mode="In" />
+          <Parameter Name="usuario_ult_modificacion" Type="int" Mode="In" />
+          <Parameter Name="tipo_habitacion_id" Type="int" Mode="In" />
+          <Parameter Name="estado_habitacion" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="usp_actualizar_tb_huesped" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="huesped_id" Type="int" Mode="In" />
+          <Parameter Name="huesped_nombre" Type="varchar" Mode="In" />
+          <Parameter Name="huesped_telefono" Type="char" Mode="In" />
+          <Parameter Name="huesped_dni" Type="char" Mode="In" />
+          <Parameter Name="fecha_ult_modificacion" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="usp_actualizar_tb_reserva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="reserva_id" Type="int" Mode="In" />
+          <Parameter Name="usuario_id" Type="int" Mode="In" />
+          <Parameter Name="usuario_ult_modificacion" Type="int" Mode="In" />
+          <Parameter Name="usuario_dni" Type="char" Mode="In" />
+          <Parameter Name="reserva_nombre" Type="varchar" Mode="In" />
+          <Parameter Name="usuario_telefono" Type="char" Mode="In" />
+          <Parameter Name="reserva_estado" Type="bit" Mode="In" />
+          <Parameter Name="estado_pago" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="usp_actualizar_tb_reserva_habitacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="reserva_id" Type="int" Mode="In" />
+          <Parameter Name="habitacion_id" Type="int" Mode="In" />
+          <Parameter Name="fecha_checkin" Type="datetime" Mode="In" />
+          <Parameter Name="fecha_checkout" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="usp_actualizar_tb_reserva_habitacion_huesped" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="reserva_id" Type="int" Mode="In" />
+          <Parameter Name="habitacion_id" Type="int" Mode="In" />
+          <Parameter Name="huesped_id" Type="int" Mode="In" />
+          <Parameter Name="asistencia_confirmada" Type="bit" Mode="In" />
+          <Parameter Name="comentario_huesped" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_actualizar_tb_reserva_servicio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="reserva_id" Type="int" Mode="In" />
+          <Parameter Name="servicio_id" Type="int" Mode="In" />
+          <Parameter Name="cantidad" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_actualizar_tb_servicio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="servicio_id" Type="int" Mode="In" />
+          <Parameter Name="servicio_descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="servicio_precio" Type="decimal" Mode="In" />
+          <Parameter Name="servicio_estado" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="usp_actualizar_tb_tipo_habitacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo_habitacion_id" Type="int" Mode="In" />
+          <Parameter Name="tipo_habitacion_descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="costo_noche" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="usp_actualizar_tb_tipo_usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo_usuario_id" Type="int" Mode="In" />
+          <Parameter Name="tipo_usuario_descripcion" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_actualizar_tb_usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="usuario_id" Type="int" Mode="In" />
+          <Parameter Name="usuario_nombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="usuario_correo" Type="varchar" Mode="In" />
+          <Parameter Name="usuario_password" Type="varchar" Mode="In" />
+          <Parameter Name="tipo_usuario_id" Type="int" Mode="In" />
+          <Parameter Name="estado_usuario" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="usp_borrar_tb_habitacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="habitacion_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_borrar_tb_huesped" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="huesped_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_borrar_tb_reserva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="reserva_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_borrar_tb_reserva_habitacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="reserva_id" Type="int" Mode="In" />
+          <Parameter Name="habitacion_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_borrar_tb_reserva_habitacion_huesped" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="reserva_id" Type="int" Mode="In" />
+          <Parameter Name="habitacion_id" Type="int" Mode="In" />
+          <Parameter Name="huesped_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_borrar_tb_reserva_servicio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="reserva_id" Type="int" Mode="In" />
+          <Parameter Name="servicio_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_borrar_tb_servicio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="servicio_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_borrar_tb_tipo_habitacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo_habitacion_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_borrar_tb_tipo_usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo_usuario_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_borrar_tb_usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="usuario_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_crear_tb_habitacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo_habitacion_id" Type="int" Mode="In" />
+          <Parameter Name="habitacion_nombre" Type="char" Mode="In" />
+          <Parameter Name="habitacion_aforo" Type="smallint" Mode="In" />
+          <Parameter Name="estado_habitacion" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="usp_crear_tb_huesped" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="huesped_nombre" Type="varchar" Mode="In" />
+          <Parameter Name="huesped_telefono" Type="char" Mode="In" />
+          <Parameter Name="huesped_dni" Type="char" Mode="In" />
+        </Function>
+        <Function Name="usp_crear_tb_reserva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="usuario_id" Type="int" Mode="In" />
+          <Parameter Name="usuario_dni" Type="char" Mode="In" />
+          <Parameter Name="usuario_telefono" Type="char" Mode="In" />
+          <Parameter Name="reserva_nombre" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_crear_tb_reserva_habitacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="reserva_id" Type="int" Mode="In" />
+          <Parameter Name="habitacion_id" Type="int" Mode="In" />
+          <Parameter Name="fecha_checkin" Type="datetime" Mode="In" />
+          <Parameter Name="fecha_checkout" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="usp_crear_tb_reserva_habitacion_huesped" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="reserva_id" Type="int" Mode="In" />
+          <Parameter Name="habitacion_id" Type="int" Mode="In" />
+          <Parameter Name="huesped_id" Type="int" Mode="In" />
+          <Parameter Name="asistencia_confirmada" Type="bit" Mode="In" />
+          <Parameter Name="comentario_huesped" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_crear_tb_reserva_servicio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="reserva_id" Type="int" Mode="In" />
+          <Parameter Name="servicio_id" Type="int" Mode="In" />
+          <Parameter Name="cantidad" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_crear_tb_servicio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="servicio_descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="servicio_precio" Type="decimal" Mode="In" />
+          <Parameter Name="servicio_estado" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="usp_crear_tb_tipo_habitacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo_habitacion_descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="costo_noche" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="usp_crear_tb_tipo_usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo_usuario_descripcion" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_crear_tb_usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo_usuario_id" Type="int" Mode="In" />
+          <Parameter Name="usuario_nombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="usuario_correo" Type="varchar" Mode="In" />
+          <Parameter Name="usuario_password" Type="varchar" Mode="In" />
+          <Parameter Name="usuario_estado" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="usp_eliminar_tb_reserva_servicio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="reserva_id" Type="int" Mode="In" />
+          <Parameter Name="servicio_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_ingreso_tb_usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="usuario_nombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="usuario_password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_listar_tb_habitacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_listar_tb_huesped" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_listar_tb_reserva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_listar_tb_reserva_habitacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_listar_tb_reserva_habitacion_huesped" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_listar_tb_reserva_servicio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_listar_tb_servicio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_listar_tb_tipo_habitacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_listar_tb_tipo_usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_listar_tb_usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_obtener_tb_habitacion_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="habitacion_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_obtener_tb_habitacion_tipo_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo_habitacion_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_obtener_tb_huesped_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="huesped_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_obtener_tb_reserva_habitacion_huesped" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="huesped_nombre" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_obtener_tb_reserva_habitacion_huesped_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="reserva_id" Type="int" Mode="In" />
+          <Parameter Name="habitacion_id" Type="int" Mode="In" />
+          <Parameter Name="huesped_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_obtener_tb_reserva_habitacion_huesped_todo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="reserva_id" Type="int" Mode="In" />
+          <Parameter Name="habitacion_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_obtener_tb_reserva_habitacion_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="reserva_id" Type="int" Mode="In" />
+          <Parameter Name="habitacion_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_obtener_tb_reserva_habitacion_reserva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="reserva_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_obtener_tb_reserva_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="reserva_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_obtener_tb_reserva_servicio_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="reserva_id" Type="int" Mode="In" />
+          <Parameter Name="servicio_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_obtener_tb_reserva_servicio_reserva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="reserva_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_obtener_tb_servicio_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="servicio_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_obtener_tb_tipo_habitacion_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo_habitacion_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_obtener_tb_tipo_usuario_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo_usuario_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_obtener_tb_usuario_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="usuario_id" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="HotelDatabaseStoreContainer">
+          <EntitySet Name="tb_habitacion" EntityType="Self.tb_habitacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_huesped" EntityType="Self.tb_huesped" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_reserva" EntityType="Self.tb_reserva" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_reserva_habitacion" EntityType="Self.tb_reserva_habitacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_reserva_habitacion_huesped" EntityType="Self.tb_reserva_habitacion_huesped" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_servicio" EntityType="Self.tb_servicio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_tipo_habitacion" EntityType="Self.tb_tipo_habitacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_tipo_usuario" EntityType="Self.tb_tipo_usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_usuario" EntityType="Self.tb_usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_reserva_servicio" EntityType="Self.tb_reserva_servicio" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tb_reserva_servicio].[reserva_id] AS [reserva_id], 
+    [tb_reserva_servicio].[servicio_id] AS [servicio_id], 
+    [tb_reserva_servicio].[cantidad] AS [cantidad], 
+    [tb_reserva_servicio].[precio_total] AS [precio_total], 
+    [tb_reserva_servicio].[fecha_creacion] AS [fecha_creacion], 
+    [tb_reserva_servicio].[fecha_ult_modificacion] AS [fecha_ult_modificacion]
+    FROM [dbo].[tb_reserva_servicio] AS [tb_reserva_servicio]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_habitacion" EntityType="Self.vw_habitacion" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_habitacion].[Habitacion Id] AS [Habitacion Id], 
+    [vw_habitacion].[Tipo Habitacion Id] AS [Tipo Habitacion Id], 
+    [vw_habitacion].[Habitacion Nombre] AS [Habitacion Nombre], 
+    [vw_habitacion].[Tipo Habitacion] AS [Tipo Habitacion], 
+    [vw_habitacion].[Costo Noche] AS [Costo Noche], 
+    [vw_habitacion].[Habitacion Aforo] AS [Habitacion Aforo], 
+    [vw_habitacion].[Estado Numero] AS [Estado Numero], 
+    [vw_habitacion].[Fecha Ultima Modificacion] AS [Fecha Ultima Modificacion], 
+    [vw_habitacion].[Usuario Ultima Modificacion Id] AS [Usuario Ultima Modificacion Id], 
+    [vw_habitacion].[Usuario Ultima Modificacion] AS [Usuario Ultima Modificacion], 
+    [vw_habitacion].[Estado] AS [Estado]
+    FROM [dbo].[vw_habitacion] AS [vw_habitacion]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_huesped" EntityType="Self.vw_huesped" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_huesped].[Id] AS [Id], 
+    [vw_huesped].[Nombre] AS [Nombre], 
+    [vw_huesped].[Telefono] AS [Telefono], 
+    [vw_huesped].[DNI] AS [DNI], 
+    [vw_huesped].[Correo] AS [Correo], 
+    [vw_huesped].[Sexo] AS [Sexo], 
+    [vw_huesped].[Fecha Creacion] AS [Fecha Creacion], 
+    [vw_huesped].[Fecha Ultima Modificacion] AS [Fecha Ultima Modificacion], 
+    [vw_huesped].[Usuario Ultima Modificacion] AS [Usuario Ultima Modificacion], 
+    [vw_huesped].[Estado] AS [Estado]
+    FROM [dbo].[vw_huesped] AS [vw_huesped]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_reserva" EntityType="Self.vw_reserva" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_reserva].[Reserva Id] AS [Reserva Id], 
+    [vw_reserva].[Usuario Id] AS [Usuario Id], 
+    [vw_reserva].[Tipo Usuario Id] AS [Tipo Usuario Id], 
+    [vw_reserva].[Creado por] AS [Creado por], 
+    [vw_reserva].[Tipo Usuario] AS [Tipo Usuario], 
+    [vw_reserva].[DNI] AS [DNI], 
+    [vw_reserva].[Telefono] AS [Telefono], 
+    [vw_reserva].[A Nombre de] AS [A Nombre de], 
+    [vw_reserva].[Precio] AS [Precio], 
+    [vw_reserva].[Estado Numero] AS [Estado Numero], 
+    [vw_reserva].[Estado] AS [Estado], 
+    [vw_reserva].[Fecha Creacion] AS [Fecha Creacion], 
+    [vw_reserva].[Fecha Ultima Modificacion] AS [Fecha Ultima Modificacion], 
+    [vw_reserva].[Usuario Ultima Modificacion] AS [Usuario Ultima Modificacion], 
+    [vw_reserva].[Fecha Pago] AS [Fecha Pago], 
+    [vw_reserva].[Estado Pago Numero] AS [Estado Pago Numero], 
+    [vw_reserva].[Estado Pago] AS [Estado Pago]
+    FROM [dbo].[vw_reserva] AS [vw_reserva]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_reserva_habitacion" EntityType="Self.vw_reserva_habitacion" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_reserva_habitacion].[Reserva Id] AS [Reserva Id], 
+    [vw_reserva_habitacion].[Habitacion Id] AS [Habitacion Id], 
+    [vw_reserva_habitacion].[Habitacion Nombre] AS [Habitacion Nombre], 
+    [vw_reserva_habitacion].[Precio de Estadia] AS [Precio de Estadia], 
+    [vw_reserva_habitacion].[Fecha de Entrada] AS [Fecha de Entrada], 
+    [vw_reserva_habitacion].[Fecha de Salida] AS [Fecha de Salida], 
+    [vw_reserva_habitacion].[Fecha Creacion] AS [Fecha Creacion], 
+    [vw_reserva_habitacion].[Fecha Ultima Modificacion] AS [Fecha Ultima Modificacion]
+    FROM [dbo].[vw_reserva_habitacion] AS [vw_reserva_habitacion]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_reserva_habitacion_huesped" EntityType="Self.vw_reserva_habitacion_huesped" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_reserva_habitacion_huesped].[Reserva Id] AS [Reserva Id], 
+    [vw_reserva_habitacion_huesped].[Habitacion Id] AS [Habitacion Id], 
+    [vw_reserva_habitacion_huesped].[Huesped Id] AS [Huesped Id], 
+    [vw_reserva_habitacion_huesped].[Numero Estado] AS [Numero Estado], 
+    [vw_reserva_habitacion_huesped].[Estado] AS [Estado], 
+    [vw_reserva_habitacion_huesped].[Comentarios del Huesped] AS [Comentarios del Huesped], 
+    [vw_reserva_habitacion_huesped].[Huesped Nombre] AS [Huesped Nombre], 
+    [vw_reserva_habitacion_huesped].[Habitacion del huesped] AS [Habitacion del huesped], 
+    [vw_reserva_habitacion_huesped].[Fecha Creacion] AS [Fecha Creacion], 
+    [vw_reserva_habitacion_huesped].[Fecha Ultima Modificacion] AS [Fecha Ultima Modificacion]
+    FROM [dbo].[vw_reserva_habitacion_huesped] AS [vw_reserva_habitacion_huesped]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_reserva_servicio" EntityType="Self.vw_reserva_servicio" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_reserva_servicio].[Reserva Id] AS [Reserva Id], 
+    [vw_reserva_servicio].[Servicio Id] AS [Servicio Id], 
+    [vw_reserva_servicio].[Servicio] AS [Servicio], 
+    [vw_reserva_servicio].[Cantidad] AS [Cantidad], 
+    [vw_reserva_servicio].[Precio Total] AS [Precio Total], 
+    [vw_reserva_servicio].[Fecha de Creacion] AS [Fecha de Creacion], 
+    [vw_reserva_servicio].[Fecha de Ultima Modificacion] AS [Fecha de Ultima Modificacion]
+    FROM [dbo].[vw_reserva_servicio] AS [vw_reserva_servicio]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_servicio" EntityType="Self.vw_servicio" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_servicio].[Id] AS [Id], 
+    [vw_servicio].[Servicio Descripcion] AS [Servicio Descripcion], 
+    [vw_servicio].[Precio] AS [Precio], 
+    [vw_servicio].[Fecha Creacion] AS [Fecha Creacion], 
+    [vw_servicio].[Estado] AS [Estado]
+    FROM [dbo].[vw_servicio] AS [vw_servicio]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_tipo_habitacion" EntityType="Self.vw_tipo_habitacion" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_tipo_habitacion].[Id] AS [Id], 
+    [vw_tipo_habitacion].[Habitacion Descripcion] AS [Habitacion Descripcion], 
+    [vw_tipo_habitacion].[Precio] AS [Precio]
+    FROM [dbo].[vw_tipo_habitacion] AS [vw_tipo_habitacion]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_tipo_usuario" EntityType="Self.vw_tipo_usuario" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_tipo_usuario].[Id] AS [Id], 
+    [vw_tipo_usuario].[Tipo Descripcion] AS [Tipo Descripcion]
+    FROM [dbo].[vw_tipo_usuario] AS [vw_tipo_usuario]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_usuario" EntityType="Self.vw_usuario" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_usuario].[Id] AS [Id], 
+    [vw_usuario].[Usuario] AS [Usuario], 
+    [vw_usuario].[Contraseña] AS [Contraseña], 
+    [vw_usuario].[Tipo] AS [Tipo], 
+    [vw_usuario].[Correo] AS [Correo], 
+    [vw_usuario].[Fecha Ultima Modificacion] AS [Fecha Ultima Modificacion], 
+    [vw_usuario].[Estado] AS [Estado], 
+    [vw_usuario].[fecha_creacion] AS [fecha_creacion]
+    FROM [dbo].[vw_usuario] AS [vw_usuario]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__tb_habita__tipo___7A3223E8" Association="Self.FK__tb_habita__tipo___7A3223E8">
+            <End Role="tb_tipo_habitacion" EntitySet="tb_tipo_habitacion" />
+            <End Role="tb_habitacion" EntitySet="tb_habitacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_reserv__habit__00DF2177" Association="Self.FK__tb_reserv__habit__00DF2177">
+            <End Role="tb_habitacion" EntitySet="tb_habitacion" />
+            <End Role="tb_reserva_habitacion_huesped" EntitySet="tb_reserva_habitacion_huesped" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_reserv__habit__0A688BB1" Association="Self.FK__tb_reserv__habit__0A688BB1">
+            <End Role="tb_habitacion" EntitySet="tb_habitacion" />
+            <End Role="tb_reserva_habitacion" EntitySet="tb_reserva_habitacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_reserv__huesp__04AFB25B" Association="Self.FK__tb_reserv__huesp__04AFB25B">
+            <End Role="tb_huesped" EntitySet="tb_huesped" />
+            <End Role="tb_reserva_habitacion_huesped" EntitySet="tb_reserva_habitacion_huesped" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_reserv__reser__09746778" Association="Self.FK__tb_reserv__reser__09746778">
+            <End Role="tb_reserva" EntitySet="tb_reserva" />
+            <End Role="tb_reserva_habitacion" EntitySet="tb_reserva_habitacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_reserv__reser__7B264821" Association="Self.FK__tb_reserv__reser__7B264821">
+            <End Role="tb_reserva" EntitySet="tb_reserva" />
+            <End Role="tb_reserva_servicio" EntitySet="tb_reserva_servicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_reserv__reser__7FEAFD3E" Association="Self.FK__tb_reserv__reser__7FEAFD3E">
+            <End Role="tb_reserva" EntitySet="tb_reserva" />
+            <End Role="tb_reserva_habitacion_huesped" EntitySet="tb_reserva_habitacion_huesped" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_reserv__servi__7C1A6C5A" Association="Self.FK__tb_reserv__servi__7C1A6C5A">
+            <End Role="tb_servicio" EntitySet="tb_servicio" />
+            <End Role="tb_reserva_servicio" EntitySet="tb_reserva_servicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_reserv__usuar__76619304" Association="Self.FK__tb_reserv__usuar__76619304">
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+            <End Role="tb_reserva" EntitySet="tb_reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_usuari__tipo___756D6ECB" Association="Self.FK__tb_usuari__tipo___756D6ECB">
+            <End Role="tb_tipo_usuario" EntitySet="tb_tipo_usuario" />
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HotelDatabase" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tb_habitacion">
+          <Key>
+            <PropertyRef Name="habitacion_id" />
+          </Key>
+          <Property Name="habitacion_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo_habitacion_id" Type="Int32" Nullable="false" />
+          <Property Name="habitacion_aforo" Type="Byte" />
+          <Property Name="estado_habitacion" Type="Boolean" Nullable="false" />
+          <Property Name="habitacion_nombre" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="fecha_ult_modificacion" Type="DateTime" Precision="3" />
+          <Property Name="usuario_ult_modificacion" Type="Int32" />
+          <NavigationProperty Name="tb_tipo_habitacion" Relationship="Self.FK__tb_habita__tipo___7A3223E8" FromRole="tb_habitacion" ToRole="tb_tipo_habitacion" />
+          <NavigationProperty Name="tb_reserva_habitacion_huesped" Relationship="Self.FK__tb_reserv__habit__00DF2177" FromRole="tb_habitacion" ToRole="tb_reserva_habitacion_huesped" />
+          <NavigationProperty Name="tb_reserva_habitacion" Relationship="Self.FK__tb_reserv__habit__0A688BB1" FromRole="tb_habitacion" ToRole="tb_reserva_habitacion" />
+        </EntityType>
+        <EntityType Name="tb_huesped">
+          <Key>
+            <PropertyRef Name="huesped_id" />
+          </Key>
+          <Property Name="huesped_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="huesped_nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="huesped_telefono" Type="String" MaxLength="9" FixedLength="true" Unicode="false" />
+          <Property Name="huesped_dni" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fecha_ult_modificacion" Type="DateTime" Precision="3" />
+          <Property Name="huesped_correo" Type="String" MaxLength="99" FixedLength="false" Unicode="false" />
+          <Property Name="huesped_sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="usuario_ult_modificacion" Type="Int32" />
+          <Property Name="huesped_estado" Type="Boolean" />
+          <NavigationProperty Name="tb_reserva_habitacion_huesped" Relationship="Self.FK__tb_reserv__huesp__04AFB25B" FromRole="tb_huesped" ToRole="tb_reserva_habitacion_huesped" />
+        </EntityType>
+        <EntityType Name="tb_reserva">
+          <Key>
+            <PropertyRef Name="reserva_id" />
+          </Key>
+          <Property Name="reserva_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usuario_id" Type="Int32" Nullable="false" />
+          <Property Name="usuario_dni" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="usuario_telefono" Type="String" MaxLength="9" FixedLength="true" Unicode="false" />
+          <Property Name="precio_total" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="reserva_estado" Type="Boolean" />
+          <Property Name="fecha_registro" Type="DateTime" Precision="3" />
+          <Property Name="fecha_modificacion" Type="DateTime" Precision="3" />
+          <Property Name="fecha_pago" Type="DateTime" Precision="3" />
+          <Property Name="estado_pago" Type="Boolean" Nullable="false" />
+          <Property Name="reserva_nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="usuario_ult_modificacion" Type="Int32" />
+          <NavigationProperty Name="tb_reserva_habitacion" Relationship="Self.FK__tb_reserv__reser__09746778" FromRole="tb_reserva" ToRole="tb_reserva_habitacion" />
+          <NavigationProperty Name="tb_reserva_servicio" Relationship="Self.FK__tb_reserv__reser__7B264821" FromRole="tb_reserva" ToRole="tb_reserva_servicio" />
+          <NavigationProperty Name="tb_reserva_habitacion_huesped" Relationship="Self.FK__tb_reserv__reser__7FEAFD3E" FromRole="tb_reserva" ToRole="tb_reserva_habitacion_huesped" />
+          <NavigationProperty Name="tb_usuario" Relationship="Self.FK__tb_reserv__usuar__76619304" FromRole="tb_reserva" ToRole="tb_usuario" />
+        </EntityType>
+        <EntityType Name="tb_reserva_habitacion">
+          <Key>
+            <PropertyRef Name="reserva_id" />
+            <PropertyRef Name="habitacion_id" />
+          </Key>
+          <Property Name="reserva_id" Type="Int32" Nullable="false" />
+          <Property Name="habitacion_id" Type="Int32" Nullable="false" />
+          <Property Name="precio_estadia" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="fecha_checkin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fecha_checkout" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fecha_registro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fecha_ult_modificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tb_habitacion" Relationship="Self.FK__tb_reserv__habit__0A688BB1" FromRole="tb_reserva_habitacion" ToRole="tb_habitacion" />
+          <NavigationProperty Name="tb_reserva" Relationship="Self.FK__tb_reserv__reser__09746778" FromRole="tb_reserva_habitacion" ToRole="tb_reserva" />
+        </EntityType>
+        <EntityType Name="tb_reserva_habitacion_huesped">
+          <Key>
+            <PropertyRef Name="reserva_id" />
+            <PropertyRef Name="habitacion_id" />
+            <PropertyRef Name="huesped_id" />
+          </Key>
+          <Property Name="reserva_id" Type="Int32" Nullable="false" />
+          <Property Name="habitacion_id" Type="Int32" Nullable="false" />
+          <Property Name="huesped_id" Type="Int32" Nullable="false" />
+          <Property Name="asistencia_confirmada" Type="Boolean" />
+          <Property Name="comentario_huesped" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_creacion" Type="DateTime" Precision="3" />
+          <Property Name="fecha_ult_modificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tb_habitacion" Relationship="Self.FK__tb_reserv__habit__00DF2177" FromRole="tb_reserva_habitacion_huesped" ToRole="tb_habitacion" />
+          <NavigationProperty Name="tb_huesped" Relationship="Self.FK__tb_reserv__huesp__04AFB25B" FromRole="tb_reserva_habitacion_huesped" ToRole="tb_huesped" />
+          <NavigationProperty Name="tb_reserva" Relationship="Self.FK__tb_reserv__reser__7FEAFD3E" FromRole="tb_reserva_habitacion_huesped" ToRole="tb_reserva" />
+        </EntityType>
+        <EntityType Name="tb_servicio">
+          <Key>
+            <PropertyRef Name="servicio_id" />
+          </Key>
+          <Property Name="servicio_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="servicio_descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="servicio_precio" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="fecha_creacion" Type="DateTime" Precision="3" />
+          <Property Name="servicio_estado" Type="Boolean" />
+          <NavigationProperty Name="tb_reserva_servicio" Relationship="Self.FK__tb_reserv__servi__7C1A6C5A" FromRole="tb_servicio" ToRole="tb_reserva_servicio" />
+        </EntityType>
+        <EntityType Name="tb_tipo_habitacion">
+          <Key>
+            <PropertyRef Name="tipo_habitacion_id" />
+          </Key>
+          <Property Name="tipo_habitacion_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo_habitacion_descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="costo_noche" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <NavigationProperty Name="tb_habitacion" Relationship="Self.FK__tb_habita__tipo___7A3223E8" FromRole="tb_tipo_habitacion" ToRole="tb_habitacion" />
+        </EntityType>
+        <EntityType Name="tb_tipo_usuario">
+          <Key>
+            <PropertyRef Name="tipo_usuario_id" />
+          </Key>
+          <Property Name="tipo_usuario_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo_usuario_descripcion" Type="String" MaxLength="99" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tb_usuario" Relationship="Self.FK__tb_usuari__tipo___756D6ECB" FromRole="tb_tipo_usuario" ToRole="tb_usuario" />
+        </EntityType>
+        <EntityType Name="tb_usuario">
+          <Key>
+            <PropertyRef Name="usuario_id" />
+          </Key>
+          <Property Name="usuario_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo_usuario_id" Type="Int32" Nullable="false" />
+          <Property Name="usuario_nombre" Type="String" MaxLength="99" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="usuario_correo" Type="String" MaxLength="99" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usuario_password" Type="String" MaxLength="99" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usuario_estado" Type="Boolean" Nullable="false" />
+          <Property Name="fecha_ult_modificacion" Type="DateTime" Precision="3" />
+          <Property Name="fecha_creacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tb_reserva" Relationship="Self.FK__tb_reserv__usuar__76619304" FromRole="tb_usuario" ToRole="tb_reserva" />
+          <NavigationProperty Name="tb_tipo_usuario" Relationship="Self.FK__tb_usuari__tipo___756D6ECB" FromRole="tb_usuario" ToRole="tb_tipo_usuario" />
+        </EntityType>
+        <EntityType Name="tb_reserva_servicio">
+          <Key>
+            <PropertyRef Name="reserva_id" />
+            <PropertyRef Name="servicio_id" />
+            <PropertyRef Name="cantidad" />
+            <PropertyRef Name="precio_total" />
+            <PropertyRef Name="fecha_creacion" />
+          </Key>
+          <Property Name="reserva_id" Type="Int32" Nullable="false" />
+          <Property Name="servicio_id" Type="Int32" Nullable="false" />
+          <Property Name="cantidad" Type="Int32" Nullable="false" />
+          <Property Name="precio_total" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fecha_ult_modificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tb_reserva" Relationship="Self.FK__tb_reserv__reser__7B264821" FromRole="tb_reserva_servicio" ToRole="tb_reserva" />
+          <NavigationProperty Name="tb_servicio" Relationship="Self.FK__tb_reserv__servi__7C1A6C5A" FromRole="tb_reserva_servicio" ToRole="tb_servicio" />
+        </EntityType>
+        <EntityType Name="vw_habitacion">
+          <Key>
+            <PropertyRef Name="Habitacion_Id" />
+            <PropertyRef Name="Tipo_Habitacion_Id" />
+            <PropertyRef Name="Tipo_Habitacion" />
+            <PropertyRef Name="Estado_Numero" />
+            <PropertyRef Name="Estado" />
+          </Key>
+          <Property Name="Habitacion_Id" Type="Int32" Nullable="false" />
+          <Property Name="Tipo_Habitacion_Id" Type="Int32" Nullable="false" />
+          <Property Name="Habitacion_Nombre" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="Tipo_Habitacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Costo_Noche" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="Habitacion_Aforo" Type="Byte" />
+          <Property Name="Estado_Numero" Type="Boolean" Nullable="false" />
+          <Property Name="Fecha_Ultima_Modificacion" Type="DateTime" Precision="3" />
+          <Property Name="Usuario_Ultima_Modificacion_Id" Type="Int32" />
+          <Property Name="Usuario_Ultima_Modificacion" Type="String" MaxLength="99" FixedLength="false" Unicode="true" />
+          <Property Name="Estado" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vw_huesped">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="DNI" />
+            <PropertyRef Name="Fecha_Creacion" />
+            <PropertyRef Name="Estado" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="9" FixedLength="true" Unicode="false" />
+          <Property Name="DNI" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="99" FixedLength="false" Unicode="false" />
+          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Fecha_Creacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fecha_Ultima_Modificacion" Type="DateTime" Precision="3" />
+          <Property Name="Usuario_Ultima_Modificacion" Type="Int32" />
+          <Property Name="Estado" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vw_reserva">
+          <Key>
+            <PropertyRef Name="Reserva_Id" />
+            <PropertyRef Name="Usuario_Id" />
+            <PropertyRef Name="Tipo_Usuario_Id" />
+            <PropertyRef Name="Creado_por" />
+            <PropertyRef Name="Tipo_Usuario" />
+            <PropertyRef Name="DNI" />
+            <PropertyRef Name="Precio" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="Estado_Pago_Numero" />
+            <PropertyRef Name="Estado_Pago" />
+          </Key>
+          <Property Name="Reserva_Id" Type="Int32" Nullable="false" />
+          <Property Name="Usuario_Id" Type="Int32" Nullable="false" />
+          <Property Name="Tipo_Usuario_Id" Type="Int32" Nullable="false" />
+          <Property Name="Creado_por" Type="String" MaxLength="99" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Tipo_Usuario" Type="String" MaxLength="99" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DNI" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="9" FixedLength="true" Unicode="false" />
+          <Property Name="A_Nombre_de" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Precio" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="Estado_Numero" Type="Boolean" />
+          <Property Name="Estado" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fecha_Creacion" Type="DateTime" Precision="3" />
+          <Property Name="Fecha_Ultima_Modificacion" Type="DateTime" Precision="3" />
+          <Property Name="Usuario_Ultima_Modificacion" Type="String" MaxLength="99" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Pago" Type="DateTime" Precision="3" />
+          <Property Name="Estado_Pago_Numero" Type="Boolean" Nullable="false" />
+          <Property Name="Estado_Pago" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vw_reserva_habitacion">
+          <Key>
+            <PropertyRef Name="Reserva_Id" />
+            <PropertyRef Name="Habitacion_Id" />
+            <PropertyRef Name="Fecha_de_Entrada" />
+            <PropertyRef Name="Fecha_de_Salida" />
+            <PropertyRef Name="Fecha_Creacion" />
+          </Key>
+          <Property Name="Reserva_Id" Type="Int32" Nullable="false" />
+          <Property Name="Habitacion_Id" Type="Int32" Nullable="false" />
+          <Property Name="Habitacion_Nombre" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="Precio_de_Estadia" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="Fecha_de_Entrada" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fecha_de_Salida" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fecha_Creacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fecha_Ultima_Modificacion" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="vw_reserva_habitacion_huesped">
+          <Key>
+            <PropertyRef Name="Reserva_Id" />
+            <PropertyRef Name="Habitacion_Id" />
+            <PropertyRef Name="Huesped_Id" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="Huesped_Nombre" />
+          </Key>
+          <Property Name="Reserva_Id" Type="Int32" Nullable="false" />
+          <Property Name="Habitacion_Id" Type="Int32" Nullable="false" />
+          <Property Name="Huesped_Id" Type="Int32" Nullable="false" />
+          <Property Name="Numero_Estado" Type="Boolean" />
+          <Property Name="Estado" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Comentarios_del_Huesped" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Huesped_Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Habitacion_del_huesped" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="Fecha_Creacion" Type="DateTime" Precision="3" />
+          <Property Name="Fecha_Ultima_Modificacion" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="vw_reserva_servicio">
+          <Key>
+            <PropertyRef Name="Reserva_Id" />
+            <PropertyRef Name="Servicio_Id" />
+            <PropertyRef Name="Servicio" />
+            <PropertyRef Name="Cantidad" />
+            <PropertyRef Name="Precio_Total" />
+            <PropertyRef Name="Fecha_de_Creacion" />
+          </Key>
+          <Property Name="Reserva_Id" Type="Int32" Nullable="false" />
+          <Property Name="Servicio_Id" Type="Int32" Nullable="false" />
+          <Property Name="Servicio" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="Precio_Total" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="Fecha_de_Creacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fecha_de_Ultima_Modificacion" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="vw_servicio">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Servicio_Descripcion" />
+            <PropertyRef Name="Precio" />
+            <PropertyRef Name="Estado" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Servicio_Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Precio" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="Fecha_Creacion" Type="DateTime" Precision="3" />
+          <Property Name="Estado" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vw_tipo_habitacion">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Habitacion_Descripcion" />
+            <PropertyRef Name="Precio" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Habitacion_Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Precio" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vw_tipo_usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Tipo_Descripcion" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tipo_Descripcion" Type="String" MaxLength="99" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vw_usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Usuario" />
+            <PropertyRef Name="Contraseña" />
+            <PropertyRef Name="Tipo" />
+            <PropertyRef Name="Correo" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Usuario" Type="String" MaxLength="99" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Contraseña" Type="String" MaxLength="99" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tipo" Type="String" MaxLength="99" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="99" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fecha_Ultima_Modificacion" Type="DateTime" Precision="3" />
+          <Property Name="Estado" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_creacion" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK__tb_habita__tipo___7A3223E8">
+          <End Role="tb_tipo_habitacion" Type="Self.tb_tipo_habitacion" Multiplicity="1" />
+          <End Role="tb_habitacion" Type="Self.tb_habitacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_tipo_habitacion">
+              <PropertyRef Name="tipo_habitacion_id" />
+            </Principal>
+            <Dependent Role="tb_habitacion">
+              <PropertyRef Name="tipo_habitacion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_reserv__habit__00DF2177">
+          <End Role="tb_habitacion" Type="Self.tb_habitacion" Multiplicity="1" />
+          <End Role="tb_reserva_habitacion_huesped" Type="Self.tb_reserva_habitacion_huesped" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_habitacion">
+              <PropertyRef Name="habitacion_id" />
+            </Principal>
+            <Dependent Role="tb_reserva_habitacion_huesped">
+              <PropertyRef Name="habitacion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_reserv__habit__0A688BB1">
+          <End Role="tb_habitacion" Type="Self.tb_habitacion" Multiplicity="1" />
+          <End Role="tb_reserva_habitacion" Type="Self.tb_reserva_habitacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_habitacion">
+              <PropertyRef Name="habitacion_id" />
+            </Principal>
+            <Dependent Role="tb_reserva_habitacion">
+              <PropertyRef Name="habitacion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_reserv__huesp__04AFB25B">
+          <End Role="tb_huesped" Type="Self.tb_huesped" Multiplicity="1" />
+          <End Role="tb_reserva_habitacion_huesped" Type="Self.tb_reserva_habitacion_huesped" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_huesped">
+              <PropertyRef Name="huesped_id" />
+            </Principal>
+            <Dependent Role="tb_reserva_habitacion_huesped">
+              <PropertyRef Name="huesped_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_reserv__reser__09746778">
+          <End Role="tb_reserva" Type="Self.tb_reserva" Multiplicity="1" />
+          <End Role="tb_reserva_habitacion" Type="Self.tb_reserva_habitacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_reserva">
+              <PropertyRef Name="reserva_id" />
+            </Principal>
+            <Dependent Role="tb_reserva_habitacion">
+              <PropertyRef Name="reserva_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_reserv__reser__7B264821">
+          <End Role="tb_reserva" Type="Self.tb_reserva" Multiplicity="1" />
+          <End Role="tb_reserva_servicio" Type="Self.tb_reserva_servicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_reserva">
+              <PropertyRef Name="reserva_id" />
+            </Principal>
+            <Dependent Role="tb_reserva_servicio">
+              <PropertyRef Name="reserva_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_reserv__reser__7FEAFD3E">
+          <End Role="tb_reserva" Type="Self.tb_reserva" Multiplicity="1" />
+          <End Role="tb_reserva_habitacion_huesped" Type="Self.tb_reserva_habitacion_huesped" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_reserva">
+              <PropertyRef Name="reserva_id" />
+            </Principal>
+            <Dependent Role="tb_reserva_habitacion_huesped">
+              <PropertyRef Name="reserva_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_reserv__usuar__76619304">
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="1" />
+          <End Role="tb_reserva" Type="Self.tb_reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_usuario">
+              <PropertyRef Name="usuario_id" />
+            </Principal>
+            <Dependent Role="tb_reserva">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_reserv__servi__7C1A6C5A">
+          <End Role="tb_servicio" Type="Self.tb_servicio" Multiplicity="1" />
+          <End Role="tb_reserva_servicio" Type="Self.tb_reserva_servicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_servicio">
+              <PropertyRef Name="servicio_id" />
+            </Principal>
+            <Dependent Role="tb_reserva_servicio">
+              <PropertyRef Name="servicio_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_usuari__tipo___756D6ECB">
+          <End Role="tb_tipo_usuario" Type="Self.tb_tipo_usuario" Multiplicity="1" />
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_tipo_usuario">
+              <PropertyRef Name="tipo_usuario_id" />
+            </Principal>
+            <Dependent Role="tb_usuario">
+              <PropertyRef Name="tipo_usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="hotel_databaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_habitacion" EntityType="Self.tb_habitacion" />
+          <EntitySet Name="tb_huesped" EntityType="Self.tb_huesped" />
+          <EntitySet Name="tb_reserva" EntityType="Self.tb_reserva" />
+          <EntitySet Name="tb_reserva_habitacion" EntityType="Self.tb_reserva_habitacion" />
+          <EntitySet Name="tb_reserva_habitacion_huesped" EntityType="Self.tb_reserva_habitacion_huesped" />
+          <EntitySet Name="tb_servicio" EntityType="Self.tb_servicio" />
+          <EntitySet Name="tb_tipo_habitacion" EntityType="Self.tb_tipo_habitacion" />
+          <EntitySet Name="tb_tipo_usuario" EntityType="Self.tb_tipo_usuario" />
+          <EntitySet Name="tb_usuario" EntityType="Self.tb_usuario" />
+          <EntitySet Name="tb_reserva_servicio" EntityType="Self.tb_reserva_servicio" />
+          <EntitySet Name="vw_habitacion" EntityType="Self.vw_habitacion" />
+          <EntitySet Name="vw_huesped" EntityType="Self.vw_huesped" />
+          <EntitySet Name="vw_reserva" EntityType="Self.vw_reserva" />
+          <EntitySet Name="vw_reserva_habitacion" EntityType="Self.vw_reserva_habitacion" />
+          <EntitySet Name="vw_reserva_habitacion_huesped" EntityType="Self.vw_reserva_habitacion_huesped" />
+          <EntitySet Name="vw_reserva_servicio" EntityType="Self.vw_reserva_servicio" />
+          <EntitySet Name="vw_servicio" EntityType="Self.vw_servicio" />
+          <EntitySet Name="vw_tipo_habitacion" EntityType="Self.vw_tipo_habitacion" />
+          <EntitySet Name="vw_tipo_usuario" EntityType="Self.vw_tipo_usuario" />
+          <EntitySet Name="vw_usuario" EntityType="Self.vw_usuario" />
+          <AssociationSet Name="FK__tb_habita__tipo___7A3223E8" Association="Self.FK__tb_habita__tipo___7A3223E8">
+            <End Role="tb_tipo_habitacion" EntitySet="tb_tipo_habitacion" />
+            <End Role="tb_habitacion" EntitySet="tb_habitacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_reserv__habit__00DF2177" Association="Self.FK__tb_reserv__habit__00DF2177">
+            <End Role="tb_habitacion" EntitySet="tb_habitacion" />
+            <End Role="tb_reserva_habitacion_huesped" EntitySet="tb_reserva_habitacion_huesped" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_reserv__habit__0A688BB1" Association="Self.FK__tb_reserv__habit__0A688BB1">
+            <End Role="tb_habitacion" EntitySet="tb_habitacion" />
+            <End Role="tb_reserva_habitacion" EntitySet="tb_reserva_habitacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_reserv__huesp__04AFB25B" Association="Self.FK__tb_reserv__huesp__04AFB25B">
+            <End Role="tb_huesped" EntitySet="tb_huesped" />
+            <End Role="tb_reserva_habitacion_huesped" EntitySet="tb_reserva_habitacion_huesped" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_reserv__reser__09746778" Association="Self.FK__tb_reserv__reser__09746778">
+            <End Role="tb_reserva" EntitySet="tb_reserva" />
+            <End Role="tb_reserva_habitacion" EntitySet="tb_reserva_habitacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_reserv__reser__7B264821" Association="Self.FK__tb_reserv__reser__7B264821">
+            <End Role="tb_reserva" EntitySet="tb_reserva" />
+            <End Role="tb_reserva_servicio" EntitySet="tb_reserva_servicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_reserv__reser__7FEAFD3E" Association="Self.FK__tb_reserv__reser__7FEAFD3E">
+            <End Role="tb_reserva" EntitySet="tb_reserva" />
+            <End Role="tb_reserva_habitacion_huesped" EntitySet="tb_reserva_habitacion_huesped" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_reserv__usuar__76619304" Association="Self.FK__tb_reserv__usuar__76619304">
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+            <End Role="tb_reserva" EntitySet="tb_reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_reserv__servi__7C1A6C5A" Association="Self.FK__tb_reserv__servi__7C1A6C5A">
+            <End Role="tb_servicio" EntitySet="tb_servicio" />
+            <End Role="tb_reserva_servicio" EntitySet="tb_reserva_servicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_usuari__tipo___756D6ECB" Association="Self.FK__tb_usuari__tipo___756D6ECB">
+            <End Role="tb_tipo_usuario" EntitySet="tb_tipo_usuario" />
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+          </AssociationSet>
+          <FunctionImport Name="usp_actualizar_estado_usuario">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_actualizar_tb_habitacion">
+            <Parameter Name="habitacion_id" Mode="In" Type="Int32" />
+            <Parameter Name="habitacion_nombre" Mode="In" Type="String" />
+            <Parameter Name="habitacion_aforo" Mode="In" Type="Byte" />
+            <Parameter Name="usuario_ult_modificacion" Mode="In" Type="Int32" />
+            <Parameter Name="tipo_habitacion_id" Mode="In" Type="Int32" />
+            <Parameter Name="estado_habitacion" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="usp_actualizar_tb_huesped">
+            <Parameter Name="huesped_id" Mode="In" Type="Int32" />
+            <Parameter Name="huesped_nombre" Mode="In" Type="String" />
+            <Parameter Name="huesped_telefono" Mode="In" Type="String" />
+            <Parameter Name="huesped_dni" Mode="In" Type="String" />
+            <Parameter Name="fecha_ult_modificacion" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="usp_actualizar_tb_reserva">
+            <Parameter Name="reserva_id" Mode="In" Type="Int32" />
+            <Parameter Name="usuario_id" Mode="In" Type="Int32" />
+            <Parameter Name="usuario_ult_modificacion" Mode="In" Type="Int32" />
+            <Parameter Name="usuario_dni" Mode="In" Type="String" />
+            <Parameter Name="reserva_nombre" Mode="In" Type="String" />
+            <Parameter Name="usuario_telefono" Mode="In" Type="String" />
+            <Parameter Name="reserva_estado" Mode="In" Type="Boolean" />
+            <Parameter Name="estado_pago" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="usp_actualizar_tb_reserva_habitacion">
+            <Parameter Name="reserva_id" Mode="In" Type="Int32" />
+            <Parameter Name="habitacion_id" Mode="In" Type="Int32" />
+            <Parameter Name="fecha_checkin" Mode="In" Type="DateTime" />
+            <Parameter Name="fecha_checkout" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="usp_actualizar_tb_reserva_habitacion_huesped">
+            <Parameter Name="reserva_id" Mode="In" Type="Int32" />
+            <Parameter Name="habitacion_id" Mode="In" Type="Int32" />
+            <Parameter Name="huesped_id" Mode="In" Type="Int32" />
+            <Parameter Name="asistencia_confirmada" Mode="In" Type="Boolean" />
+            <Parameter Name="comentario_huesped" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_actualizar_tb_reserva_servicio">
+            <Parameter Name="reserva_id" Mode="In" Type="Int32" />
+            <Parameter Name="servicio_id" Mode="In" Type="Int32" />
+            <Parameter Name="cantidad" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_actualizar_tb_servicio">
+            <Parameter Name="servicio_id" Mode="In" Type="Int32" />
+            <Parameter Name="servicio_descripcion" Mode="In" Type="String" />
+            <Parameter Name="servicio_precio" Mode="In" Type="Decimal" />
+            <Parameter Name="servicio_estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="usp_actualizar_tb_tipo_habitacion">
+            <Parameter Name="tipo_habitacion_id" Mode="In" Type="Int32" />
+            <Parameter Name="tipo_habitacion_descripcion" Mode="In" Type="String" />
+            <Parameter Name="costo_noche" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="usp_actualizar_tb_tipo_usuario">
+            <Parameter Name="tipo_usuario_id" Mode="In" Type="Int32" />
+            <Parameter Name="tipo_usuario_descripcion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_actualizar_tb_usuario">
+            <Parameter Name="usuario_id" Mode="In" Type="Int32" />
+            <Parameter Name="usuario_nombre" Mode="In" Type="String" />
+            <Parameter Name="usuario_correo" Mode="In" Type="String" />
+            <Parameter Name="usuario_password" Mode="In" Type="String" />
+            <Parameter Name="tipo_usuario_id" Mode="In" Type="Int32" />
+            <Parameter Name="estado_usuario" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="usp_borrar_tb_habitacion">
+            <Parameter Name="habitacion_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_borrar_tb_huesped">
+            <Parameter Name="huesped_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_borrar_tb_reserva">
+            <Parameter Name="reserva_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_borrar_tb_reserva_habitacion">
+            <Parameter Name="reserva_id" Mode="In" Type="Int32" />
+            <Parameter Name="habitacion_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_borrar_tb_reserva_habitacion_huesped">
+            <Parameter Name="reserva_id" Mode="In" Type="Int32" />
+            <Parameter Name="habitacion_id" Mode="In" Type="Int32" />
+            <Parameter Name="huesped_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_borrar_tb_reserva_servicio">
+            <Parameter Name="reserva_id" Mode="In" Type="Int32" />
+            <Parameter Name="servicio_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_borrar_tb_servicio">
+            <Parameter Name="servicio_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_borrar_tb_tipo_habitacion">
+            <Parameter Name="tipo_habitacion_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_borrar_tb_tipo_usuario">
+            <Parameter Name="tipo_usuario_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_borrar_tb_usuario">
+            <Parameter Name="usuario_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_crear_tb_habitacion">
+            <Parameter Name="tipo_habitacion_id" Mode="In" Type="Int32" />
+            <Parameter Name="habitacion_nombre" Mode="In" Type="String" />
+            <Parameter Name="habitacion_aforo" Mode="In" Type="Int16" />
+            <Parameter Name="estado_habitacion" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="usp_crear_tb_huesped">
+            <Parameter Name="huesped_nombre" Mode="In" Type="String" />
+            <Parameter Name="huesped_telefono" Mode="In" Type="String" />
+            <Parameter Name="huesped_dni" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_crear_tb_reserva" ReturnType="Collection(HotelDatabase.usp_crear_tb_reserva_Result)">
+            <Parameter Name="usuario_id" Mode="In" Type="Int32" />
+            <Parameter Name="usuario_dni" Mode="In" Type="String" />
+            <Parameter Name="usuario_telefono" Mode="In" Type="String" />
+            <Parameter Name="reserva_nombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_crear_tb_reserva_habitacion">
+            <Parameter Name="reserva_id" Mode="In" Type="Int32" />
+            <Parameter Name="habitacion_id" Mode="In" Type="Int32" />
+            <Parameter Name="fecha_checkin" Mode="In" Type="DateTime" />
+            <Parameter Name="fecha_checkout" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="usp_crear_tb_reserva_habitacion_huesped">
+            <Parameter Name="reserva_id" Mode="In" Type="Int32" />
+            <Parameter Name="habitacion_id" Mode="In" Type="Int32" />
+            <Parameter Name="huesped_id" Mode="In" Type="Int32" />
+            <Parameter Name="asistencia_confirmada" Mode="In" Type="Boolean" />
+            <Parameter Name="comentario_huesped" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_crear_tb_reserva_servicio">
+            <Parameter Name="reserva_id" Mode="In" Type="Int32" />
+            <Parameter Name="servicio_id" Mode="In" Type="Int32" />
+            <Parameter Name="cantidad" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_crear_tb_servicio">
+            <Parameter Name="servicio_descripcion" Mode="In" Type="String" />
+            <Parameter Name="servicio_precio" Mode="In" Type="Decimal" />
+            <Parameter Name="servicio_estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="usp_crear_tb_tipo_habitacion">
+            <Parameter Name="tipo_habitacion_descripcion" Mode="In" Type="String" />
+            <Parameter Name="costo_noche" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="usp_crear_tb_tipo_usuario">
+            <Parameter Name="tipo_usuario_descripcion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_crear_tb_usuario">
+            <Parameter Name="tipo_usuario_id" Mode="In" Type="Int32" />
+            <Parameter Name="usuario_nombre" Mode="In" Type="String" />
+            <Parameter Name="usuario_correo" Mode="In" Type="String" />
+            <Parameter Name="usuario_password" Mode="In" Type="String" />
+            <Parameter Name="usuario_estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="usp_eliminar_tb_reserva_servicio">
+            <Parameter Name="reserva_id" Mode="In" Type="Int32" />
+            <Parameter Name="servicio_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_ingreso_tb_usuario" ReturnType="Collection(HotelDatabase.usp_ingreso_tb_usuario_Result)">
+            <Parameter Name="usuario_nombre" Mode="In" Type="String" />
+            <Parameter Name="usuario_password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_listar_tb_habitacion" ReturnType="Collection(HotelDatabase.usp_listar_tb_habitacion_Result)" />
+          <FunctionImport Name="usp_listar_tb_huesped" ReturnType="Collection(HotelDatabase.usp_listar_tb_huesped_Result)" />
+          <FunctionImport Name="usp_listar_tb_reserva" ReturnType="Collection(HotelDatabase.usp_listar_tb_reserva_Result)" />
+          <FunctionImport Name="usp_listar_tb_reserva_habitacion" ReturnType="Collection(HotelDatabase.usp_listar_tb_reserva_habitacion_Result)" />
+          <FunctionImport Name="usp_listar_tb_reserva_habitacion_huesped" ReturnType="Collection(HotelDatabase.usp_listar_tb_reserva_habitacion_huesped_Result)" />
+          <FunctionImport Name="usp_listar_tb_reserva_servicio" ReturnType="Collection(HotelDatabase.usp_listar_tb_reserva_servicio_Result)" />
+          <FunctionImport Name="usp_listar_tb_servicio" ReturnType="Collection(HotelDatabase.usp_listar_tb_servicio_Result)" />
+          <FunctionImport Name="usp_listar_tb_tipo_habitacion" ReturnType="Collection(HotelDatabase.usp_listar_tb_tipo_habitacion_Result)" />
+          <FunctionImport Name="usp_listar_tb_tipo_usuario" ReturnType="Collection(HotelDatabase.usp_listar_tb_tipo_usuario_Result)" />
+          <FunctionImport Name="usp_listar_tb_usuario" ReturnType="Collection(HotelDatabase.usp_listar_tb_usuario_Result)" />
+          <FunctionImport Name="usp_obtener_tb_habitacion_id" ReturnType="Collection(HotelDatabase.usp_obtener_tb_habitacion_id_Result)">
+            <Parameter Name="habitacion_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_obtener_tb_habitacion_tipo_id" ReturnType="Collection(HotelDatabase.usp_obtener_tb_habitacion_tipo_id_Result)">
+            <Parameter Name="tipo_habitacion_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_obtener_tb_huesped_id" ReturnType="Collection(HotelDatabase.usp_obtener_tb_huesped_id_Result)">
+            <Parameter Name="huesped_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_obtener_tb_reserva_habitacion_huesped" ReturnType="Collection(HotelDatabase.usp_obtener_tb_reserva_habitacion_huesped_Result)">
+            <Parameter Name="huesped_nombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_obtener_tb_reserva_habitacion_huesped_id" ReturnType="Collection(HotelDatabase.usp_obtener_tb_reserva_habitacion_huesped_id_Result)">
+            <Parameter Name="reserva_id" Mode="In" Type="Int32" />
+            <Parameter Name="habitacion_id" Mode="In" Type="Int32" />
+            <Parameter Name="huesped_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_obtener_tb_reserva_habitacion_huesped_todo" ReturnType="Collection(HotelDatabase.usp_obtener_tb_reserva_habitacion_huesped_todo_Result)">
+            <Parameter Name="reserva_id" Mode="In" Type="Int32" />
+            <Parameter Name="habitacion_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_obtener_tb_reserva_habitacion_id" ReturnType="Collection(HotelDatabase.usp_obtener_tb_reserva_habitacion_id_Result)">
+            <Parameter Name="reserva_id" Mode="In" Type="Int32" />
+            <Parameter Name="habitacion_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_obtener_tb_reserva_habitacion_reserva" ReturnType="Collection(HotelDatabase.usp_obtener_tb_reserva_habitacion_reserva_Result)">
+            <Parameter Name="reserva_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_obtener_tb_reserva_id" ReturnType="Collection(HotelDatabase.usp_obtener_tb_reserva_id_Result)">
+            <Parameter Name="reserva_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_obtener_tb_reserva_servicio_id" ReturnType="Collection(HotelDatabase.usp_obtener_tb_reserva_servicio_id_Result)">
+            <Parameter Name="reserva_id" Mode="In" Type="Int32" />
+            <Parameter Name="servicio_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_obtener_tb_reserva_servicio_reserva" ReturnType="Collection(HotelDatabase.usp_obtener_tb_reserva_servicio_reserva_Result)">
+            <Parameter Name="reserva_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_obtener_tb_servicio_id" ReturnType="Collection(HotelDatabase.usp_obtener_tb_servicio_id_Result)">
+            <Parameter Name="servicio_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_obtener_tb_tipo_habitacion_id" ReturnType="Collection(HotelDatabase.usp_obtener_tb_tipo_habitacion_id_Result)">
+            <Parameter Name="tipo_habitacion_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_obtener_tb_tipo_usuario_id" ReturnType="Collection(HotelDatabase.usp_obtener_tb_tipo_usuario_id_Result)">
+            <Parameter Name="tipo_usuario_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_obtener_tb_usuario_id" ReturnType="Collection(HotelDatabase.usp_obtener_tb_usuario_id_Result)">
+            <Parameter Name="usuario_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="usp_crear_tb_reserva_Result">
+          <Property Type="Int32" Name="reserva_id" Nullable="true" />
+          <Property Type="String" Name="reserva_nombre" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="usuario_dni" Nullable="true" MaxLength="8" />
+          <Property Type="String" Name="usuario_telefono" Nullable="true" MaxLength="9" />
+          <Property Type="Decimal" Name="precio_total" Nullable="false" Precision="8" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="usp_ingreso_tb_usuario_Result">
+          <Property Type="Int32" Name="usuario_id" Nullable="false" />
+          <Property Type="String" Name="usuario_nombre" Nullable="false" MaxLength="99" />
+          <Property Type="String" Name="usuario_password" Nullable="false" MaxLength="99" />
+          <Property Type="Boolean" Name="usuario_estado" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="usp_listar_tb_habitacion_Result">
+          <Property Type="Int32" Name="Habitacion_Id" Nullable="false" />
+          <Property Type="Int32" Name="Tipo_Habitacion_Id" Nullable="false" />
+          <Property Type="String" Name="Habitacion_Nombre" Nullable="true" MaxLength="4" />
+          <Property Type="String" Name="Tipo_Habitacion" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Costo_Noche" Nullable="false" Precision="8" Scale="2" />
+          <Property Type="Byte" Name="Habitacion_Aforo" Nullable="true" />
+          <Property Type="Boolean" Name="Estado_Numero" Nullable="false" />
+          <Property Type="DateTime" Name="Fecha_Ultima_Modificacion" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Usuario_Ultima_Modificacion_Id" Nullable="true" />
+          <Property Type="String" Name="Usuario_Ultima_Modificacion" Nullable="true" MaxLength="99" />
+          <Property Type="String" Name="Estado" Nullable="false" MaxLength="8" />
+        </ComplexType>
+        <ComplexType Name="usp_listar_tb_huesped_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="Telefono" Nullable="true" MaxLength="9" />
+          <Property Type="String" Name="DNI" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="Correo" Nullable="true" MaxLength="99" />
+          <Property Type="String" Name="Sexo" Nullable="true" MaxLength="1" />
+          <Property Type="DateTime" Name="Fecha_Creacion" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="Fecha_Ultima_Modificacion" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Usuario_Ultima_Modificacion" Nullable="true" />
+          <Property Type="String" Name="Estado" Nullable="false" MaxLength="8" />
+        </ComplexType>
+        <ComplexType Name="usp_listar_tb_reserva_Result">
+          <Property Type="Int32" Name="Reserva_Id" Nullable="false" />
+          <Property Type="Int32" Name="Usuario_Id" Nullable="false" />
+          <Property Type="Int32" Name="Tipo_Usuario_Id" Nullable="false" />
+          <Property Type="String" Name="Creado_por" Nullable="false" MaxLength="99" />
+          <Property Type="String" Name="Tipo_Usuario" Nullable="false" MaxLength="99" />
+          <Property Type="String" Name="DNI" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="Telefono" Nullable="true" MaxLength="9" />
+          <Property Type="String" Name="A_Nombre_de" Nullable="true" MaxLength="255" />
+          <Property Type="Decimal" Name="Precio" Nullable="false" Precision="8" Scale="2" />
+          <Property Type="Boolean" Name="Estado_Numero" Nullable="true" />
+          <Property Type="String" Name="Estado" Nullable="false" MaxLength="8" />
+          <Property Type="DateTime" Name="Fecha_Creacion" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Fecha_Ultima_Modificacion" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Usuario_Ultima_Modificacion" Nullable="true" />
+          <Property Type="DateTime" Name="Fecha_Pago" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="Estado_Pago_Numero" Nullable="false" />
+          <Property Type="String" Name="Estado_Pago" Nullable="false" MaxLength="8" />
+        </ComplexType>
+        <ComplexType Name="usp_listar_tb_reserva_habitacion_Result">
+          <Property Type="Int32" Name="Reserva_Id" Nullable="false" />
+          <Property Type="Int32" Name="Habitacion_Id" Nullable="false" />
+          <Property Type="String" Name="Habitacion_Nombre" Nullable="true" MaxLength="4" />
+          <Property Type="Decimal" Name="Precio_de_Estadia" Nullable="true" Precision="8" Scale="2" />
+          <Property Type="DateTime" Name="Fecha_de_Entrada" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="Fecha_de_Salida" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="Fecha_Creacion" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="Fecha_Ultima_Modificacion" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="usp_listar_tb_reserva_habitacion_huesped_Result">
+          <Property Type="Int32" Name="Reserva_Id" Nullable="false" />
+          <Property Type="Int32" Name="Habitacion_Id" Nullable="false" />
+          <Property Type="Int32" Name="Huesped_Id" Nullable="false" />
+          <Property Type="Boolean" Name="Numero_Estado" Nullable="true" />
+          <Property Type="String" Name="Estado" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Comentarios_del_Huesped" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Huesped_Nombre" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="Habitacion_del_huesped" Nullable="true" MaxLength="4" />
+          <Property Type="DateTime" Name="Fecha_Creacion" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Fecha_Ultima_Modificacion" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="usp_listar_tb_reserva_servicio_Result">
+          <Property Type="Int32" Name="Reserva_Id" Nullable="false" />
+          <Property Type="Int32" Name="Servicio_Id" Nullable="false" />
+          <Property Type="String" Name="Servicio" Nullable="false" MaxLength="255" />
+          <Property Type="Int32" Name="Cantidad" Nullable="false" />
+          <Property Type="Decimal" Name="Precio_Total" Nullable="false" Precision="8" Scale="2" />
+          <Property Type="DateTime" Name="Fecha_de_Creacion" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="Fecha_de_Ultima_Modificacion" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="usp_listar_tb_servicio_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Servicio_Descripcion" Nullable="false" MaxLength="255" />
+          <Property Type="Decimal" Name="Precio" Nullable="false" Precision="8" Scale="2" />
+          <Property Type="DateTime" Name="Fecha_Creacion" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Estado" Nullable="false" MaxLength="8" />
+        </ComplexType>
+        <ComplexType Name="usp_listar_tb_tipo_habitacion_Result">
+          <Property Type="Int32" Name="tipo_habitacion_id" Nullable="false" />
+          <Property Type="String" Name="tipo_habitacion_descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="costo_noche" Nullable="false" Precision="8" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="usp_listar_tb_tipo_usuario_Result">
+          <Property Type="Int32" Name="tipo_usuario_id" Nullable="false" />
+          <Property Type="String" Name="tipo_usuario_descripcion" Nullable="false" MaxLength="99" />
+        </ComplexType>
+        <ComplexType Name="usp_listar_tb_usuario_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Usuario" Nullable="false" MaxLength="99" />
+          <Property Type="String" Name="Contraseña" Nullable="false" MaxLength="99" />
+          <Property Type="String" Name="Tipo" Nullable="false" MaxLength="99" />
+          <Property Type="String" Name="Correo" Nullable="false" MaxLength="99" />
+          <Property Type="DateTime" Name="Fecha_Ultima_Modificacion" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Estado" Nullable="true" MaxLength="8" />
+          <Property Type="DateTime" Name="fecha_creacion" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="usp_obtener_tb_habitacion_id_Result">
+          <Property Type="Int32" Name="habitacion_id" Nullable="false" />
+          <Property Type="Int32" Name="tipo_habitacion_id" Nullable="false" />
+          <Property Type="Byte" Name="habitacion_aforo" Nullable="true" />
+          <Property Type="Boolean" Name="estado_habitacion" Nullable="false" />
+          <Property Type="String" Name="habitacion_nombre" Nullable="true" MaxLength="4" />
+          <Property Type="DateTime" Name="fecha_ult_modificacion" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="usuario_ult_modificacion" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_obtener_tb_habitacion_tipo_id_Result">
+          <Property Type="Int32" Name="Habitacion_Id" Nullable="false" />
+          <Property Type="Int32" Name="Tipo_Habitacion_Id" Nullable="false" />
+          <Property Type="String" Name="Habitacion_Nombre" Nullable="true" MaxLength="4" />
+          <Property Type="String" Name="Tipo_Habitacion" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Costo_Noche" Nullable="false" Precision="8" Scale="2" />
+          <Property Type="Byte" Name="Habitacion_Aforo" Nullable="true" />
+          <Property Type="Boolean" Name="Estado_Numero" Nullable="false" />
+          <Property Type="DateTime" Name="Fecha_Ultima_Modificacion" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Usuario_Ultima_Modificacion_Id" Nullable="true" />
+          <Property Type="String" Name="Usuario_Ultima_Modificacion" Nullable="true" MaxLength="99" />
+          <Property Type="String" Name="Estado" Nullable="false" MaxLength="8" />
+        </ComplexType>
+        <ComplexType Name="usp_obtener_tb_huesped_id_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="Telefono" Nullable="true" MaxLength="9" />
+          <Property Type="String" Name="DNI" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="Correo" Nullable="true" MaxLength="99" />
+          <Property Type="String" Name="Sexo" Nullable="true" MaxLength="1" />
+          <Property Type="DateTime" Name="Fecha_Creacion" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="Fecha_Ultima_Modificacion" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Usuario_Ultima_Modificacion" Nullable="true" />
+          <Property Type="String" Name="Estado" Nullable="false" MaxLength="8" />
+        </ComplexType>
+        <ComplexType Name="usp_obtener_tb_reserva_habitacion_huesped_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="DNI" Nullable="false" MaxLength="8" />
+        </ComplexType>
+        <ComplexType Name="usp_obtener_tb_reserva_habitacion_huesped_id_Result">
+          <Property Type="Int32" Name="Reserva_Id" Nullable="false" />
+          <Property Type="Int32" Name="Habitacion_Id" Nullable="false" />
+          <Property Type="Int32" Name="Huesped_Id" Nullable="false" />
+          <Property Type="Boolean" Name="Numero_Estado" Nullable="true" />
+          <Property Type="String" Name="Estado" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Comentarios_del_Huesped" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Huesped_Nombre" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="Habitacion_del_huesped" Nullable="true" MaxLength="4" />
+          <Property Type="DateTime" Name="Fecha_Creacion" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Fecha_Ultima_Modificacion" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="usp_obtener_tb_reserva_habitacion_huesped_todo_Result">
+          <Property Type="Int32" Name="Reserva_Id" Nullable="false" />
+          <Property Type="Int32" Name="Habitacion_Id" Nullable="false" />
+          <Property Type="Int32" Name="Huesped_Id" Nullable="false" />
+          <Property Type="Boolean" Name="Numero_Estado" Nullable="true" />
+          <Property Type="String" Name="Estado" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Comentarios_del_Huesped" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Huesped_Nombre" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="Habitacion_del_huesped" Nullable="true" MaxLength="4" />
+          <Property Type="DateTime" Name="Fecha_Creacion" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="Fecha_Ultima_Modificacion" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="usp_obtener_tb_reserva_habitacion_id_Result">
+          <Property Type="Int32" Name="reserva_id" Nullable="false" />
+          <Property Type="Int32" Name="habitacion_id" Nullable="false" />
+          <Property Type="String" Name="tipo_habitacion_descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="habitacion_nombre" Nullable="true" MaxLength="4" />
+          <Property Type="Decimal" Name="costo_noche" Nullable="false" Precision="8" Scale="2" />
+          <Property Type="DateTime" Name="fecha_checkin" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="fecha_checkout" Nullable="false" Precision="23" />
+          <Property Type="Decimal" Name="precio_estadia" Nullable="true" Precision="8" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="usp_obtener_tb_reserva_habitacion_reserva_Result">
+          <Property Type="Int32" Name="reserva_id" Nullable="false" />
+          <Property Type="Int32" Name="habitacion_id" Nullable="false" />
+          <Property Type="String" Name="habitacion_nombre" Nullable="true" MaxLength="4" />
+          <Property Type="String" Name="tipo_habitacion_descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="precio_estadia" Nullable="true" Precision="8" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="usp_obtener_tb_reserva_id_Result">
+          <Property Type="Int32" Name="reserva_id" Nullable="false" />
+          <Property Type="Int32" Name="usuario_id" Nullable="false" />
+          <Property Type="String" Name="usuario_dni" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="usuario_telefono" Nullable="true" MaxLength="9" />
+          <Property Type="Decimal" Name="precio_total" Nullable="false" Precision="8" Scale="2" />
+          <Property Type="Boolean" Name="reserva_estado" Nullable="true" />
+          <Property Type="DateTime" Name="fecha_registro" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="fecha_modificacion" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="fecha_pago" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="estado_pago" Nullable="false" />
+          <Property Type="String" Name="reserva_nombre" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="usuario_ult_modificacion" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_obtener_tb_reserva_servicio_id_Result">
+          <Property Type="Int32" Name="reserva_id" Nullable="false" />
+          <Property Type="Int32" Name="servicio_id" Nullable="false" />
+          <Property Type="String" Name="servicio_descripcion" Nullable="false" MaxLength="255" />
+          <Property Type="Int32" Name="cantidad" Nullable="false" />
+          <Property Type="Decimal" Name="servicio_precio" Nullable="false" Precision="8" Scale="2" />
+          <Property Type="Decimal" Name="precio_total" Nullable="false" Precision="8" Scale="2" />
+          <Property Type="DateTime" Name="fecha_creacion" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="fecha_ult_modificacion" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="usp_obtener_tb_reserva_servicio_reserva_Result">
+          <Property Type="Int32" Name="reserva_id" Nullable="false" />
+          <Property Type="Int32" Name="servicio_id" Nullable="false" />
+          <Property Type="String" Name="servicio_descripcion" Nullable="false" MaxLength="255" />
+          <Property Type="Int32" Name="cantidad" Nullable="false" />
+          <Property Type="Decimal" Name="precio_total" Nullable="false" Precision="8" Scale="2" />
+          <Property Type="DateTime" Name="fecha_creacion" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="fecha_ult_modificacion" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="usp_obtener_tb_servicio_id_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Servicio_Descripcion" Nullable="false" MaxLength="255" />
+          <Property Type="Decimal" Name="Precio" Nullable="false" Precision="8" Scale="2" />
+          <Property Type="DateTime" Name="Fecha_Creacion" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Estado" Nullable="false" MaxLength="8" />
+        </ComplexType>
+        <ComplexType Name="usp_obtener_tb_tipo_habitacion_id_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Habitacion_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Precio" Nullable="false" Precision="8" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="usp_obtener_tb_tipo_usuario_id_Result">
+          <Property Type="Int32" Name="Tipo_Usuario_Id" Nullable="false" />
+          <Property Type="String" Name="Descripcion_Tipo_de_Usuario" Nullable="false" MaxLength="99" />
+        </ComplexType>
+        <ComplexType Name="usp_obtener_tb_usuario_id_Result">
+          <Property Type="Int32" Name="usuario_id" Nullable="false" />
+          <Property Type="Int32" Name="tipo_usuario_id" Nullable="false" />
+          <Property Type="String" Name="usuario_nombre" Nullable="false" MaxLength="99" />
+          <Property Type="String" Name="usuario_correo" Nullable="false" MaxLength="99" />
+          <Property Type="String" Name="usuario_password" Nullable="false" MaxLength="99" />
+          <Property Type="Boolean" Name="usuario_estado" Nullable="false" />
+          <Property Type="DateTime" Name="fecha_ult_modificacion" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="fecha_creacion" Nullable="true" Precision="23" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HotelDatabaseStoreContainer" CdmEntityContainer="hotel_databaseEntities">
+          <EntitySetMapping Name="tb_habitacion">
+            <EntityTypeMapping TypeName="HotelDatabase.tb_habitacion">
+              <MappingFragment StoreEntitySet="tb_habitacion">
+                <ScalarProperty Name="habitacion_id" ColumnName="habitacion_id" />
+                <ScalarProperty Name="tipo_habitacion_id" ColumnName="tipo_habitacion_id" />
+                <ScalarProperty Name="habitacion_aforo" ColumnName="habitacion_aforo" />
+                <ScalarProperty Name="estado_habitacion" ColumnName="estado_habitacion" />
+                <ScalarProperty Name="habitacion_nombre" ColumnName="habitacion_nombre" />
+                <ScalarProperty Name="fecha_ult_modificacion" ColumnName="fecha_ult_modificacion" />
+                <ScalarProperty Name="usuario_ult_modificacion" ColumnName="usuario_ult_modificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_huesped">
+            <EntityTypeMapping TypeName="HotelDatabase.tb_huesped">
+              <MappingFragment StoreEntitySet="tb_huesped">
+                <ScalarProperty Name="huesped_id" ColumnName="huesped_id" />
+                <ScalarProperty Name="huesped_nombre" ColumnName="huesped_nombre" />
+                <ScalarProperty Name="huesped_telefono" ColumnName="huesped_telefono" />
+                <ScalarProperty Name="huesped_dni" ColumnName="huesped_dni" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+                <ScalarProperty Name="fecha_ult_modificacion" ColumnName="fecha_ult_modificacion" />
+                <ScalarProperty Name="huesped_correo" ColumnName="huesped_correo" />
+                <ScalarProperty Name="huesped_sexo" ColumnName="huesped_sexo" />
+                <ScalarProperty Name="usuario_ult_modificacion" ColumnName="usuario_ult_modificacion" />
+                <ScalarProperty Name="huesped_estado" ColumnName="huesped_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_reserva">
+            <EntityTypeMapping TypeName="HotelDatabase.tb_reserva">
+              <MappingFragment StoreEntitySet="tb_reserva">
+                <ScalarProperty Name="reserva_id" ColumnName="reserva_id" />
+                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+                <ScalarProperty Name="usuario_dni" ColumnName="usuario_dni" />
+                <ScalarProperty Name="usuario_telefono" ColumnName="usuario_telefono" />
+                <ScalarProperty Name="precio_total" ColumnName="precio_total" />
+                <ScalarProperty Name="reserva_estado" ColumnName="reserva_estado" />
+                <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+                <ScalarProperty Name="fecha_modificacion" ColumnName="fecha_modificacion" />
+                <ScalarProperty Name="fecha_pago" ColumnName="fecha_pago" />
+                <ScalarProperty Name="estado_pago" ColumnName="estado_pago" />
+                <ScalarProperty Name="reserva_nombre" ColumnName="reserva_nombre" />
+                <ScalarProperty Name="usuario_ult_modificacion" ColumnName="usuario_ult_modificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_reserva_habitacion">
+            <EntityTypeMapping TypeName="HotelDatabase.tb_reserva_habitacion">
+              <MappingFragment StoreEntitySet="tb_reserva_habitacion">
+                <ScalarProperty Name="reserva_id" ColumnName="reserva_id" />
+                <ScalarProperty Name="habitacion_id" ColumnName="habitacion_id" />
+                <ScalarProperty Name="precio_estadia" ColumnName="precio_estadia" />
+                <ScalarProperty Name="fecha_checkin" ColumnName="fecha_checkin" />
+                <ScalarProperty Name="fecha_checkout" ColumnName="fecha_checkout" />
+                <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+                <ScalarProperty Name="fecha_ult_modificacion" ColumnName="fecha_ult_modificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_reserva_habitacion_huesped">
+            <EntityTypeMapping TypeName="HotelDatabase.tb_reserva_habitacion_huesped">
+              <MappingFragment StoreEntitySet="tb_reserva_habitacion_huesped">
+                <ScalarProperty Name="reserva_id" ColumnName="reserva_id" />
+                <ScalarProperty Name="habitacion_id" ColumnName="habitacion_id" />
+                <ScalarProperty Name="huesped_id" ColumnName="huesped_id" />
+                <ScalarProperty Name="asistencia_confirmada" ColumnName="asistencia_confirmada" />
+                <ScalarProperty Name="comentario_huesped" ColumnName="comentario_huesped" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+                <ScalarProperty Name="fecha_ult_modificacion" ColumnName="fecha_ult_modificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_servicio">
+            <EntityTypeMapping TypeName="HotelDatabase.tb_servicio">
+              <MappingFragment StoreEntitySet="tb_servicio">
+                <ScalarProperty Name="servicio_id" ColumnName="servicio_id" />
+                <ScalarProperty Name="servicio_descripcion" ColumnName="servicio_descripcion" />
+                <ScalarProperty Name="servicio_precio" ColumnName="servicio_precio" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+                <ScalarProperty Name="servicio_estado" ColumnName="servicio_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_tipo_habitacion">
+            <EntityTypeMapping TypeName="HotelDatabase.tb_tipo_habitacion">
+              <MappingFragment StoreEntitySet="tb_tipo_habitacion">
+                <ScalarProperty Name="tipo_habitacion_id" ColumnName="tipo_habitacion_id" />
+                <ScalarProperty Name="tipo_habitacion_descripcion" ColumnName="tipo_habitacion_descripcion" />
+                <ScalarProperty Name="costo_noche" ColumnName="costo_noche" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_tipo_usuario">
+            <EntityTypeMapping TypeName="HotelDatabase.tb_tipo_usuario">
+              <MappingFragment StoreEntitySet="tb_tipo_usuario">
+                <ScalarProperty Name="tipo_usuario_id" ColumnName="tipo_usuario_id" />
+                <ScalarProperty Name="tipo_usuario_descripcion" ColumnName="tipo_usuario_descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_usuario">
+            <EntityTypeMapping TypeName="HotelDatabase.tb_usuario">
+              <MappingFragment StoreEntitySet="tb_usuario">
+                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+                <ScalarProperty Name="tipo_usuario_id" ColumnName="tipo_usuario_id" />
+                <ScalarProperty Name="usuario_nombre" ColumnName="usuario_nombre" />
+                <ScalarProperty Name="usuario_correo" ColumnName="usuario_correo" />
+                <ScalarProperty Name="usuario_password" ColumnName="usuario_password" />
+                <ScalarProperty Name="usuario_estado" ColumnName="usuario_estado" />
+                <ScalarProperty Name="fecha_ult_modificacion" ColumnName="fecha_ult_modificacion" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_reserva_servicio">
+            <EntityTypeMapping TypeName="HotelDatabase.tb_reserva_servicio">
+              <MappingFragment StoreEntitySet="tb_reserva_servicio">
+                <ScalarProperty Name="reserva_id" ColumnName="reserva_id" />
+                <ScalarProperty Name="servicio_id" ColumnName="servicio_id" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="precio_total" ColumnName="precio_total" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+                <ScalarProperty Name="fecha_ult_modificacion" ColumnName="fecha_ult_modificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_habitacion">
+            <EntityTypeMapping TypeName="HotelDatabase.vw_habitacion">
+              <MappingFragment StoreEntitySet="vw_habitacion">
+                <ScalarProperty Name="Habitacion_Id" ColumnName="Habitacion Id" />
+                <ScalarProperty Name="Tipo_Habitacion_Id" ColumnName="Tipo Habitacion Id" />
+                <ScalarProperty Name="Habitacion_Nombre" ColumnName="Habitacion Nombre" />
+                <ScalarProperty Name="Tipo_Habitacion" ColumnName="Tipo Habitacion" />
+                <ScalarProperty Name="Costo_Noche" ColumnName="Costo Noche" />
+                <ScalarProperty Name="Habitacion_Aforo" ColumnName="Habitacion Aforo" />
+                <ScalarProperty Name="Estado_Numero" ColumnName="Estado Numero" />
+                <ScalarProperty Name="Fecha_Ultima_Modificacion" ColumnName="Fecha Ultima Modificacion" />
+                <ScalarProperty Name="Usuario_Ultima_Modificacion_Id" ColumnName="Usuario Ultima Modificacion Id" />
+                <ScalarProperty Name="Usuario_Ultima_Modificacion" ColumnName="Usuario Ultima Modificacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_huesped">
+            <EntityTypeMapping TypeName="HotelDatabase.vw_huesped">
+              <MappingFragment StoreEntitySet="vw_huesped">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Fecha_Creacion" ColumnName="Fecha Creacion" />
+                <ScalarProperty Name="Fecha_Ultima_Modificacion" ColumnName="Fecha Ultima Modificacion" />
+                <ScalarProperty Name="Usuario_Ultima_Modificacion" ColumnName="Usuario Ultima Modificacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_reserva">
+            <EntityTypeMapping TypeName="HotelDatabase.vw_reserva">
+              <MappingFragment StoreEntitySet="vw_reserva">
+                <ScalarProperty Name="Reserva_Id" ColumnName="Reserva Id" />
+                <ScalarProperty Name="Usuario_Id" ColumnName="Usuario Id" />
+                <ScalarProperty Name="Tipo_Usuario_Id" ColumnName="Tipo Usuario Id" />
+                <ScalarProperty Name="Creado_por" ColumnName="Creado por" />
+                <ScalarProperty Name="Tipo_Usuario" ColumnName="Tipo Usuario" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="A_Nombre_de" ColumnName="A Nombre de" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Estado_Numero" ColumnName="Estado Numero" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha_Creacion" ColumnName="Fecha Creacion" />
+                <ScalarProperty Name="Fecha_Ultima_Modificacion" ColumnName="Fecha Ultima Modificacion" />
+                <ScalarProperty Name="Usuario_Ultima_Modificacion" ColumnName="Usuario Ultima Modificacion" />
+                <ScalarProperty Name="Fecha_Pago" ColumnName="Fecha Pago" />
+                <ScalarProperty Name="Estado_Pago_Numero" ColumnName="Estado Pago Numero" />
+                <ScalarProperty Name="Estado_Pago" ColumnName="Estado Pago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_reserva_habitacion">
+            <EntityTypeMapping TypeName="HotelDatabase.vw_reserva_habitacion">
+              <MappingFragment StoreEntitySet="vw_reserva_habitacion">
+                <ScalarProperty Name="Reserva_Id" ColumnName="Reserva Id" />
+                <ScalarProperty Name="Habitacion_Id" ColumnName="Habitacion Id" />
+                <ScalarProperty Name="Habitacion_Nombre" ColumnName="Habitacion Nombre" />
+                <ScalarProperty Name="Precio_de_Estadia" ColumnName="Precio de Estadia" />
+                <ScalarProperty Name="Fecha_de_Entrada" ColumnName="Fecha de Entrada" />
+                <ScalarProperty Name="Fecha_de_Salida" ColumnName="Fecha de Salida" />
+                <ScalarProperty Name="Fecha_Creacion" ColumnName="Fecha Creacion" />
+                <ScalarProperty Name="Fecha_Ultima_Modificacion" ColumnName="Fecha Ultima Modificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_reserva_habitacion_huesped">
+            <EntityTypeMapping TypeName="HotelDatabase.vw_reserva_habitacion_huesped">
+              <MappingFragment StoreEntitySet="vw_reserva_habitacion_huesped">
+                <ScalarProperty Name="Reserva_Id" ColumnName="Reserva Id" />
+                <ScalarProperty Name="Habitacion_Id" ColumnName="Habitacion Id" />
+                <ScalarProperty Name="Huesped_Id" ColumnName="Huesped Id" />
+                <ScalarProperty Name="Numero_Estado" ColumnName="Numero Estado" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Comentarios_del_Huesped" ColumnName="Comentarios del Huesped" />
+                <ScalarProperty Name="Huesped_Nombre" ColumnName="Huesped Nombre" />
+                <ScalarProperty Name="Habitacion_del_huesped" ColumnName="Habitacion del huesped" />
+                <ScalarProperty Name="Fecha_Creacion" ColumnName="Fecha Creacion" />
+                <ScalarProperty Name="Fecha_Ultima_Modificacion" ColumnName="Fecha Ultima Modificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_reserva_servicio">
+            <EntityTypeMapping TypeName="HotelDatabase.vw_reserva_servicio">
+              <MappingFragment StoreEntitySet="vw_reserva_servicio">
+                <ScalarProperty Name="Reserva_Id" ColumnName="Reserva Id" />
+                <ScalarProperty Name="Servicio_Id" ColumnName="Servicio Id" />
+                <ScalarProperty Name="Servicio" ColumnName="Servicio" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Precio_Total" ColumnName="Precio Total" />
+                <ScalarProperty Name="Fecha_de_Creacion" ColumnName="Fecha de Creacion" />
+                <ScalarProperty Name="Fecha_de_Ultima_Modificacion" ColumnName="Fecha de Ultima Modificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_servicio">
+            <EntityTypeMapping TypeName="HotelDatabase.vw_servicio">
+              <MappingFragment StoreEntitySet="vw_servicio">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Servicio_Descripcion" ColumnName="Servicio Descripcion" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Fecha_Creacion" ColumnName="Fecha Creacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_tipo_habitacion">
+            <EntityTypeMapping TypeName="HotelDatabase.vw_tipo_habitacion">
+              <MappingFragment StoreEntitySet="vw_tipo_habitacion">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Habitacion_Descripcion" ColumnName="Habitacion Descripcion" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_tipo_usuario">
+            <EntityTypeMapping TypeName="HotelDatabase.vw_tipo_usuario">
+              <MappingFragment StoreEntitySet="vw_tipo_usuario">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Tipo_Descripcion" ColumnName="Tipo Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_usuario">
+            <EntityTypeMapping TypeName="HotelDatabase.vw_usuario">
+              <MappingFragment StoreEntitySet="vw_usuario">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Fecha_Ultima_Modificacion" ColumnName="Fecha Ultima Modificacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_actualizar_estado_usuario" FunctionName="HotelDatabase.Store.usp_actualizar_estado_usuario" />
+          <FunctionImportMapping FunctionImportName="usp_actualizar_tb_habitacion" FunctionName="HotelDatabase.Store.usp_actualizar_tb_habitacion" />
+          <FunctionImportMapping FunctionImportName="usp_actualizar_tb_huesped" FunctionName="HotelDatabase.Store.usp_actualizar_tb_huesped" />
+          <FunctionImportMapping FunctionImportName="usp_actualizar_tb_reserva" FunctionName="HotelDatabase.Store.usp_actualizar_tb_reserva" />
+          <FunctionImportMapping FunctionImportName="usp_actualizar_tb_reserva_habitacion" FunctionName="HotelDatabase.Store.usp_actualizar_tb_reserva_habitacion" />
+          <FunctionImportMapping FunctionImportName="usp_actualizar_tb_reserva_habitacion_huesped" FunctionName="HotelDatabase.Store.usp_actualizar_tb_reserva_habitacion_huesped" />
+          <FunctionImportMapping FunctionImportName="usp_actualizar_tb_reserva_servicio" FunctionName="HotelDatabase.Store.usp_actualizar_tb_reserva_servicio" />
+          <FunctionImportMapping FunctionImportName="usp_actualizar_tb_servicio" FunctionName="HotelDatabase.Store.usp_actualizar_tb_servicio" />
+          <FunctionImportMapping FunctionImportName="usp_actualizar_tb_tipo_habitacion" FunctionName="HotelDatabase.Store.usp_actualizar_tb_tipo_habitacion" />
+          <FunctionImportMapping FunctionImportName="usp_actualizar_tb_tipo_usuario" FunctionName="HotelDatabase.Store.usp_actualizar_tb_tipo_usuario" />
+          <FunctionImportMapping FunctionImportName="usp_actualizar_tb_usuario" FunctionName="HotelDatabase.Store.usp_actualizar_tb_usuario" />
+          <FunctionImportMapping FunctionImportName="usp_borrar_tb_habitacion" FunctionName="HotelDatabase.Store.usp_borrar_tb_habitacion" />
+          <FunctionImportMapping FunctionImportName="usp_borrar_tb_huesped" FunctionName="HotelDatabase.Store.usp_borrar_tb_huesped" />
+          <FunctionImportMapping FunctionImportName="usp_borrar_tb_reserva" FunctionName="HotelDatabase.Store.usp_borrar_tb_reserva" />
+          <FunctionImportMapping FunctionImportName="usp_borrar_tb_reserva_habitacion" FunctionName="HotelDatabase.Store.usp_borrar_tb_reserva_habitacion" />
+          <FunctionImportMapping FunctionImportName="usp_borrar_tb_reserva_habitacion_huesped" FunctionName="HotelDatabase.Store.usp_borrar_tb_reserva_habitacion_huesped" />
+          <FunctionImportMapping FunctionImportName="usp_borrar_tb_reserva_servicio" FunctionName="HotelDatabase.Store.usp_borrar_tb_reserva_servicio" />
+          <FunctionImportMapping FunctionImportName="usp_borrar_tb_servicio" FunctionName="HotelDatabase.Store.usp_borrar_tb_servicio" />
+          <FunctionImportMapping FunctionImportName="usp_borrar_tb_tipo_habitacion" FunctionName="HotelDatabase.Store.usp_borrar_tb_tipo_habitacion" />
+          <FunctionImportMapping FunctionImportName="usp_borrar_tb_tipo_usuario" FunctionName="HotelDatabase.Store.usp_borrar_tb_tipo_usuario" />
+          <FunctionImportMapping FunctionImportName="usp_borrar_tb_usuario" FunctionName="HotelDatabase.Store.usp_borrar_tb_usuario" />
+          <FunctionImportMapping FunctionImportName="usp_crear_tb_habitacion" FunctionName="HotelDatabase.Store.usp_crear_tb_habitacion" />
+          <FunctionImportMapping FunctionImportName="usp_crear_tb_huesped" FunctionName="HotelDatabase.Store.usp_crear_tb_huesped" />
+          <FunctionImportMapping FunctionImportName="usp_crear_tb_reserva" FunctionName="HotelDatabase.Store.usp_crear_tb_reserva">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.usp_crear_tb_reserva_Result">
+                <ScalarProperty Name="reserva_id" ColumnName="reserva_id" />
+                <ScalarProperty Name="reserva_nombre" ColumnName="reserva_nombre" />
+                <ScalarProperty Name="usuario_dni" ColumnName="usuario_dni" />
+                <ScalarProperty Name="usuario_telefono" ColumnName="usuario_telefono" />
+                <ScalarProperty Name="precio_total" ColumnName="precio_total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_crear_tb_reserva_habitacion" FunctionName="HotelDatabase.Store.usp_crear_tb_reserva_habitacion" />
+          <FunctionImportMapping FunctionImportName="usp_crear_tb_reserva_habitacion_huesped" FunctionName="HotelDatabase.Store.usp_crear_tb_reserva_habitacion_huesped" />
+          <FunctionImportMapping FunctionImportName="usp_crear_tb_reserva_servicio" FunctionName="HotelDatabase.Store.usp_crear_tb_reserva_servicio" />
+          <FunctionImportMapping FunctionImportName="usp_crear_tb_servicio" FunctionName="HotelDatabase.Store.usp_crear_tb_servicio" />
+          <FunctionImportMapping FunctionImportName="usp_crear_tb_tipo_habitacion" FunctionName="HotelDatabase.Store.usp_crear_tb_tipo_habitacion" />
+          <FunctionImportMapping FunctionImportName="usp_crear_tb_tipo_usuario" FunctionName="HotelDatabase.Store.usp_crear_tb_tipo_usuario" />
+          <FunctionImportMapping FunctionImportName="usp_crear_tb_usuario" FunctionName="HotelDatabase.Store.usp_crear_tb_usuario" />
+          <FunctionImportMapping FunctionImportName="usp_eliminar_tb_reserva_servicio" FunctionName="HotelDatabase.Store.usp_eliminar_tb_reserva_servicio" />
+          <FunctionImportMapping FunctionImportName="usp_ingreso_tb_usuario" FunctionName="HotelDatabase.Store.usp_ingreso_tb_usuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.usp_ingreso_tb_usuario_Result">
+                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+                <ScalarProperty Name="usuario_nombre" ColumnName="usuario_nombre" />
+                <ScalarProperty Name="usuario_password" ColumnName="usuario_password" />
+                <ScalarProperty Name="usuario_estado" ColumnName="usuario_estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_listar_tb_habitacion" FunctionName="HotelDatabase.Store.usp_listar_tb_habitacion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.usp_listar_tb_habitacion_Result">
+                <ScalarProperty Name="Habitacion_Id" ColumnName="Habitacion Id" />
+                <ScalarProperty Name="Tipo_Habitacion_Id" ColumnName="Tipo Habitacion Id" />
+                <ScalarProperty Name="Habitacion_Nombre" ColumnName="Habitacion Nombre" />
+                <ScalarProperty Name="Tipo_Habitacion" ColumnName="Tipo Habitacion" />
+                <ScalarProperty Name="Costo_Noche" ColumnName="Costo Noche" />
+                <ScalarProperty Name="Habitacion_Aforo" ColumnName="Habitacion Aforo" />
+                <ScalarProperty Name="Estado_Numero" ColumnName="Estado Numero" />
+                <ScalarProperty Name="Fecha_Ultima_Modificacion" ColumnName="Fecha Ultima Modificacion" />
+                <ScalarProperty Name="Usuario_Ultima_Modificacion_Id" ColumnName="Usuario Ultima Modificacion Id" />
+                <ScalarProperty Name="Usuario_Ultima_Modificacion" ColumnName="Usuario Ultima Modificacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_listar_tb_huesped" FunctionName="HotelDatabase.Store.usp_listar_tb_huesped">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.usp_listar_tb_huesped_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Fecha_Creacion" ColumnName="Fecha Creacion" />
+                <ScalarProperty Name="Fecha_Ultima_Modificacion" ColumnName="Fecha Ultima Modificacion" />
+                <ScalarProperty Name="Usuario_Ultima_Modificacion" ColumnName="Usuario Ultima Modificacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_listar_tb_reserva" FunctionName="HotelDatabase.Store.usp_listar_tb_reserva">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.usp_listar_tb_reserva_Result">
+                <ScalarProperty Name="Reserva_Id" ColumnName="Reserva Id" />
+                <ScalarProperty Name="Usuario_Id" ColumnName="Usuario Id" />
+                <ScalarProperty Name="Tipo_Usuario_Id" ColumnName="Tipo Usuario Id" />
+                <ScalarProperty Name="Creado_por" ColumnName="Creado por" />
+                <ScalarProperty Name="Tipo_Usuario" ColumnName="Tipo Usuario" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="A_Nombre_de" ColumnName="A Nombre de" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Estado_Numero" ColumnName="Estado Numero" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha_Creacion" ColumnName="Fecha Creacion" />
+                <ScalarProperty Name="Fecha_Ultima_Modificacion" ColumnName="Fecha Ultima Modificacion" />
+                <ScalarProperty Name="Usuario_Ultima_Modificacion" ColumnName="Usuario Ultima Modificacion" />
+                <ScalarProperty Name="Fecha_Pago" ColumnName="Fecha Pago" />
+                <ScalarProperty Name="Estado_Pago_Numero" ColumnName="Estado Pago Numero" />
+                <ScalarProperty Name="Estado_Pago" ColumnName="Estado Pago" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_listar_tb_reserva_habitacion" FunctionName="HotelDatabase.Store.usp_listar_tb_reserva_habitacion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.usp_listar_tb_reserva_habitacion_Result">
+                <ScalarProperty Name="Reserva_Id" ColumnName="Reserva Id" />
+                <ScalarProperty Name="Habitacion_Id" ColumnName="Habitacion Id" />
+                <ScalarProperty Name="Habitacion_Nombre" ColumnName="Habitacion Nombre" />
+                <ScalarProperty Name="Precio_de_Estadia" ColumnName="Precio de Estadia" />
+                <ScalarProperty Name="Fecha_de_Entrada" ColumnName="Fecha de Entrada" />
+                <ScalarProperty Name="Fecha_de_Salida" ColumnName="Fecha de Salida" />
+                <ScalarProperty Name="Fecha_Creacion" ColumnName="Fecha Creacion" />
+                <ScalarProperty Name="Fecha_Ultima_Modificacion" ColumnName="Fecha Ultima Modificacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_listar_tb_reserva_habitacion_huesped" FunctionName="HotelDatabase.Store.usp_listar_tb_reserva_habitacion_huesped">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.usp_listar_tb_reserva_habitacion_huesped_Result">
+                <ScalarProperty Name="Reserva_Id" ColumnName="Reserva Id" />
+                <ScalarProperty Name="Habitacion_Id" ColumnName="Habitacion Id" />
+                <ScalarProperty Name="Huesped_Id" ColumnName="Huesped Id" />
+                <ScalarProperty Name="Numero_Estado" ColumnName="Numero Estado" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Comentarios_del_Huesped" ColumnName="Comentarios del Huesped" />
+                <ScalarProperty Name="Huesped_Nombre" ColumnName="Huesped Nombre" />
+                <ScalarProperty Name="Habitacion_del_huesped" ColumnName="Habitacion del huesped" />
+                <ScalarProperty Name="Fecha_Creacion" ColumnName="Fecha Creacion" />
+                <ScalarProperty Name="Fecha_Ultima_Modificacion" ColumnName="Fecha Ultima Modificacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_listar_tb_reserva_servicio" FunctionName="HotelDatabase.Store.usp_listar_tb_reserva_servicio">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.usp_listar_tb_reserva_servicio_Result">
+                <ScalarProperty Name="Reserva_Id" ColumnName="Reserva Id" />
+                <ScalarProperty Name="Servicio_Id" ColumnName="Servicio Id" />
+                <ScalarProperty Name="Servicio" ColumnName="Servicio" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Precio_Total" ColumnName="Precio Total" />
+                <ScalarProperty Name="Fecha_de_Creacion" ColumnName="Fecha de Creacion" />
+                <ScalarProperty Name="Fecha_de_Ultima_Modificacion" ColumnName="Fecha de Ultima Modificacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_listar_tb_servicio" FunctionName="HotelDatabase.Store.usp_listar_tb_servicio">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.usp_listar_tb_servicio_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Servicio_Descripcion" ColumnName="Servicio Descripcion" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Fecha_Creacion" ColumnName="Fecha Creacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_listar_tb_tipo_habitacion" FunctionName="HotelDatabase.Store.usp_listar_tb_tipo_habitacion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.usp_listar_tb_tipo_habitacion_Result">
+                <ScalarProperty Name="tipo_habitacion_id" ColumnName="tipo_habitacion_id" />
+                <ScalarProperty Name="tipo_habitacion_descripcion" ColumnName="tipo_habitacion_descripcion" />
+                <ScalarProperty Name="costo_noche" ColumnName="costo_noche" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_listar_tb_tipo_usuario" FunctionName="HotelDatabase.Store.usp_listar_tb_tipo_usuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.usp_listar_tb_tipo_usuario_Result">
+                <ScalarProperty Name="tipo_usuario_id" ColumnName="tipo_usuario_id" />
+                <ScalarProperty Name="tipo_usuario_descripcion" ColumnName="tipo_usuario_descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_listar_tb_usuario" FunctionName="HotelDatabase.Store.usp_listar_tb_usuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.usp_listar_tb_usuario_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Fecha_Ultima_Modificacion" ColumnName="Fecha Ultima Modificacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_obtener_tb_habitacion_id" FunctionName="HotelDatabase.Store.usp_obtener_tb_habitacion_id">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.usp_obtener_tb_habitacion_id_Result">
+                <ScalarProperty Name="habitacion_id" ColumnName="habitacion_id" />
+                <ScalarProperty Name="tipo_habitacion_id" ColumnName="tipo_habitacion_id" />
+                <ScalarProperty Name="habitacion_aforo" ColumnName="habitacion_aforo" />
+                <ScalarProperty Name="estado_habitacion" ColumnName="estado_habitacion" />
+                <ScalarProperty Name="habitacion_nombre" ColumnName="habitacion_nombre" />
+                <ScalarProperty Name="fecha_ult_modificacion" ColumnName="fecha_ult_modificacion" />
+                <ScalarProperty Name="usuario_ult_modificacion" ColumnName="usuario_ult_modificacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_obtener_tb_habitacion_tipo_id" FunctionName="HotelDatabase.Store.usp_obtener_tb_habitacion_tipo_id">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.usp_obtener_tb_habitacion_tipo_id_Result">
+                <ScalarProperty Name="Habitacion_Id" ColumnName="Habitacion Id" />
+                <ScalarProperty Name="Tipo_Habitacion_Id" ColumnName="Tipo Habitacion Id" />
+                <ScalarProperty Name="Habitacion_Nombre" ColumnName="Habitacion Nombre" />
+                <ScalarProperty Name="Tipo_Habitacion" ColumnName="Tipo Habitacion" />
+                <ScalarProperty Name="Costo_Noche" ColumnName="Costo Noche" />
+                <ScalarProperty Name="Habitacion_Aforo" ColumnName="Habitacion Aforo" />
+                <ScalarProperty Name="Estado_Numero" ColumnName="Estado Numero" />
+                <ScalarProperty Name="Fecha_Ultima_Modificacion" ColumnName="Fecha Ultima Modificacion" />
+                <ScalarProperty Name="Usuario_Ultima_Modificacion_Id" ColumnName="Usuario Ultima Modificacion Id" />
+                <ScalarProperty Name="Usuario_Ultima_Modificacion" ColumnName="Usuario Ultima Modificacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_obtener_tb_huesped_id" FunctionName="HotelDatabase.Store.usp_obtener_tb_huesped_id">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.usp_obtener_tb_huesped_id_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Fecha_Creacion" ColumnName="Fecha Creacion" />
+                <ScalarProperty Name="Fecha_Ultima_Modificacion" ColumnName="Fecha Ultima Modificacion" />
+                <ScalarProperty Name="Usuario_Ultima_Modificacion" ColumnName="Usuario Ultima Modificacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_obtener_tb_reserva_habitacion_huesped" FunctionName="HotelDatabase.Store.usp_obtener_tb_reserva_habitacion_huesped">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.usp_obtener_tb_reserva_habitacion_huesped_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_obtener_tb_reserva_habitacion_huesped_id" FunctionName="HotelDatabase.Store.usp_obtener_tb_reserva_habitacion_huesped_id">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.usp_obtener_tb_reserva_habitacion_huesped_id_Result">
+                <ScalarProperty Name="Reserva_Id" ColumnName="Reserva Id" />
+                <ScalarProperty Name="Habitacion_Id" ColumnName="Habitacion Id" />
+                <ScalarProperty Name="Huesped_Id" ColumnName="Huesped Id" />
+                <ScalarProperty Name="Numero_Estado" ColumnName="Numero Estado" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Comentarios_del_Huesped" ColumnName="Comentarios del Huesped" />
+                <ScalarProperty Name="Huesped_Nombre" ColumnName="Huesped Nombre" />
+                <ScalarProperty Name="Habitacion_del_huesped" ColumnName="Habitacion del huesped" />
+                <ScalarProperty Name="Fecha_Creacion" ColumnName="Fecha Creacion" />
+                <ScalarProperty Name="Fecha_Ultima_Modificacion" ColumnName="Fecha Ultima Modificacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_obtener_tb_reserva_habitacion_huesped_todo" FunctionName="HotelDatabase.Store.usp_obtener_tb_reserva_habitacion_huesped_todo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.usp_obtener_tb_reserva_habitacion_huesped_todo_Result">
+                <ScalarProperty Name="Reserva_Id" ColumnName="Reserva Id" />
+                <ScalarProperty Name="Habitacion_Id" ColumnName="Habitacion Id" />
+                <ScalarProperty Name="Huesped_Id" ColumnName="Huesped Id" />
+                <ScalarProperty Name="Numero_Estado" ColumnName="Numero Estado" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Comentarios_del_Huesped" ColumnName="Comentarios del Huesped" />
+                <ScalarProperty Name="Huesped_Nombre" ColumnName="Huesped Nombre" />
+                <ScalarProperty Name="Habitacion_del_huesped" ColumnName="Habitacion del huesped" />
+                <ScalarProperty Name="Fecha_Creacion" ColumnName="Fecha Creacion" />
+                <ScalarProperty Name="Fecha_Ultima_Modificacion" ColumnName="Fecha Ultima Modificacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_obtener_tb_reserva_habitacion_id" FunctionName="HotelDatabase.Store.usp_obtener_tb_reserva_habitacion_id">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.usp_obtener_tb_reserva_habitacion_id_Result">
+                <ScalarProperty Name="reserva_id" ColumnName="reserva_id" />
+                <ScalarProperty Name="habitacion_id" ColumnName="habitacion_id" />
+                <ScalarProperty Name="tipo_habitacion_descripcion" ColumnName="tipo_habitacion_descripcion" />
+                <ScalarProperty Name="habitacion_nombre" ColumnName="habitacion_nombre" />
+                <ScalarProperty Name="costo_noche" ColumnName="costo_noche" />
+                <ScalarProperty Name="fecha_checkin" ColumnName="fecha_checkin" />
+                <ScalarProperty Name="fecha_checkout" ColumnName="fecha_checkout" />
+                <ScalarProperty Name="precio_estadia" ColumnName="precio_estadia" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_obtener_tb_reserva_habitacion_reserva" FunctionName="HotelDatabase.Store.usp_obtener_tb_reserva_habitacion_reserva">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.usp_obtener_tb_reserva_habitacion_reserva_Result">
+                <ScalarProperty Name="reserva_id" ColumnName="reserva_id" />
+                <ScalarProperty Name="habitacion_id" ColumnName="habitacion_id" />
+                <ScalarProperty Name="habitacion_nombre" ColumnName="habitacion_nombre" />
+                <ScalarProperty Name="tipo_habitacion_descripcion" ColumnName="tipo_habitacion_descripcion" />
+                <ScalarProperty Name="precio_estadia" ColumnName="precio_estadia" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_obtener_tb_reserva_id" FunctionName="HotelDatabase.Store.usp_obtener_tb_reserva_id">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.usp_obtener_tb_reserva_id_Result">
+                <ScalarProperty Name="reserva_id" ColumnName="reserva_id" />
+                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+                <ScalarProperty Name="usuario_dni" ColumnName="usuario_dni" />
+                <ScalarProperty Name="usuario_telefono" ColumnName="usuario_telefono" />
+                <ScalarProperty Name="precio_total" ColumnName="precio_total" />
+                <ScalarProperty Name="reserva_estado" ColumnName="reserva_estado" />
+                <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+                <ScalarProperty Name="fecha_modificacion" ColumnName="fecha_modificacion" />
+                <ScalarProperty Name="fecha_pago" ColumnName="fecha_pago" />
+                <ScalarProperty Name="estado_pago" ColumnName="estado_pago" />
+                <ScalarProperty Name="reserva_nombre" ColumnName="reserva_nombre" />
+                <ScalarProperty Name="usuario_ult_modificacion" ColumnName="usuario_ult_modificacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_obtener_tb_reserva_servicio_id" FunctionName="HotelDatabase.Store.usp_obtener_tb_reserva_servicio_id">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.usp_obtener_tb_reserva_servicio_id_Result">
+                <ScalarProperty Name="reserva_id" ColumnName="reserva_id" />
+                <ScalarProperty Name="servicio_id" ColumnName="servicio_id" />
+                <ScalarProperty Name="servicio_descripcion" ColumnName="servicio_descripcion" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="servicio_precio" ColumnName="servicio_precio" />
+                <ScalarProperty Name="precio_total" ColumnName="precio_total" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+                <ScalarProperty Name="fecha_ult_modificacion" ColumnName="fecha_ult_modificacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_obtener_tb_reserva_servicio_reserva" FunctionName="HotelDatabase.Store.usp_obtener_tb_reserva_servicio_reserva">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.usp_obtener_tb_reserva_servicio_reserva_Result">
+                <ScalarProperty Name="reserva_id" ColumnName="reserva_id" />
+                <ScalarProperty Name="servicio_id" ColumnName="servicio_id" />
+                <ScalarProperty Name="servicio_descripcion" ColumnName="servicio_descripcion" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="precio_total" ColumnName="precio_total" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+                <ScalarProperty Name="fecha_ult_modificacion" ColumnName="fecha_ult_modificacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_obtener_tb_servicio_id" FunctionName="HotelDatabase.Store.usp_obtener_tb_servicio_id">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.usp_obtener_tb_servicio_id_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Servicio_Descripcion" ColumnName="Servicio Descripcion" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Fecha_Creacion" ColumnName="Fecha Creacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_obtener_tb_tipo_habitacion_id" FunctionName="HotelDatabase.Store.usp_obtener_tb_tipo_habitacion_id">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.usp_obtener_tb_tipo_habitacion_id_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Habitacion_Descripcion" ColumnName="Habitacion Descripcion" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_obtener_tb_tipo_usuario_id" FunctionName="HotelDatabase.Store.usp_obtener_tb_tipo_usuario_id">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.usp_obtener_tb_tipo_usuario_id_Result">
+                <ScalarProperty Name="Tipo_Usuario_Id" ColumnName="Tipo Usuario Id" />
+                <ScalarProperty Name="Descripcion_Tipo_de_Usuario" ColumnName="Descripcion Tipo de Usuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_obtener_tb_usuario_id" FunctionName="HotelDatabase.Store.usp_obtener_tb_usuario_id">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.usp_obtener_tb_usuario_id_Result">
+                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+                <ScalarProperty Name="tipo_usuario_id" ColumnName="tipo_usuario_id" />
+                <ScalarProperty Name="usuario_nombre" ColumnName="usuario_nombre" />
+                <ScalarProperty Name="usuario_correo" ColumnName="usuario_correo" />
+                <ScalarProperty Name="usuario_password" ColumnName="usuario_password" />
+                <ScalarProperty Name="usuario_estado" ColumnName="usuario_estado" />
+                <ScalarProperty Name="fecha_ult_modificacion" ColumnName="fecha_ult_modificacion" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
