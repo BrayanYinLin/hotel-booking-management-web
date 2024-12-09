@@ -66,6 +66,7 @@
       <DependentUpon>HotelDatabase.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServicioADO.cs" />
     <Compile Include="tb_habitacion.cs">
       <DependentUpon>HotelDatabase.tt</DependentUpon>
     </Compile>
