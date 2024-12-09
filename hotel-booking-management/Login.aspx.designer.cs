@@ -7,7 +7,7 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace DemoWEB_Sem10
+namespace hotel_booking_management
 {
 
 

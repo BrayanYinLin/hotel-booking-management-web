@@ -8,7 +8,7 @@ using hotel_booking_management;
 using ProyHotel_BE;
 using ProyHotel_BL;
 
-namespace DemoWEB_Sem10
+namespace hotel_booking_management
 {
     public partial class Login : System.Web.UI.Page
     {

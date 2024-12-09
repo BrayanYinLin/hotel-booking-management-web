@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="DemoWEB_Sem10.Login" %>
+﻿<%@ Page  Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="hotel_booking_management.Login" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
