@@ -15,7 +15,7 @@
         <EntityTypeShape EntityType="HotelDatabase.tb_tipo_usuario" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="HotelDatabase.tb_usuario" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HotelDatabase.tb_reserva_servicio" Width="1.5" PointX="7.5" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="HotelDatabase.vw_habitacion" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelDatabase.vw_habitacion" Width="1.875" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HotelDatabase.vw_huesped" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HotelDatabase.vw_reserva" Width="1.5" PointX="10.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HotelDatabase.vw_reserva_habitacion" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />

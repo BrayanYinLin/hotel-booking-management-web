@@ -1,4 +1,4 @@
-﻿// La generación de código T4 está habilitada para el modelo 'C:\hotel_proyecto\hotel-booking-management-web\ProyHotel_ADO\HotelDatabase.edmx'. 
+﻿// La generación de código T4 está habilitada para el modelo 'D:\ISIL\Semesters\04\Desarrollo de Aplicaciones I\Project\hotel-booking-management-web\ProyHotel_ADO\HotelDatabase.edmx'. 
 // Para habilitar la generación de código heredada, cambie el valor de la propiedad del diseñador 'Estrategia de generación de código'
 // por 'ObjectContext heredado'. Esta propiedad está disponible en la ventana Propiedades cuando se abre
 // el modelo en el diseñador.

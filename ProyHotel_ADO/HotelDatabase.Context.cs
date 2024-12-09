@@ -20,10 +20,8 @@ namespace ProyHotel_ADO
         public hotel_databaseEntities()
             : base("name=hotel_databaseEntities")
         {
-            var ensureDLLIsCopied = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
-
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
