@@ -215,6 +215,7 @@
     <None Include="packages.config" />
     <Content Include="Site.Master" />
     <Content Include="SiteMaster.Master" />
+    <Content Include="Plantillas\ListadoServicio.xlsx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -230,7 +231,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
-    <Folder Include="Plantillas\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ProyHotel_BE\ProyHotel_BE.csproj">

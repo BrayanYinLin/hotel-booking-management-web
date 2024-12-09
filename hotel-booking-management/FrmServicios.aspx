@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="Cabecera" runat="server">
     <h2>Gestionar Servicios</h2>
     <p>En esta sección puede agregar o eliminar los servicios disponibles para los huéspedes, como Wi-Fi, gimnasio, spa, etc.</p>
+    <asp:Label ID="labelError" runat="server" Text=""></asp:Label>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Principal" runat="server">
     <style>
@@ -20,7 +21,7 @@
         </div>
     </header>
     <div>
-        <asp:Button ID="buttonDescargar" runat="server" Text="Descargar" CssClass="btn btn-outline-dark" />
+        <asp:Button ID="buttonDescargar" runat="server" Text="Descargar" CssClass="btn btn-outline-dark" OnClick="buttonDescargar_Click" />
     </div>
     <asp:GridView ID="gridServices" runat="server" AutoGenerateColumns="False" Width="100%" CssClass="bg-transparent border border-dark rounded">
         <HeaderStyle Font-Bold="True" Font-Size="Large" />
