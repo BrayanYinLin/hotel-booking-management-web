@@ -46,21 +46,30 @@ namespace ProyHotel_ADO
 
         }
 
-        public HuespedBE BuscarHuespedPorNombre(string nombre)
+        public List<HuespedBE> BuscarHuespedPorNombre(string nombre)
         {
             try
             {
-                var huespedB = (from huesped in hotel.vw_huesped orderby huesped.Id select huesped).Where(huesped => huesped.Nombre == nombre).FirstOrDefault();
-                
-                HuespedBE huespedBE = new HuespedBE();
-                huespedBE.huespedId = huespedB.Id;
-                huespedBE.huespedNombre = huespedB.Nombre;
-                huespedBE.huespedTelefono = huespedB.Telefono;
-                huespedBE.huespedDni = huespedB.DNI;
-                huespedBE.huespedCorreo = huespedB.Correo;
-                huespedBE.huespedSexo = huespedB.Sexo;
+                var query = (from huesped in hotel.vw_huesped
+                             where huesped.Nombre.Contains(nombre)
+                             orderby huesped.Id
+                             select huesped).ToList();
 
-                return huespedBE;
+                List<HuespedBE> listaHuespedes = new List<HuespedBE>();
+                foreach (var huesped in query)
+                {
+                    HuespedBE huespedBE = new HuespedBE();
+                    huespedBE.huespedId = huesped.Id;
+                    huespedBE.huespedNombre = huesped.Nombre;
+                    huespedBE.huespedTelefono = huesped.Telefono;
+                    huespedBE.huespedDni = huesped.DNI;
+                    huespedBE.huespedCorreo = huesped.Correo;
+                    huespedBE.huespedSexo = huesped.Sexo;
+
+                    listaHuespedes.Add(huespedBE);
+                }
+
+                return listaHuespedes;
             }
             catch (EntityException e)
             {

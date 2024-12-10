@@ -13,7 +13,11 @@
                 <div class="search-bar">
                     <asp:TextBox ID="txtNombre" runat="server" CssClass="search-input" placeholder="Ingrese el nombre" />
                     <asp:Button ID="btnBuscarPorNombre" runat="server" Text="Buscar" CssClass="btn-search" OnClick="btnBuscarPorNombre_Click" />
+                    <br />
+                    <br />
+                    <asp:Button ID="btnDescargarExcel" runat="server" Text="Descargar Excel" CssClass="btn-excel-download" OnClick="btnDescargarExcel_Click" />
                 </div>
+                <asp:Label ID="lblMensaje" runat="server" ForeColor="Red" Visible="false"></asp:Label>
 
                 <asp:GridView ID="gridHuespedes" runat="server" AllowPaging="True" Width="100%" AutoGenerateColumns="False" CellPadding="4" OnPageIndexChanging="gridHuespedes_PageIndexChanging" CssClass="table-grid">
                     <Columns>
@@ -31,6 +35,38 @@
 
     <!-- Estilos solo para el ContentPlaceHolderID="Principal" -->
     <style>
+        .btn-excel-download {
+        display: inline-block;
+        padding: 10px 20px;
+        background: linear-gradient(135deg, #28a745, #218838); 
+        color: #fff; 
+        font-size: 1rem;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+        .btn-excel-download:hover {
+            background: linear-gradient(135deg, #218838, #1e7e34);
+            transform: translateY(-2px); 
+        }
+
+        .btn-excel-download:active {
+            background: #1e7e34; 
+            transform: translateY(0); 
+        }
+
+    
+        .btn-excel-download i {
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+
         :root {
             --primary-color: #6366f1;
             --secondary-color: #4f46e5;

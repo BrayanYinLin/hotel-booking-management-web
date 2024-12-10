@@ -18,7 +18,7 @@ namespace ProyHotel_BL
             return huespedADO.listarHuespedes();
         }
 
-        public HuespedBE BuscarHuespedPorNombre(String nombre)
+        public List<HuespedBE> BuscarHuespedPorNombre(String nombre)
         {
             return huespedADO.BuscarHuespedPorNombre(nombre);
         }
