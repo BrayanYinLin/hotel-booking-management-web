@@ -108,6 +108,7 @@
     <Content Include="FrmReportes.aspx" />
     <Content Include="FrmReserva.aspx" />
     <Content Include="FrmServicios.aspx" />
+    <Content Include="FrmTipoHabitacion.aspx" />
     <Content Include="FrmTipoUsuario.aspx" />
     <Content Include="FrmUsuarios.aspx" />
     <Content Include="Login.aspx" />
@@ -164,6 +165,13 @@
     <Compile Include="FrmServicios.aspx.designer.cs">
       <DependentUpon>FrmServicios.aspx</DependentUpon>
     </Compile>
+    <Compile Include="FrmTipoHabitacion.aspx.cs">
+      <DependentUpon>FrmTipoHabitacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FrmTipoHabitacion.aspx.designer.cs">
+      <DependentUpon>FrmTipoHabitacion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="FrmTipoUsuario.aspx.cs">
       <DependentUpon>FrmTipoUsuario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -214,6 +222,7 @@
     <Content Include="SiteMaster.Master" />
     <Content Include="Plantillas\ListadoServicio.xlsx" />
     <Content Include="Plantillas\ListadoTipoUsuario.xlsx" />
+    <Content Include="Plantillas\ListadoTipoHabitacion.xlsx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

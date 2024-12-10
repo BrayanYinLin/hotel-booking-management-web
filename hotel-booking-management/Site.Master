@@ -18,16 +18,16 @@
             --dark-color: #1e1b4b;
             --light-color: #eef2ff;
         }
-         /* Reset básico y configuración de altura */
+        /* Reset básico y configuración de altura */
         html, body {
             margin: 0;
             padding: 0;
             min-height: 100vh;
             width: 100%;
         }
-         /* Reset básico y configuración de altura */
-          /* Reset básico y configuración de altura */
-         body {
+        /* Reset básico y configuración de altura */
+        /* Reset básico y configuración de altura */
+        body {
             font-family: 'Poppins', sans-serif;
             background-size: cover;
             background-position: center;
@@ -49,6 +49,7 @@
                 transform: translateY(20px);
                 opacity: 0;
             }
+
             100% {
                 transform: translateY(0);
                 opacity: 1;
@@ -113,17 +114,17 @@
             gap: 1rem;
         }
 
-        .nav-link i {
-            font-size: 1.25rem;
-            width: 1.5rem;
-            text-align: center;
-        }
+            .nav-link i {
+                font-size: 1.25rem;
+                width: 1.5rem;
+                text-align: center;
+            }
 
-        .nav-link:hover,
-        .nav-link.active {
-            background: rgba(99, 102, 241, 0.2);
-            transform: translateX(5px);
-        }
+            .nav-link:hover,
+            .nav-link.active {
+                background: rgba(99, 102, 241, 0.2);
+                transform: translateX(5px);
+            }
 
         .accordion-button {
             background: transparent !important;
@@ -133,13 +134,13 @@
             box-shadow: none !important;
         }
 
-        .accordion-button:not(.collapsed) {
-            background: rgba(99, 102, 241, 0.2) !important;
-        }
+            .accordion-button:not(.collapsed) {
+                background: rgba(99, 102, 241, 0.2) !important;
+            }
 
-        .accordion-button::after {
-            filter: brightness(0) invert(1);
-        }
+            .accordion-button::after {
+                filter: brightness(0) invert(1);
+            }
 
         .accordion-body {
             background: transparent !important;
@@ -162,11 +163,11 @@
             gap: 1rem;
         }
 
-        .sub-nav-link:hover {
-            background: rgba(99, 102, 241, 0.2);
-            transform: translateX(5px);
-            color: var(--light-color);
-        }
+            .sub-nav-link:hover {
+                background: rgba(99, 102, 241, 0.2);
+                transform: translateX(5px);
+                color: var(--light-color);
+            }
 
         .main-content {
             margin-left: 280px;
@@ -175,6 +176,7 @@
             position: relative;
             width: calc(100% - 280px);
         }
+
         .main-content-container {
             margin-left: 280px;
             padding: 2rem;
@@ -218,6 +220,7 @@
             z-index: 900;
             font-size: 0.875rem;
         }
+
         .top-section {
             margin-left: 280px;
             padding: 2rem 2rem 0 2rem;
@@ -242,29 +245,34 @@
             .sidebar {
                 transform: translateX(-100%);
             }
-            .sidebar.show {
-                transform: translateX(0);
-            }
+
+                .sidebar.show {
+                    transform: translateX(0);
+                }
+
             .main-content {
                 margin-left: 0;
                 width: 100%;
             }
+
             .footer {
                 left: 0;
             }
+
             .toggle-sidebar {
                 display: block !important;
             }
+
             .top-section {
                 margin-left: 0;
                 width: 100%;
             }
-             .main-content-container {
+
+            .main-content-container {
                 margin-left: 0;
                 width: 100%;
             }
-}
-
+        }
 
         }
 
@@ -310,31 +318,33 @@
         .form-control:invalid {
             border-color: #dc3545;
         }
+
         .auto-style1 {
             margin-bottom: 2rem;
             width: 280px;
         }
     </style>
 
-   <div class="top-section">
-    <div class="top-container">
-       <asp:ContentPlaceHolder id="Cabecera" runat="server"></asp:ContentPlaceHolder>
+    <div class="top-section">
+        <div class="top-container">
+            <asp:ContentPlaceHolder ID="Cabecera" runat="server"></asp:ContentPlaceHolder>
+        </div>
     </div>
-</div>
 </head>
 <body>
     <form runat="server" class="needs-validation" novalidate>
 
         <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="True"></asp:ScriptManager>
 
-        <button class="toggle-sidebar" onclick="toggleSidebar()"><i class="fas fa-bars"></i>
+        <button class="toggle-sidebar" onclick="toggleSidebar()">
+            <i class="fas fa-bars"></i>
         </button>
 
         <nav class="sidebar">
             <div class="auto-style1">
-                 <!-- RUTA POR DEFECTO  -->
+                <!-- RUTA POR DEFECTO  -->
                 <a class="sidebar-brand" runat="server" href="~/Inicio.aspx">
-                     <!--FIN RUTA  -->
+                    <!--FIN RUTA  -->
                     <span>Hotel</span><img src="https://i.postimg.cc/fyWYHyhR/logo.png" alt="Logo" class="logo-img">
                 </a>
             </div>
@@ -343,14 +353,14 @@
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#userCollapse">
-                            <i class="fas fa-user-circle me-2"></i> Usuario
+                            <i class="fas fa-user-circle me-2"></i>Usuario
                         </button>
                     </h2>
                     <div id="userCollapse" class="accordion-collapse collapse" data-bs-parent="#sidebarAccordion">
                         <div class="accordion-body">
                             <!--CAMBIAR RUTA  -->
                             <a class="sub-nav-link" runat="server" href="~/FrmUsuarios.aspx">
-                                 <!--FIN RUTA  -->
+                                <!--FIN RUTA  -->
                                 <i class="fas fa-users-cog"></i>
                                 <span>Usuarios</span>
                             </a>
@@ -384,17 +394,26 @@
 
                 <li class="nav-item">
                     <!--CAMBIAR RUTA  -->
-                    <a class="nav-link" runat="server" href="~/FrmHuespedes.aspx">
+                    <a class="nav-link" runat="server" href="~/FrmServicios.aspx">
                         <!--FIN RUTA  -->
-                        <i class="fas fa-users"></i>
-                        <span>Huespedes</span>
+                        <i class="fas fa-concierge-bell"></i>
+                        <span>Servicio</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <!--CAMBIAR RUTA  -->
+                    <a class="nav-link" runat="server" href="~/FrmTipoHabitacion.aspx">
+                        <!--FIN RUTA  -->
+                        <i class="fas fa-clone"></i>
+                        <span>Tipo Habitacion</span>
                     </a>
                 </li>
 
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#reservaCollapse">
-                            <i class="fas fa-calendar-check me-2"></i> Reserva
+                            <i class="fas fa-calendar-check me-2"></i>Reserva
                         </button>
                     </h2>
                     <div id="reservaCollapse" class="accordion-collapse collapse" data-bs-parent="#sidebarAccordion">
@@ -435,11 +454,11 @@
             </div>
         </nav>
 
-       <div class="main-content-container">
+        <div class="main-content-container">
             <div class="content-wrapper">
-                <asp:ContentPlaceHolder id="Principal" runat="server"></asp:ContentPlaceHolder>
+                <asp:ContentPlaceHolder ID="Principal" runat="server"></asp:ContentPlaceHolder>
             </div>
-        </main>
+            </main>
 
         <footer class="footer">
             &copy; <%: DateTime.Now.Year %> La Pandilla
@@ -475,8 +494,8 @@
             }
             validationDiv.textContent = message;
         }
-    // Arreglo con todas las URLs de fondo
-            const backgroundImages = [
+        // Arreglo con todas las URLs de fondo
+        const backgroundImages = [
             'https://i.postimg.cc/Y0hRtzZv/photo-1602217401791-a5fab1b8b775.avif',
             'https://i.postimg.cc/vZNrNsQt/pexels-photo-8543167.jpg',
             'https://i.postimg.cc/rs3Jst2Q/photo-1455587734955-081b22074882.avif',
@@ -490,15 +509,15 @@
             'https://i.postimg.cc/z3mhNW9N/pexels-photo-3225602.jpg',
             'https://i.postimg.cc/28vcZxj4/pexels-photo-8143668.jpg'
 
-           
 
-            ];
 
-            let currentImageIndex = 0;
+        ];
 
-            function changeBackground() {
-        // Crear la cadena del gradiente con la nueva imagen
-        const newBackground = `linear-gradient(135deg, rgba(30, 27, 75, 0.5), rgba(45, 27, 105, 0.5)), url('${backgroundImages[currentImageIndex]}')`;
+        let currentImageIndex = 0;
+
+        function changeBackground() {
+            // Crear la cadena del gradiente con la nueva imagen
+            const newBackground = `linear-gradient(135deg, rgba(30, 27, 75, 0.5), rgba(45, 27, 105, 0.5)), url('${backgroundImages[currentImageIndex]}')`;
 
             // Aplicar el nuevo fondo
             document.body.style.background = newBackground;
@@ -509,13 +528,13 @@
 
             // Incrementar el índice y volver a 0 si llegamos al final
             currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
-    }
+        }
 
-            // Cambiar el fondo cada 10 segundos (10000 milisegundos)
-            setInterval(changeBackground, 10000);
+        // Cambiar el fondo cada 10 segundos (10000 milisegundos)
+        setInterval(changeBackground, 10000);
 
-            // Llamar a la función inmediatamente para no esperar los primeros 10 segundos
-            changeBackground();
+        // Llamar a la función inmediatamente para no esperar los primeros 10 segundos
+        changeBackground();
     </script>
 </body>
 </html>
