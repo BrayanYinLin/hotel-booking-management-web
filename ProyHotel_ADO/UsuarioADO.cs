@@ -36,6 +36,7 @@ namespace ProyHotel_ADO
                         usuarioId = (short)u.Id,
                         usuarioNombre = u.Usuario,
                         usuarioClave = u.Contraseña,
+                        usuarioTipo = u.Tipo,
                         usuarioTipoId = 0, // Ajuste temporal: asume que Tipo es string y no se puede convertir a short
                         usuarioCorreo = u.Correo,
                         usuarioEstado = u.Estado

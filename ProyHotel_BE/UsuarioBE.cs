@@ -10,6 +10,7 @@ namespace ProyHotel_BE
     {
         public Int16 usuarioId { get; set; }
         public Int16 usuarioTipoId { get; set; }
+        public string usuarioTipo { get; set; }
         public String usuarioNombre { get; set; }
         public String usuarioCorreo { get; set; }
         public String usuarioClave { get; set; }

@@ -110,7 +110,7 @@ namespace hotel_booking_management
                         worksheet.Cells[filaInicial, 2].Value = usuario.usuarioNombre;
                         worksheet.Cells[filaInicial, 3].Value = usuario.usuarioCorreo;
                         worksheet.Cells[filaInicial, 4].Value = usuario.usuarioClave;
-                        worksheet.Cells[filaInicial, 5].Value = usuario.usuarioTipoId.ToString();
+                        worksheet.Cells[filaInicial, 5].Value = usuario.usuarioTipo;
                         worksheet.Cells[filaInicial, 6].Value = usuario.usuarioEstado ? "Activo" : "Inactivo";
                         filaInicial++;
                     }
