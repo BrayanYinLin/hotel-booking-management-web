@@ -115,6 +115,22 @@
                 border-top: 1px solid #ccc;
             }
 
+        .btn-excel-download {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #28a745, #218838); /* Verdes profesionales */
+            color: #fff; /* Texto blanco */
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
         @media (max-width: 768px) {
             .content-container {
                 width: 90%;
@@ -135,17 +151,15 @@
         }
     </style>
     <div class="content-container">
-         <h3 class="section-title">Tipos de Usuario</h3>
-        <asp:Label ID="labelError" runat="server" Text="Label" CssClass="badge text-bg-danger"></asp:Label>
+        <h3 class="section-title">Tipos de Usuario</h3>
+        <asp:Label ID="labelError" runat="server" Text="" CssClass="badge text-bg-danger"></asp:Label>
         <header>
             <div class="search-bar">
                 <asp:TextBox ID="textboxSearch" runat="server" CssClass="search-input" placeholder="Ingrese el tipo de usuario"></asp:TextBox>
                 <asp:Button ID="buttonSearch" runat="server" Text="Buscar" CssClass="btn-search" OnClick="buttonSearch_Click" />
+                <asp:Button ID="buttonDescargar" runat="server" Text="Descargar" CssClass="btn-excel-download" OnClick="buttonDescargar_Click" />
             </div>
         </header>
-        <div id="download-section">
-            <asp:Button ID="buttonDescargar" runat="server" Text="Descargar" CssClass="btn btn-outline-dark" OnClick="buttonDescargar_Click" />
-        </div>
         <asp:GridView ID="gridUsersType" runat="server" AllowPaging="True" AutoGenerateColumns="False" Width="100%" CssClass="table-grid" OnPageIndexChanging="gridTipoUsuario_PageIndexChanging">
             <HeaderStyle Font-Bold="True" Font-Size="Large" />
             <Columns>

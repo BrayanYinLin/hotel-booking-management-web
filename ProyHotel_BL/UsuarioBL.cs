@@ -16,5 +16,10 @@ namespace ProyHotel_BL
         {
             return usuarioADO.IniciarSesion(usuarioBE);
         }
+
+        public List<UsuarioBE> ListarUsuarios()
+        {
+            return usuarioADO.ListarUsuarios();
+        }
     }
 }
