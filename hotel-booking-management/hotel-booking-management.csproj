@@ -213,6 +213,7 @@
     <Content Include="Site.Master" />
     <Content Include="SiteMaster.Master" />
     <Content Include="Plantillas\ListadoServicio.xlsx" />
+    <Content Include="Plantillas\ListadoTipoUsuario.xlsx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
