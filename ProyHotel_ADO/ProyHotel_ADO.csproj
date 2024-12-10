@@ -98,6 +98,7 @@
     <Compile Include="tb_usuario.cs">
       <DependentUpon>HotelDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="TipoHabitacionADO.cs" />
     <Compile Include="TipoUsuarioADO.cs" />
     <Compile Include="usp_crear_tb_reserva_Result.cs">
       <DependentUpon>HotelDatabase.tt</DependentUpon>
