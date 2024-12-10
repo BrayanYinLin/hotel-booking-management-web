@@ -48,6 +48,11 @@ namespace ProyHotel_ADO
             {
                 var servicio = (from service in hotel.vw_servicio orderby service.Id select service).Where(service => service.Servicio_Descripcion == nombre).FirstOrDefault();
 
+                if (servicio == null)
+                {
+                    throw new Exception("No se hallo el servicio");
+                }
+
                 ServicioBE servicioBE = new ServicioBE();
                 servicioBE.servicioId = servicio.Id;
                 servicioBE.servicioDescripcion = servicio.Servicio_Descripcion;
@@ -59,6 +64,10 @@ namespace ProyHotel_ADO
                 return servicioBE;
             }
             catch (EntityException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }

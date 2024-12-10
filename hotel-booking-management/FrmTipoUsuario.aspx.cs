@@ -40,14 +40,19 @@ namespace hotel_booking_management
             try
             {
                 List<TipoUsuarioBE> listaTipoUsuario = new List<TipoUsuarioBE>();
-                listaTipoUsuario.Add(tipoUsuarioBL.BuscarTipoUsuarioPorNombre(textboxSearch.Text));
-
+                TipoUsuarioBE tipoUsuarioBE = tipoUsuarioBL.BuscarTipoUsuarioPorNombre(textboxSearch.Text);
+                if (tipoUsuarioBE == null)
+                {
+                    throw new Exception("No se hallaron coincidencias");
+                }
+                listaTipoUsuario.Add(tipoUsuarioBE);
+                labelError.Text = "";
                 gridUsersType.DataSource = listaTipoUsuario;
                 gridUsersType.DataBind();
             }
             catch (Exception ex)
             {
-
+                labelError.Text = ex.Message;
             }
         }
 
@@ -101,6 +106,13 @@ namespace hotel_booking_management
             {
                 labelError.Text = ex.Message;
             }
+        }
+
+        protected void gridTipoUsuario_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gridUsersType.PageIndex = e.NewPageIndex;
+            gridUsersType.DataSource = tipoUsuarioBL.ListarTipoUsuario();
+            gridUsersType.DataBind();
         }
     }
 }
