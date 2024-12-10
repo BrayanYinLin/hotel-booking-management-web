@@ -214,6 +214,14 @@
     <Content Include="SiteMaster.Master" />
     <Content Include="Plantillas\ListadoServicio.xlsx" />
     <Content Include="Plantillas\ListadoTipoUsuario.xlsx" />
+    <Content Include="Plantillas\ListadoUsuario.xlsx" />
+    <Content Include="Plantillas\ListadoHabitacion.xlsx" />
+    <Content Include="Plantillas\ListadoHuesped.xlsx" />
+    <Content Include="Plantillas\ListadoReserva.xlsx" />
+    <Content Include="Plantillas\ListadoReservaHabitacionHuesped.xlsx" />
+    <Content Include="Plantillas\ListadoReservaServicio.xlsx" />
+    <Content Include="Plantillas\ListadoReservasHabitacion.xlsx" />
+    <Content Include="Plantillas\ListadoTipoHabitacion.xlsx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

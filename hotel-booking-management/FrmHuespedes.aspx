@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="Gestionar Huéspedes" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="FrmHuespedes.aspx.cs" Inherits="hotel_booking_management.FrmHuespedes" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="Cabecera" runat="server">
     <h2>Gestionar Huéspedes</h2>
     <p>Aquí puede ver los huéspedes registrados y sus datos de contacto.</p>
@@ -7,12 +8,13 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="Principal" runat="server">
     <div class="content-container">
         <h3 class="section-title">Listado de Huéspedes</h3>
-
+        <asp:Label ID="labelError" runat="server" Text="" CssClass="badge text-bg-danger"></asp:Label>
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
                 <div class="search-bar">
                     <asp:TextBox ID="txtNombre" runat="server" CssClass="search-input" placeholder="Ingrese el nombre" />
                     <asp:Button ID="btnBuscarPorNombre" runat="server" Text="Buscar" CssClass="btn-search" OnClick="btnBuscarPorNombre_Click" />
+                    <asp:Button ID="btnDescargarExcel" runat="server" Text="Descargar Excel" CssClass="btn-excel-download" OnClick="btnDescargarExcel_Click" />
                 </div>
 
                 <asp:GridView ID="gridHuespedes" runat="server" AllowPaging="True" Width="100%" AutoGenerateColumns="False" CellPadding="4" OnPageIndexChanging="gridHuespedes_PageIndexChanging" CssClass="table-grid">
@@ -56,6 +58,8 @@
         }
 
         .search-bar {
+            width: 100%;
+            gap: 10px;
             display: flex;
             justify-content: space-between;
             margin-bottom: 20px;
@@ -70,10 +74,10 @@
             transition: border-color 0.3s ease;
         }
 
-        .search-input:focus {
-            border-color: var(--primary-color);
-            outline: none;
-        }
+            .search-input:focus {
+                border-color: var(--primary-color);
+                outline: none;
+            }
 
         .btn-search {
             padding: 10px 20px;
@@ -86,9 +90,9 @@
             transition: background 0.3s ease;
         }
 
-        .btn-search:hover {
-            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-        }
+            .btn-search:hover {
+                background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            }
 
         .table-grid {
             width: 100%;
@@ -98,32 +102,32 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .table-grid th,
-        .table-grid td {
-            padding: 12px;
-            text-align: center;
-            border: 1px solid #ddd;
-        }
+            .table-grid th,
+            .table-grid td {
+                padding: 12px;
+                text-align: center;
+                border: 1px solid #ddd;
+            }
 
-        .table-grid th {
-            background-color: var(--primary-color);
-            color: white;
-            font-weight: bold;
-        }
+            .table-grid th {
+                background-color: var(--primary-color);
+                color: white;
+                font-weight: bold;
+            }
 
-        .table-grid tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
+            .table-grid tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
 
-        .table-grid tr:hover {
-            background-color: #e7e7e7;
-            cursor: pointer;
-        }
+            .table-grid tr:hover {
+                background-color: #e7e7e7;
+                cursor: pointer;
+            }
 
-        .table-grid td,
-        .table-grid th {
-            border-top: 1px solid #ccc;
-        }
+            .table-grid td,
+            .table-grid th {
+                border-top: 1px solid #ccc;
+            }
 
         @media (max-width: 768px) {
             .content-container {
@@ -143,5 +147,37 @@
                 width: 100%;
             }
         }
+
+        .btn-excel-download {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #28a745, #218838); /* Verdes profesionales */
+            color: #fff; /* Texto blanco */
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+            .btn-excel-download:hover {
+                background: linear-gradient(135deg, #218838, #1e7e34);
+                transform: translateY(-2px);
+            }
+
+            .btn-excel-download:active {
+                background: #1e7e34;
+                transform: translateY(0);
+            }
+
+
+            .btn-excel-download i {
+                margin-right: 8px;
+                font-size: 1.2rem;
+            }
     </style>
-    </asp:Content>
+</asp:Content>
