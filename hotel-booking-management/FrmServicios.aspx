@@ -12,6 +12,11 @@
             display: flex;
             justify-content: space-between;
         }
+
+        #download-section {
+            width: 100%;
+            justify-content: flex-end;
+        }
     </style>
     <header>
         <h3>Lista de Servicios Disponibles</h3>
@@ -20,7 +25,7 @@
 <asp:Button ID="buttonReport" runat="server" Text="Buscar" CssClass="btn btn-outline-dark" OnClick="buttonReport_Click" />
         </div>
     </header>
-    <div>
+    <div id="download-section">
         <asp:Button ID="buttonDescargar" runat="server" Text="Descargar" CssClass="btn btn-outline-dark" OnClick="buttonDescargar_Click" />
     </div>
     <asp:GridView ID="gridServices" runat="server" AutoGenerateColumns="False" Width="100%" CssClass="bg-transparent border border-dark rounded">

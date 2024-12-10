@@ -2,32 +2,37 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="Cabecera" runat="server">
     <h2>Gestionar Tipos de Usuario</h2>
     <p>Defina los diferentes tipos de usuario que tendrán acceso a la plataforma, como administrador, recepcionista, y más.</p>
+    <asp:Label ID="labelError" runat="server" Text="Label"></asp:Label>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Principal" runat="server">
-    <h3>Tipos de Usuario</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Tipo de Usuario</th>
-                <th>Descripción</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>Administrador</td>
-                <td>Acceso total al sistema</td>
-                <td><a href="#">Modificar</a> | <a href="#">Eliminar</a></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Recepcionista</td>
-                <td>Acceso a gestión de reservas y huéspedes</td>
-                <td><a href="#">Modificar</a> | <a href="#">Eliminar</a></td>
-            </tr>
-            <!-- Más tipos de usuario -->
-        </tbody>
-    </table>
+        <style>
+        header {
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #download-section {
+            width: 100%;
+            margin: 10px 0;
+            justify-content: flex-end;
+        }
+    </style>
+    <header>
+        <h3>Tipos de Usuario</h3>
+        <div>
+            <asp:TextBox ID="textboxSearch" runat="server"></asp:TextBox>
+<asp:Button ID="buttonSearch" runat="server" Text="Buscar" CssClass="btn btn-outline-dark" OnClick="buttonSearch_Click" />
+        </div>
+    </header>
+    <div id="download-section">
+        <asp:Button ID="buttonDescargar" runat="server" Text="Descargar" CssClass="btn btn-outline-dark" OnClick="buttonDescargar_Click" />
+    </div>
+    <asp:GridView ID="gridUsersType" runat="server" AutoGenerateColumns="False" Width="100%" CssClass="bg-transparent border border-dark rounded">
+    <HeaderStyle Font-Bold="True" Font-Size="Large" />
+    <Columns>
+        <asp:BoundField DataField="tipoUsuarioId" HeaderText="Id" />
+        <asp:BoundField DataField="tipoUsuarioDescripcion" HeaderText="Descripcion" />
+    </Columns>
+</asp:GridView>
 </asp:Content>
