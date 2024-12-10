@@ -168,7 +168,7 @@
                 <asp:BoundField DataField="usuarioNombre" HeaderText="Nombre" />
                 <asp:BoundField DataField="usuarioCorreo" HeaderText="Correo Electrónico" />
                 <asp:BoundField DataField="usuarioClave" HeaderText="Contraseña" />
-                <asp:BoundField DataField="usuarioTipoId" HeaderText="Tipo de Usuario" />
+                <asp:BoundField DataField="usuarioTipo" HeaderText="Tipo de Usuario" />
                 <asp:BoundField DataField="usuarioEstado" HeaderText="Estado" />
             </Columns>
         </asp:GridView>
