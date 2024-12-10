@@ -39,14 +39,20 @@ namespace hotel_booking_management
             try
             {
                 listServices = new List<ServicioBE>();
-                listServices.Add(servicioBL.BuscarServicioPorNombre(textboxSearch.Text));
+                ServicioBE targetService = servicioBL.BuscarServicioPorNombre(textboxSearch.Text.Trim());
+                if (targetService == null)
+                {
+                    throw new Exception("No se hallaron coincidencias");
+                }
+                listServices.Add(targetService);
+                labelError.Text = "";
 
                 gridServices.DataSource = listServices;
                 gridServices.DataBind();
             }
             catch (Exception ex)
             {
-
+                labelError.Text = ex.Message;
             }
         }
 
@@ -116,6 +122,13 @@ namespace hotel_booking_management
             {
                 labelError.Text = ex.Message;
             }
+        }
+
+        protected void gridServicios_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gridServices.PageIndex = e.NewPageIndex;
+            gridServices.DataSource = servicioBL.ListarServicio();
+            gridServices.DataBind();
         }
     }
 }
