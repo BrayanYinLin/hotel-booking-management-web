@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -38,10 +39,8 @@ namespace hotel_booking_management
         {
             try
             {
-                listUsuarios = usuarioBL.ListarUsuarios();
-                DataView dataView = new DataView(ConvertToDataTable(listUsuarios));
-                dataView.RowFilter = $"usuarioNombre LIKE '%{filtro}%'";
-                grvUsuarios.DataSource = dataView;
+                listUsuarios = usuarioBL.ListarUsuarios().Where(user => user.usuarioNombre.ToLower().Contains(filtro.ToLower())).ToList();
+                grvUsuarios.DataSource = listUsuarios;
                 grvUsuarios.DataBind();
             }
             catch (Exception ex)
@@ -49,28 +48,6 @@ namespace hotel_booking_management
                 lblMensaje.Text = ex.Message;
                 lblMensaje.Visible = true;
             }
-        }
-
-        private DataTable ConvertToDataTable(List<UsuarioBE> listaUsuarios)
-        {
-            DataTable dt = new DataTable();
-            dt.Columns.AddRange(new DataColumn[6]
-            {
-                new DataColumn("usuarioId"),
-                new DataColumn("usuarioNombre"),
-                new DataColumn("usuarioCorreo"),
-                new DataColumn("usuarioClave"),
-                new DataColumn("usuarioTipoId"),
-                new DataColumn("usuarioEstado")
-            });
-
-            foreach (var usuario in listaUsuarios)
-            {
-                dt.Rows.Add(usuario.usuarioId, usuario.usuarioNombre, usuario.usuarioCorreo,
-                    usuario.usuarioClave, usuario.usuarioTipoId, usuario.usuarioEstado ? "Activo" : "Inactivo");
-            }
-
-            return dt;
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e)

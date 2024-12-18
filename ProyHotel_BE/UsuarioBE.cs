@@ -15,5 +15,6 @@ namespace ProyHotel_BE
         public String usuarioCorreo { get; set; }
         public String usuarioClave { get; set; }
         public Boolean usuarioEstado { get; set; }
+        public String usuarioEstadoString {  get; set; }
     }
 }
