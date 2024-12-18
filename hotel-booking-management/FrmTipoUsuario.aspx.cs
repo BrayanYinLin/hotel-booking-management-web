@@ -39,12 +39,18 @@ namespace hotel_booking_management
         {
             try
             {
-                List<TipoUsuarioBE> listaTipoUsuario = new List<TipoUsuarioBE>();
-                TipoUsuarioBE tipoUsuarioBE = tipoUsuarioBL.BuscarTipoUsuarioPorNombre(textboxSearch.Text);
-                if (tipoUsuarioBE == null)
+                if (textboxSearch.Text.Trim() == String.Empty)
                 {
-                    throw new Exception("No se hallaron coincidencias");
+                    List<TipoUsuarioBE> todosTipoUsuario = new List<TipoUsuarioBE>();
+                    todosTipoUsuario = tipoUsuarioBL.ListarTipoUsuario();
+                    labelError.Text = "";
+                    gridUsersType.DataSource = todosTipoUsuario;
+                    gridUsersType.DataBind();
+                    return;
                 }
+
+                List<TipoUsuarioBE> listaTipoUsuario = new List<TipoUsuarioBE>();
+                TipoUsuarioBE tipoUsuarioBE = tipoUsuarioBL.BuscarTipoUsuarioPorNombre(textboxSearch.Text.Trim()) ?? throw new Exception("No se hallaron coincidencias");
                 listaTipoUsuario.Add(tipoUsuarioBE);
                 labelError.Text = "";
                 gridUsersType.DataSource = listaTipoUsuario;
