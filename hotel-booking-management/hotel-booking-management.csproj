@@ -102,8 +102,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="FrmCrearReserva.aspx" />
     <Content Include="FrmHabitaciones.aspx" />
+    <Content Include="FrmCrearReserva.aspx" />
     <Content Include="FrmHuespedes.aspx" />
     <Content Include="FrmMantenimientos.aspx" />
     <Content Include="FrmReportes.aspx" />
@@ -117,19 +117,19 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FrmCrearReserva.aspx.cs">
-      <DependentUpon>FrmCrearReserva.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FrmCrearReserva.aspx.designer.cs">
-      <DependentUpon>FrmCrearReserva.aspx</DependentUpon>
-    </Compile>
     <Compile Include="FrmHabitaciones.aspx.cs">
       <DependentUpon>FrmHabitaciones.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="FrmHabitaciones.aspx.designer.cs">
       <DependentUpon>FrmHabitaciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCrearReserva.aspx.cs">
+      <DependentUpon>FrmCrearReserva.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FrmCrearReserva.aspx.designer.cs">
+      <DependentUpon>FrmCrearReserva.aspx</DependentUpon>
     </Compile>
     <Compile Include="FrmHuespedes.aspx.cs">
       <DependentUpon>FrmHuespedes.aspx</DependentUpon>
@@ -231,6 +231,7 @@
     <Content Include="Plantillas\ListadoReservaServicio.xlsx" />
     <Content Include="Plantillas\ListadoReservasHabitacion.xlsx" />
     <Content Include="Plantillas\ListadoTipoHabitacion.xlsx" />
+    <Content Include="Plantillas\ListadoConsultaHabitaciones.xlsx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
