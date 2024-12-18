@@ -444,14 +444,14 @@
                     </div>
                 </div>
 
-                <li class="nav-item">
+                <%--<li class="nav-item">
                     <!--CAMBIAR RUTA  -->
                     <a class="nav-link" runat="server" href="~/FrmReportes.aspx">
                         <!--FIN RUTA  -->
                         <i class="fas fa-chart-bar"></i>
                         <span>Reporte</span>
                     </a>
-                </li>
+                </li>--%>
 
                
             </div>

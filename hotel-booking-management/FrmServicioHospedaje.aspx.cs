@@ -15,14 +15,6 @@ namespace hotel_booking_management
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
-            {
-                
-            }
-            catch (Exception ex)
-            {
-
-            }
         }
 
         protected void ButtonSearch_Click(object sender, EventArgs e)
@@ -30,8 +22,13 @@ namespace hotel_booking_management
             try
             {
                 List<ServicioReservaBE> listTargets = servicioBL.BuscarPorReserva(Convert.ToInt32(textboxSearch.Text.Trim()));
+                if (listTargets.Count <= 0)
+                {
+                    throw new Exception("No se hallaron resultados");
+                }
                 gridServicesSearched.DataSource = listTargets;
                 gridServicesSearched.DataBind();
+                labelError.Text = string.Empty;
             }
             catch (Exception ex)
             {
