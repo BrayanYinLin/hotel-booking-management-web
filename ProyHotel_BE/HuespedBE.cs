@@ -19,4 +19,14 @@ namespace ProyHotel_BE
         public String UsuarioUltModificacion { get; set; }
         public  Boolean huespedEstado { get; set; }
     }
+
+    public class GraficoMensual
+    {
+        public int MesCreacion { get; set; }
+        public Int16 TotalHuespedes { get;set; }
+        public Int16 TotalMasculinos { get;set; }
+        public Int16 TotalFemeninos { get;set; }
+       
+    }
+
 }

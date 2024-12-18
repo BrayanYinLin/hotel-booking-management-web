@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="Gestionar Huéspedes" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="FrmHuespedes.aspx.cs" Inherits="hotel_booking_management.FrmHuespedes" %>
 
+<%@ Register assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" namespace="System.Web.UI.DataVisualization.Charting" tagprefix="asp" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="Cabecera" runat="server">
     <h2>Gestionar Huéspedes</h2>
     <p>Aquí puede ver los huéspedes registrados y sus datos de contacto.</p>
@@ -8,7 +10,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="Principal" runat="server">
     <div class="content-container">
         <h3 class="section-title">Listado de Huéspedes</h3>
-        <asp:Label ID="labelError" runat="server" Text="" CssClass="badge text-bg-danger"></asp:Label>
+        <asp:Label ID="labelError" runat="server" CssClass="badge text-bg-danger" Visible="False"></asp:Label>
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
                 <div class="search-bar">
@@ -27,12 +29,32 @@
                         <asp:BoundField DataField="huespedSexo" HeaderText="Sexo" />
                     </Columns>
                 </asp:GridView>
+
+                
+      
             </ContentTemplate>
+
+
         </asp:UpdatePanel>
-    </div>
+                    <br />
+                <asp:Chart ID="graficohuesped" runat="server" Width="782px">
+                    <series>
+                        <asp:Series Name="Series1" ChartType="StackedColumn">
+                        </asp:Series>
+                    </series>
+                    <chartareas>
+                        <asp:ChartArea Name="ChartArea1">
+                        </asp:ChartArea>
+                    </chartareas>
+        </asp:Chart>
+                <br />
+                <br />
+                <br />
+                    </div>
 
     <!-- Estilos solo para el ContentPlaceHolderID="Principal" -->
     <style>
+
         :root {
             --primary-color: #6366f1;
             --secondary-color: #4f46e5;

@@ -23,7 +23,7 @@ namespace ProyHotel_ADO
             var ensureDLLIsCopied = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
 
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -814,6 +814,11 @@ namespace ProyHotel_ADO
                 new ObjectParameter("usuario_id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_obtener_tb_usuario_id_Result>("usp_obtener_tb_usuario_id", usuario_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_ObtenerEstadisticasPorMesHuesped_Result> sp_ObtenerEstadisticasPorMesHuesped()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ObtenerEstadisticasPorMesHuesped_Result>("sp_ObtenerEstadisticasPorMesHuesped");
         }
     }
 }
