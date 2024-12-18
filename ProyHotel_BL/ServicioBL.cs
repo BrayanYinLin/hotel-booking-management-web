@@ -26,5 +26,10 @@ namespace ProyHotel_BL
         {
             return servicioADO.ListarServicioGrafico();
         }
+
+        public List<ServicioReservaBE> BuscarPorReserva(int reserva)
+        {
+            return servicioADO.BuscarPorReserva(reserva);
+        }
     }
 }

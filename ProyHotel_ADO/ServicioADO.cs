@@ -46,7 +46,7 @@ namespace ProyHotel_ADO
         {
             try
             {
-                var servicio = (from service in hotel.vw_servicio orderby service.Id select service).Where(service => service.Servicio_Descripcion == nombre).FirstOrDefault();
+                var servicio = (from service in hotel.vw_servicio orderby service.Id select service).Where(service => service.Servicio_Descripcion.ToLower().Contains(nombre.ToLower())).FirstOrDefault();
 
                 if (servicio == null)
                 {
@@ -99,6 +99,36 @@ namespace ProyHotel_ADO
             catch (EntityException ex)
             {
                 throw new Exception($"Error en el listado: {ex.Message}");
+            }
+        }
+
+        public List<ServicioReservaBE> BuscarPorReserva(int reserva)
+        {
+            try
+            {
+                hotel_databaseEntities miHotel = new hotel_databaseEntities();
+                List<ServicioReservaBE> ListaServicios = new List<ServicioReservaBE>();
+
+                var query = miHotel.usp_obtener_tb_reserva_servicio_reserva(reserva);
+
+                foreach (var service in query)
+                {
+                    ServicioReservaBE servicioBE = new ServicioReservaBE();
+                    servicioBE.reservaId = service.reserva_id;
+                    servicioBE.servicioId = service.servicio_id;
+                    servicioBE.servicioDescripcion = service.servicio_descripcion;
+                    servicioBE.precioTotal = Convert.ToSingle(service.precio_total);
+                    servicioBE.servicioFechaCreacion = service.fecha_creacion;
+                    servicioBE.fechaModificacion = service.fecha_ult_modificacion ?? DateTime.MinValue;
+
+                    ListaServicios.Add(servicioBE);
+                }
+
+                return ListaServicios;
+            }
+            catch (EntityException e)
+            {
+                throw new Exception(e.Message);
             }
         }
     }

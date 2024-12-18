@@ -34,12 +34,6 @@ namespace hotel_booking_management
                                                                     servicioBL.ListarServicioGrafico(), "ingresoMensual");
                     ChartServicio.Series["Totales"].IsValueShownAsLabel = true;
                     ChartServicio.Series["Totales"].LabelFormat = "c";
-
-
-                    //ChartServicio.Series.Add("Reservas");
-                    //ChartServicio.Series["Reservas"].Points.DataBindXY(reservaBL.graficoReservas(), "periodo",
-                    //                                                reservaBL.graficoReservas(), "cantidad_reservas");
-                    //ChartServicio.Series["Reservas"].IsValueShownAsLabel = true;
                 }
                 
             }

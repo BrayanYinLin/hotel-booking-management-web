@@ -108,6 +108,7 @@
     <Content Include="FrmMantenimientos.aspx" />
     <Content Include="FrmReportes.aspx" />
     <Content Include="FrmReserva.aspx" />
+    <Content Include="FrmServicioHospedaje.aspx" />
     <Content Include="FrmServicios.aspx" />
     <Content Include="FrmTipoHabitacion.aspx" />
     <Content Include="FrmTipoUsuario.aspx" />
@@ -158,6 +159,13 @@
     </Compile>
     <Compile Include="FrmReserva.aspx.designer.cs">
       <DependentUpon>FrmReserva.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FrmServicioHospedaje.aspx.cs">
+      <DependentUpon>FrmServicioHospedaje.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FrmServicioHospedaje.aspx.designer.cs">
+      <DependentUpon>FrmServicioHospedaje.aspx</DependentUpon>
     </Compile>
     <Compile Include="FrmServicios.aspx.cs">
       <DependentUpon>FrmServicios.aspx</DependentUpon>
