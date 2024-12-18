@@ -152,7 +152,7 @@
 
         <!-- Barra de búsqueda -->
         <div class="search-bar">
-            <asp:DropDownList ID="cboTipoHabitacion" runat="server" CssClass="search-input"></asp:DropDownList>
+            <asp:DropDownList ID="cboTipoHabitacion" runat="server" CssClass="custom-select"></asp:DropDownList>
             <asp:Button ID="btnFiltrar" runat="server" Text="Filtrar" CssClass="btn-search" OnClick="btnFiltrar_Click" />
             <asp:Button ID="btnDescargar" runat="server" Text="Descargar" CssClass="btn-download" OnClick="btnDescargar_Click" />
         </div>
