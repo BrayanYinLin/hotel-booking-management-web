@@ -19,7 +19,7 @@
                     <asp:DropDownList ID="cboTipoHabitacion" runat="server">
                     </asp:DropDownList>
 &nbsp;&nbsp;&nbsp;
-                    <asp:Button ID="buttonListar" runat="server" Text="Button" />
+                    <asp:Button ID="btnFiltrar" runat="server" Text="Button" OnClick="btnFiltrar_Click1" />
 
                 </div>
             </td>
@@ -28,9 +28,16 @@
             </td>
         </tr>
     </table>
-    <asp:GridView ID="grvHabitaciones" runat="server" PageSize="20" Width="853px">
+    <asp:GridView ID="grvHabitaciones" runat="server" PageSize="20" Width="853px" AutoGenerateColumns="False">
         <Columns>
-            <asp:BoundField DataField="Habitacion Id" HeaderText="Habitacion Id" />
+            <asp:BoundField DataField="habitacionId" HeaderText="ID Habitación" />
+            <asp:BoundField DataField="habitacionNombre" HeaderText="Nombre Habitación" />
+            <asp:BoundField DataField="habitacionAforo" HeaderText="Aforo" />
+            <asp:TemplateField HeaderText="Estado">
+            <ItemTemplate>
+                <%# Convert.ToBoolean(Eval("estadoHabitacion")) ? "Activo" : "Inactivo" %>
+            </ItemTemplate>
+        </asp:TemplateField>
         </Columns>
     </asp:GridView>
 </asp:Content>
