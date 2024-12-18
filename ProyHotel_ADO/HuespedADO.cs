@@ -31,7 +31,7 @@ namespace ProyHotel_ADO
                     huespedBE.huespedCorreo = huesped.Correo;
                     huespedBE.huespedSexo = huesped.Sexo;
 
-
+                   
 
                     listaHuespedes.Add(huespedBE);
 
@@ -50,7 +50,7 @@ namespace ProyHotel_ADO
         {
             try
             {
-                var huespedB = (from huesped in hotel.vw_huesped orderby huesped.Id select huesped).Where(huesped => huesped.Nombre.Contains(nombre)).FirstOrDefault();
+                var huespedB = (from huesped in hotel.vw_huesped orderby huesped.Id select huesped).Where(huesped => huesped.Nombre == nombre).FirstOrDefault();
                 
                 HuespedBE huespedBE = new HuespedBE();
                 huespedBE.huespedId = huespedB.Id;
@@ -65,36 +65,6 @@ namespace ProyHotel_ADO
             catch (EntityException e)
             {
                 throw new Exception(e.Message);
-            }
-        }
-
-        public List<GraficoMensual> ObtenerEstadisticasPorMesHuesped()
-        {
-            try
-            {
-
-                hotel_databaseEntities miHotel = new hotel_databaseEntities();
-
-                List<GraficoMensual> objObtenerEstadisticasPorMesHuesped = new List<GraficoMensual>();
-
-                var query = miHotel.sp_ObtenerEstadisticasPorMesHuesped();
-
-                foreach (var resultado in query)
-                {
-                    GraficoMensual objGraficoMensual = new GraficoMensual();
-                    objGraficoMensual.TotalHuespedes = Convert.ToInt16(resultado.TotalHuespedes);
-                    objGraficoMensual.MesCreacion = Convert.ToInt32(resultado.MesCreacion);
-                    objGraficoMensual.TotalMasculinos = Convert.ToInt16(resultado.TotalMasculinos);
-                    objGraficoMensual.TotalFemeninos = Convert.ToInt16(resultado.TotalFemeninos);
-
-                    objObtenerEstadisticasPorMesHuesped.Add(objGraficoMensual);
-
-                }
-                return objObtenerEstadisticasPorMesHuesped;
-            }
-            catch (EntityException ex)
-            {
-                throw new Exception("Error en el listado:" + ex.Message);
             }
         }
     }
