@@ -149,6 +149,12 @@
                 width: 100%;
             }
         }
+
+        .graphic {
+            display: flex;
+            justify-content: center;
+
+        }
     </style>
     <div class="content-container">
         <h3 class="section-title">Lista de Servicios Disponibles</h3>
@@ -173,5 +179,24 @@
             </Columns>
         </asp:GridView>
     </div>
+
+    <br />
+    <div class="graphic">
+        <asp:Chart ID="ChartServicio" runat="server" Width="500px">
+    <Series>
+        <asp:Series Name="Series1">
+        </asp:Series>
+    </Series>
+    <ChartAreas>
+        <asp:ChartArea Name="ChartArea1">
+            <AxisY Title="Importe Total">
+            </AxisY>
+            <AxisX Title="Periodo">
+            </AxisX>
+        </asp:ChartArea>
+    </ChartAreas>
+</asp:Chart>
+    </div>
+    <br />
 
 </asp:Content>

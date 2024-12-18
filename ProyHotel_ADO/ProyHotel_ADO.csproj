@@ -188,6 +188,9 @@
     <Compile Include="usp_obtener_tb_usuario_id_Result.cs">
       <DependentUpon>HotelDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="usp_servicios_mes_Result.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="UsuarioADO.cs" />
     <Compile Include="vw_habitacion.cs">
       <DependentUpon>HotelDatabase.tt</DependentUpon>

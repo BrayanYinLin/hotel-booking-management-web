@@ -43,4 +43,11 @@ namespace ProyHotel_BE
         {
         }
     }
+
+    public class ServicioGrafico
+    {
+        public string periodo { get; set; }
+        public int cantidad { get; set; }
+        public double ingresoMensual { get; set; }
+    }
 }

@@ -25,6 +25,21 @@ namespace hotel_booking_management
                     listServices = servicioBL.ListarServicio();
                     gridServices.DataSource = listServices;
                     gridServices.DataBind();
+
+                    ChartServicio.DataSource = servicioBL.ListarServicioGrafico();
+                    ChartServicio.DataBind();
+
+                    ChartServicio.Series.Add("Totales");
+                    ChartServicio.Series["Totales"].Points.DataBindXY(servicioBL.ListarServicioGrafico(), "periodo",
+                                                                    servicioBL.ListarServicioGrafico(), "ingresoMensual");
+                    ChartServicio.Series["Totales"].IsValueShownAsLabel = true;
+                    ChartServicio.Series["Totales"].LabelFormat = "c";
+
+
+                    //ChartServicio.Series.Add("Reservas");
+                    //ChartServicio.Series["Reservas"].Points.DataBindXY(reservaBL.graficoReservas(), "periodo",
+                    //                                                reservaBL.graficoReservas(), "cantidad_reservas");
+                    //ChartServicio.Series["Reservas"].IsValueShownAsLabel = true;
                 }
                 
             }

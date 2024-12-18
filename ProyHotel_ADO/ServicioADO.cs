@@ -72,5 +72,34 @@ namespace ProyHotel_ADO
                 throw new Exception(e.Message);
             }
         }
+
+        public List<ServicioGrafico> ListarServicioGrafico()
+        {
+            try
+            {
+
+                hotel_databaseEntities miHotel = new hotel_databaseEntities();
+
+                List<ServicioGrafico> listServicios = new List<ServicioGrafico>();
+
+                var query = miHotel.usp_servicios_mes();
+
+                foreach (var resultado in query)
+                {
+                    ServicioGrafico datoGrafico = new ServicioGrafico();
+                    datoGrafico.periodo = resultado.Periodo;
+                    datoGrafico.cantidad = Convert.ToInt32(resultado.Cantidad);
+                    datoGrafico.ingresoMensual = Convert.ToDouble(resultado.Ingreso_Mensual);
+
+                    listServicios.Add(datoGrafico);
+
+                }
+                return listServicios;
+            }
+            catch (EntityException ex)
+            {
+                throw new Exception($"Error en el listado: {ex.Message}");
+            }
+        }
     }
 }
