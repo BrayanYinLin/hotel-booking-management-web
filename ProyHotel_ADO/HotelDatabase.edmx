@@ -669,6 +669,7 @@ advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_usuario' no tiene defi
         <Function Name="usp_obtener_tb_usuario_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="usuario_id" Type="int" Mode="In" />
         </Function>
+        <Function Name="usp_servicios_mes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="HotelDatabaseStoreContainer">
           <EntitySet Name="tb_habitacion" EntityType="Self.tb_habitacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_huesped" EntityType="Self.tb_huesped" Schema="dbo" store:Type="Tables" />
@@ -1578,6 +1579,7 @@ advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_usuario' no tiene defi
           </FunctionImport>
           <FunctionImport Name="sp_ObtenerEstadisticasPorMesHuesped" ReturnType="Collection(HotelDatabase.sp_ObtenerEstadisticasPorMesHuesped_Result)" />
           <FunctionImport Name="sp_graficoReservas" ReturnType="Collection(HotelDatabase.sp_graficoReservas_Result)" />
+          <FunctionImport Name="usp_servicios_mes" ReturnType="Collection(HotelDatabase.usp_servicios_mes_Result)" />
         </EntityContainer>
         <ComplexType Name="usp_crear_tb_reserva_Result">
           <Property Type="Int32" Name="reserva_id" Nullable="true" />
@@ -1842,6 +1844,11 @@ advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_usuario' no tiene defi
           <Property Type="String" Name="periodo" Nullable="true" MaxLength="4000" />
           <Property Type="Int32" Name="cantidad_reservas" Nullable="true" />
           <Property Type="Decimal" Name="ingreso_mensual" Nullable="true" Precision="38" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="usp_servicios_mes_Result">
+          <Property Type="String" Name="Periodo" Nullable="true" MaxLength="4000" />
+          <Property Type="Int32" Name="Cantidad" Nullable="true" />
+          <Property Type="Decimal" Name="Ingreso_Mensual" Nullable="true" Precision="38" Scale="2" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2525,6 +2532,15 @@ advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_usuario' no tiene defi
                 <ScalarProperty Name="periodo" ColumnName="periodo" />
                 <ScalarProperty Name="cantidad_reservas" ColumnName="cantidad_reservas" />
                 <ScalarProperty Name="ingreso_mensual" ColumnName="ingreso_mensual" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_servicios_mes" FunctionName="HotelDatabase.Store.usp_servicios_mes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.usp_servicios_mes_Result">
+                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Ingreso_Mensual" ColumnName="Ingreso Mensual" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -21,7 +21,6 @@ namespace ProyHotel_ADO
             : base("name=hotel_databaseEntities")
         {
             var ensureDLLIsCopied = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
-
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -824,6 +823,11 @@ namespace ProyHotel_ADO
         public virtual ObjectResult<sp_graficoReservas_Result> sp_graficoReservas()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_graficoReservas_Result>("sp_graficoReservas");
+        }
+    
+        public virtual ObjectResult<usp_servicios_mes_Result> usp_servicios_mes()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_servicios_mes_Result>("usp_servicios_mes");
         }
     }
 }
