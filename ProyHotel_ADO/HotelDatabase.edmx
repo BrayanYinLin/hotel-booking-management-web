@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HotelDatabase.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HotelDatabase.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tb_habitacion">
           <Key>
             <PropertyRef Name="habitacion_id" />
@@ -442,6 +442,7 @@ advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_usuario' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_ObtenerEstadisticasPorMesHuesped" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="usp_actualizar_estado_usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
@@ -849,8 +850,7 @@ advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_usuario' no tiene defi
             <End Role="tb_usuario" EntitySet="tb_usuario" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HotelDatabase" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1351,7 +1351,7 @@ advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_usuario' no tiene defi
             <End Role="tb_usuario" EntitySet="tb_usuario" />
           </AssociationSet>
           <FunctionImport Name="usp_actualizar_estado_usuario">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_actualizar_tb_habitacion">
             <Parameter Name="habitacion_id" Mode="In" Type="Int32" />
@@ -1420,13 +1420,13 @@ advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_usuario' no tiene defi
             <Parameter Name="estado_usuario" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="usp_borrar_tb_habitacion">
-            <Parameter Name="habitacion_id" Mode="In" Type="Int32" />
+          <Parameter Name="habitacion_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_borrar_tb_huesped">
-            <Parameter Name="huesped_id" Mode="In" Type="Int32" />
+          <Parameter Name="huesped_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_borrar_tb_reserva">
-            <Parameter Name="reserva_id" Mode="In" Type="Int32" />
+          <Parameter Name="reserva_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_borrar_tb_reserva_habitacion">
             <Parameter Name="reserva_id" Mode="In" Type="Int32" />
@@ -1442,16 +1442,16 @@ advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_usuario' no tiene defi
             <Parameter Name="servicio_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_borrar_tb_servicio">
-            <Parameter Name="servicio_id" Mode="In" Type="Int32" />
+          <Parameter Name="servicio_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_borrar_tb_tipo_habitacion">
-            <Parameter Name="tipo_habitacion_id" Mode="In" Type="Int32" />
+          <Parameter Name="tipo_habitacion_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_borrar_tb_tipo_usuario">
-            <Parameter Name="tipo_usuario_id" Mode="In" Type="Int32" />
+          <Parameter Name="tipo_usuario_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_borrar_tb_usuario">
-            <Parameter Name="usuario_id" Mode="In" Type="Int32" />
+          <Parameter Name="usuario_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_crear_tb_habitacion">
             <Parameter Name="tipo_habitacion_id" Mode="In" Type="Int32" />
@@ -1498,7 +1498,7 @@ advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_usuario' no tiene defi
             <Parameter Name="costo_noche" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="usp_crear_tb_tipo_usuario">
-            <Parameter Name="tipo_usuario_descripcion" Mode="In" Type="String" />
+          <Parameter Name="tipo_usuario_descripcion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="usp_crear_tb_usuario">
             <Parameter Name="tipo_usuario_id" Mode="In" Type="Int32" />
@@ -1526,16 +1526,16 @@ advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_usuario' no tiene defi
           <FunctionImport Name="usp_listar_tb_tipo_usuario" ReturnType="Collection(HotelDatabase.usp_listar_tb_tipo_usuario_Result)" />
           <FunctionImport Name="usp_listar_tb_usuario" ReturnType="Collection(HotelDatabase.usp_listar_tb_usuario_Result)" />
           <FunctionImport Name="usp_obtener_tb_habitacion_id" ReturnType="Collection(HotelDatabase.usp_obtener_tb_habitacion_id_Result)">
-            <Parameter Name="habitacion_id" Mode="In" Type="Int32" />
+          <Parameter Name="habitacion_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_obtener_tb_habitacion_tipo_id" ReturnType="Collection(HotelDatabase.usp_obtener_tb_habitacion_tipo_id_Result)">
-            <Parameter Name="tipo_habitacion_id" Mode="In" Type="Int32" />
+          <Parameter Name="tipo_habitacion_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_obtener_tb_huesped_id" ReturnType="Collection(HotelDatabase.usp_obtener_tb_huesped_id_Result)">
-            <Parameter Name="huesped_id" Mode="In" Type="Int32" />
+          <Parameter Name="huesped_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_obtener_tb_reserva_habitacion_huesped" ReturnType="Collection(HotelDatabase.usp_obtener_tb_reserva_habitacion_huesped_Result)">
-            <Parameter Name="huesped_nombre" Mode="In" Type="String" />
+          <Parameter Name="huesped_nombre" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="usp_obtener_tb_reserva_habitacion_huesped_id" ReturnType="Collection(HotelDatabase.usp_obtener_tb_reserva_habitacion_huesped_id_Result)">
             <Parameter Name="reserva_id" Mode="In" Type="Int32" />
@@ -1551,30 +1551,31 @@ advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_usuario' no tiene defi
             <Parameter Name="habitacion_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_obtener_tb_reserva_habitacion_reserva" ReturnType="Collection(HotelDatabase.usp_obtener_tb_reserva_habitacion_reserva_Result)">
-            <Parameter Name="reserva_id" Mode="In" Type="Int32" />
+          <Parameter Name="reserva_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_obtener_tb_reserva_id" ReturnType="Collection(HotelDatabase.usp_obtener_tb_reserva_id_Result)">
-            <Parameter Name="reserva_id" Mode="In" Type="Int32" />
+          <Parameter Name="reserva_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_obtener_tb_reserva_servicio_id" ReturnType="Collection(HotelDatabase.usp_obtener_tb_reserva_servicio_id_Result)">
             <Parameter Name="reserva_id" Mode="In" Type="Int32" />
             <Parameter Name="servicio_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_obtener_tb_reserva_servicio_reserva" ReturnType="Collection(HotelDatabase.usp_obtener_tb_reserva_servicio_reserva_Result)">
-            <Parameter Name="reserva_id" Mode="In" Type="Int32" />
+          <Parameter Name="reserva_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_obtener_tb_servicio_id" ReturnType="Collection(HotelDatabase.usp_obtener_tb_servicio_id_Result)">
-            <Parameter Name="servicio_id" Mode="In" Type="Int32" />
+          <Parameter Name="servicio_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_obtener_tb_tipo_habitacion_id" ReturnType="Collection(HotelDatabase.usp_obtener_tb_tipo_habitacion_id_Result)">
-            <Parameter Name="tipo_habitacion_id" Mode="In" Type="Int32" />
+          <Parameter Name="tipo_habitacion_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_obtener_tb_tipo_usuario_id" ReturnType="Collection(HotelDatabase.usp_obtener_tb_tipo_usuario_id_Result)">
-            <Parameter Name="tipo_usuario_id" Mode="In" Type="Int32" />
+          <Parameter Name="tipo_usuario_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_obtener_tb_usuario_id" ReturnType="Collection(HotelDatabase.usp_obtener_tb_usuario_id_Result)">
-            <Parameter Name="usuario_id" Mode="In" Type="Int32" />
+          <Parameter Name="usuario_id" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="sp_ObtenerEstadisticasPorMesHuesped" ReturnType="Collection(HotelDatabase.sp_ObtenerEstadisticasPorMesHuesped_Result)" />
         </EntityContainer>
         <ComplexType Name="usp_crear_tb_reserva_Result">
           <Property Type="Int32" Name="reserva_id" Nullable="true" />
@@ -1828,6 +1829,12 @@ advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_usuario' no tiene defi
           <Property Type="Boolean" Name="usuario_estado" Nullable="false" />
           <Property Type="DateTime" Name="fecha_ult_modificacion" Nullable="true" Precision="23" />
           <Property Type="DateTime" Name="fecha_creacion" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="sp_ObtenerEstadisticasPorMesHuesped_Result">
+          <Property Type="Int32" Name="MesCreacion" Nullable="true" />
+          <Property Type="Int32" Name="TotalHuespedes" Nullable="true" />
+          <Property Type="Int32" Name="TotalMasculinos" Nullable="true" />
+          <Property Type="Int32" Name="TotalFemeninos" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2492,6 +2499,16 @@ advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_usuario' no tiene defi
                 <ScalarProperty Name="usuario_estado" ColumnName="usuario_estado" />
                 <ScalarProperty Name="fecha_ult_modificacion" ColumnName="fecha_ult_modificacion" />
                 <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_ObtenerEstadisticasPorMesHuesped" FunctionName="HotelDatabase.Store.sp_ObtenerEstadisticasPorMesHuesped">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.sp_ObtenerEstadisticasPorMesHuesped_Result">
+                <ScalarProperty Name="MesCreacion" ColumnName="MesCreacion" />
+                <ScalarProperty Name="TotalHuespedes" ColumnName="TotalHuespedes" />
+                <ScalarProperty Name="TotalMasculinos" ColumnName="TotalMasculinos" />
+                <ScalarProperty Name="TotalFemeninos" ColumnName="TotalFemeninos" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
