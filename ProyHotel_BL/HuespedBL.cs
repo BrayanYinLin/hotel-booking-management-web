@@ -23,10 +23,5 @@ namespace ProyHotel_BL
             return huespedADO.BuscarHuespedPorNombre(nombre);
         }
 
-        public List<GraficoMensual> ObtenerEstadisticasPorMesHuesped() 
-        { 
-            return huespedADO.ObtenerEstadisticasPorMesHuesped();
-        }
-
     }
 }

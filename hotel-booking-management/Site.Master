@@ -385,15 +385,6 @@
 
                 <li class="nav-item">
                     <!--CAMBIAR RUTA  -->
-                    <a class="nav-link" runat="server" href="~/FrmHuespedes.aspx">
-                        <!--FIN RUTA  -->
-                        <i class="fas fa-users"></i>
-                        <span>Huespedes</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <!--CAMBIAR RUTA  -->
                     <a class="nav-link" runat="server" href="~/FrmHabitaciones.aspx">
                         <!--FIN RUTA  -->
                         <i class="fas fa-bed"></i>
@@ -452,7 +443,14 @@
                     </a>
                 </li>
 
-               
+                <li class="nav-item">
+                    <!--CAMBIAR RUTA  -->
+                    <a class="nav-link" runat="server" href="~/FrmMantenimientos.aspx">
+                        <!--FIN RUTA  -->
+                        <i class="fas fa-tools"></i>
+                        <span>Mantenimientos</span>
+                    </a>
+                </li>
             </div>
         </nav>
 

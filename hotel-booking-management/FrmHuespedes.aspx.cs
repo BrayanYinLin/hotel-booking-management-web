@@ -19,46 +19,7 @@ namespace hotel_booking_management
             {
                 if (!Page.IsPostBack)
                 {
-
                     ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
-
-                    // Obtén los datos solo una vez
-                    var estadisticas = huespedBL.ObtenerEstadisticasPorMesHuesped();
-
-                    // Agrega las series
-                    graficohuesped.Series.Add("Masculino");
-                    
-                    graficohuesped.Series.Add("Femenino");
-
-                    // Asocia los datos de las series con las listas correctas
-                    graficohuesped.Series["Masculino"].Points.DataBindXY(
-                        estadisticas, "MesCreacion", // Enlaza los meses
-                        estadisticas, "TotalMasculinos" // Enlaza el total de masculinos
-                    );
-
-                    graficohuesped.Series["Femenino"].Points.DataBindXY(
-                        estadisticas, "MesCreacion", // Enlaza los meses
-                        estadisticas, "TotalFemeninos" // Enlaza el total de femeninos
-                    );
-
-                    // Configuración del gráfico
-                    graficohuesped.Series["Masculino"].ChartType = System.Web.UI.DataVisualization.Charting.SeriesChartType.StackedColumn;
-                    graficohuesped.Series["Femenino"].ChartType = System.Web.UI.DataVisualization.Charting.SeriesChartType.StackedColumn;
-
-                    graficohuesped.Series["Masculino"].IsValueShownAsLabel = true;
-                    graficohuesped.Series["Femenino"].IsValueShownAsLabel = true;
-
-                    graficohuesped.ChartAreas[0].AxisX.Interval = 1;
-                    graficohuesped.ChartAreas[0].AxisY.LabelStyle.Format = "#,0";
-
-                    graficohuesped.ChartAreas[0].AxisX.Title = "Meses";
-                    graficohuesped.ChartAreas[0].AxisY.Title = "Cantidad de Huéspedes";
-
-                    graficohuesped.Legends.Add("Leyenda");
-                    graficohuesped.Legends["Leyenda"].Docking = System.Web.UI.DataVisualization.Charting.Docking.Top;
-                    graficohuesped.Legends["Leyenda"].Alignment = System.Drawing.StringAlignment.Center;
-
-                    // Fuente de datos para el Grid
                     gridHuespedes.DataSource = huespedBL.listarHuespedes();
                     gridHuespedes.DataBind();
                 }
