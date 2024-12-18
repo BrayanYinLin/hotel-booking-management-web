@@ -820,5 +820,10 @@ namespace ProyHotel_ADO
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ObtenerEstadisticasPorMesHuesped_Result>("sp_ObtenerEstadisticasPorMesHuesped");
         }
+    
+        public virtual ObjectResult<sp_graficoReservas_Result> sp_graficoReservas()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_graficoReservas_Result>("sp_graficoReservas");
+        }
     }
 }
