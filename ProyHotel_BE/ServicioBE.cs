@@ -44,6 +44,16 @@ namespace ProyHotel_BE
         }
     }
 
+    public class ServicioReservaBE : ServicioBE
+    {
+        public int reservaId { get; set; }
+        public int cantidad { get; set; }
+        public DateTime fechaModificacion { get; set; }
+        public double precioTotal { get; set; }
+
+        
+    }
+
     public class ServicioGrafico
     {
         public string periodo { get; set; }

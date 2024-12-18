@@ -155,9 +155,21 @@
             justify-content: center;
 
         }
+
+        #Principal_ChartServicio {
+            border-radius: 10px;
+        }
+        .title-services {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
     </style>
     <div class="content-container">
-        <h3 class="section-title">Lista de Servicios Disponibles</h3>
+        <div class="title-services">
+            <h3 class="section-title">Lista de Servicios Disponibles</h3>
+            <a runat="server" class="btn-search" href="~/FrmServicioHospedaje.aspx">Consultar Servicios en Hospedaje</a>
+        </div>
         <asp:Label ID="labelError" runat="server" Text="" CssClass="badge text-bg-danger"></asp:Label>
         <header>
             <div class="search-bar">
@@ -166,8 +178,6 @@
                 <asp:Button ID="buttonDescargar" runat="server" Text="Descargar" CssClass="btn-excel-download" OnClick="buttonDescargar_Click" />
             </div>
         </header>
-        <div id="download-section">
-        </div>
         <asp:GridView ID="gridServices" runat="server" AllowPaging="True" AutoGenerateColumns="False" Width="100%" CssClass="table-grid" OnPageIndexChanging="gridServicios_PageIndexChanging">
             <HeaderStyle Font-Bold="True" Font-Size="Large" />
             <Columns>
@@ -183,19 +193,19 @@
     <br />
     <div class="graphic">
         <asp:Chart ID="ChartServicio" runat="server" Width="500px">
-    <Series>
-        <asp:Series Name="Series1">
-        </asp:Series>
-    </Series>
-    <ChartAreas>
-        <asp:ChartArea Name="ChartArea1">
-            <AxisY Title="Importe Total">
-            </AxisY>
-            <AxisX Title="Periodo">
-            </AxisX>
-        </asp:ChartArea>
-    </ChartAreas>
-</asp:Chart>
+            <Series>
+                <asp:Series Name="Series1">
+                </asp:Series>
+            </Series>
+            <ChartAreas>
+                <asp:ChartArea Name="ChartArea1">
+                    <AxisY Title="Importe Total">
+                    </AxisY>
+                    <AxisX Title="Periodo">
+                    </AxisX>
+                </asp:ChartArea>
+            </ChartAreas>
+        </asp:Chart>
     </div>
     <br />
 

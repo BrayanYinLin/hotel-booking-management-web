@@ -375,14 +375,14 @@
                     </div>
                 </div>
 
-                <li class="nav-item">
+<%--                <li class="nav-item">
                     <!--CAMBIAR RUTA  -->
                     <a class="nav-link" runat="server" href="~/FrmServicios.aspx">
                         <!--FIN RUTA  -->
                         <i class="fas fa-concierge-bell"></i>
                         <span>Servicio</span>
                     </a>
-                </li>
+                </li>--%>
 
                 <li class="nav-item">
                     <!--CAMBIAR RUTA  -->
