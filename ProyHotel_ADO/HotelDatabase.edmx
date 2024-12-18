@@ -442,6 +442,7 @@ advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_usuario' no tiene defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_graficoReservas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_ObtenerEstadisticasPorMesHuesped" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="usp_actualizar_estado_usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
@@ -1576,6 +1577,7 @@ advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_usuario' no tiene defi
           <Parameter Name="usuario_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_ObtenerEstadisticasPorMesHuesped" ReturnType="Collection(HotelDatabase.sp_ObtenerEstadisticasPorMesHuesped_Result)" />
+          <FunctionImport Name="sp_graficoReservas" ReturnType="Collection(HotelDatabase.sp_graficoReservas_Result)" />
         </EntityContainer>
         <ComplexType Name="usp_crear_tb_reserva_Result">
           <Property Type="Int32" Name="reserva_id" Nullable="true" />
@@ -1835,6 +1837,11 @@ advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_usuario' no tiene defi
           <Property Type="Int32" Name="TotalHuespedes" Nullable="true" />
           <Property Type="Int32" Name="TotalMasculinos" Nullable="true" />
           <Property Type="Int32" Name="TotalFemeninos" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_graficoReservas_Result">
+          <Property Type="String" Name="periodo" Nullable="true" MaxLength="4000" />
+          <Property Type="Int32" Name="cantidad_reservas" Nullable="true" />
+          <Property Type="Decimal" Name="ingreso_mensual" Nullable="true" Precision="38" Scale="2" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2509,6 +2516,15 @@ advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_usuario' no tiene defi
                 <ScalarProperty Name="TotalHuespedes" ColumnName="TotalHuespedes" />
                 <ScalarProperty Name="TotalMasculinos" ColumnName="TotalMasculinos" />
                 <ScalarProperty Name="TotalFemeninos" ColumnName="TotalFemeninos" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_graficoReservas" FunctionName="HotelDatabase.Store.sp_graficoReservas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.sp_graficoReservas_Result">
+                <ScalarProperty Name="periodo" ColumnName="periodo" />
+                <ScalarProperty Name="cantidad_reservas" ColumnName="cantidad_reservas" />
+                <ScalarProperty Name="ingreso_mensual" ColumnName="ingreso_mensual" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
