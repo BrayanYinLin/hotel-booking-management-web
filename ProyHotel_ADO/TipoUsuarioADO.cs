@@ -43,6 +43,11 @@ namespace ProyHotel_ADO
             {
                 var tipoUsuario = (from type in hotel.vw_tipo_usuario orderby type.Id select type).Where(service => service.Tipo_Descripcion == nombre).FirstOrDefault();
 
+                if (tipoUsuario == null)
+                {
+                    throw new Exception("Tipo de usuario no hallado");
+                }
+
                 TipoUsuarioBE tipoUsuarioBE = new TipoUsuarioBE();
                 tipoUsuarioBE.tipoUsuarioId = tipoUsuario.Id;
                 tipoUsuarioBE.tipoUsuarioDescripcion = tipoUsuario.Tipo_Descripcion;
