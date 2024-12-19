@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using ProyHotel_BE;
 using ProyHotel_BL;
 
 namespace hotel_booking_management
@@ -36,7 +37,42 @@ namespace hotel_booking_management
             }
             catch (Exception ex)
             {
+                lblErrorMensaje.Text = ex.Message;
+
                 throw new Exception("error: ", ex);
+            }
+
+
+
+        }
+        private void CargarDatos()
+        {
+            DateTime fecInicio = Convert.ToDateTime(txtFechaInicio.Text);
+            DateTime fecFin = Convert.ToDateTime(txtFin.Text);
+
+            if (fecInicio> fecFin)
+            {
+                throw new Exception("La fecha de inicio no puede ser mayor a la del fecha fin");
+            }
+            grdView.DataSource = reservaBL.obtenerReservasPorDNIyFechas(txtDni.Text,fecInicio,fecFin);
+            grdView.DataBind();
+        }
+
+        protected void consultar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtFechaInicio.Text.Trim() == String.Empty || txtFin.Text.Trim() == String.Empty)
+                {
+                    throw new Exception("Debe ingresar las fechas de inicio y fin");
+                }
+                CargarDatos();
+            }
+            catch (Exception ex)
+            {
+                lblErrorMensaje.Text = ex.Message;
+                grdView.DataSource = null;
+                grdView.DataBind();
             }
         }
     }

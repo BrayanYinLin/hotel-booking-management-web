@@ -17,5 +17,10 @@ namespace ProyHotel_BL
             return reservaADO.graficoReservas();
         }
 
+        public List<ReservaBE> obtenerReservasPorDNIyFechas(String dni, DateTime fechaInicio, DateTime fechaFin)
+        {
+            return reservaADO.obtenerReservasPorDNIyFechas(dni,fechaInicio,fechaFin);
+        }
+
     }
 }

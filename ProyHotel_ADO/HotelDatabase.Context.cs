@@ -829,5 +829,22 @@ namespace ProyHotel_ADO
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_servicios_mes_Result>("usp_servicios_mes");
         }
+    
+        public virtual ObjectResult<sp_ObtenerReservasPorDNIyFechas_Result> sp_ObtenerReservasPorDNIyFechas(string dNI, Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin)
+        {
+            var dNIParameter = dNI != null ?
+                new ObjectParameter("DNI", dNI) :
+                new ObjectParameter("DNI", typeof(string));
+    
+            var fechaInicioParameter = fechaInicio.HasValue ?
+                new ObjectParameter("FechaInicio", fechaInicio) :
+                new ObjectParameter("FechaInicio", typeof(System.DateTime));
+    
+            var fechaFinParameter = fechaFin.HasValue ?
+                new ObjectParameter("FechaFin", fechaFin) :
+                new ObjectParameter("FechaFin", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ObtenerReservasPorDNIyFechas_Result>("sp_ObtenerReservasPorDNIyFechas", dNIParameter, fechaInicioParameter, fechaFinParameter);
+        }
     }
 }
