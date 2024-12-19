@@ -8,7 +8,13 @@ namespace ProyHotel_BE
 {
     public class ReservaBE
     {
-
+        public int reservaId { get; set; }
+        public String nombreReserva { get; set; }
+        public String telefono { get; set; }
+        public Decimal precio { get; set; }
+        public String creadoPor {  get; set; }
+        public DateTime fechaCreacion  { get; set; } 
+        public string estado {  get; set; }
        
        
 

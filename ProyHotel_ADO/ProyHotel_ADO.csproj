@@ -76,6 +76,9 @@
     <Compile Include="sp_ObtenerEstadisticasPorMesHuesped_Result.cs">
       <DependentUpon>HotelDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="sp_ObtenerReservasPorDNIyFechas_Result.cs">
+      <DependentUpon>HotelDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="tb_habitacion.cs">
       <DependentUpon>HotelDatabase.tt</DependentUpon>
     </Compile>

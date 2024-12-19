@@ -11,8 +11,7 @@ namespace ProyHotel_ADO
 {
     public class ReservaADO
     {
-
-
+         hotel_databaseEntities miHotel = new hotel_databaseEntities();
 
         //grafica
         public List<GraficoReserva> graficoReservas()
@@ -20,7 +19,6 @@ namespace ProyHotel_ADO
             try
             {
 
-                hotel_databaseEntities miHotel = new hotel_databaseEntities();
 
                 List<GraficoReserva> objGraficoReservas = new List<GraficoReserva>();
 
@@ -41,6 +39,40 @@ namespace ProyHotel_ADO
             catch (EntityException ex)
             {
                 throw new Exception("Error en el listado:" + ex.Message);
+            }
+        }
+        public List<ReservaBE> obtenerReservasPorDNIyFechas(String dni, DateTime fechaInicio, DateTime fechaFin)
+        {
+            try
+            {
+                List<ReservaBE> objReservaPorFecha = new List<ReservaBE>();
+
+                var query = miHotel.sp_ObtenerReservasPorDNIyFechas(dni,fechaInicio,fechaFin);
+
+                foreach (var obj in query) 
+                { 
+                    ReservaBE objReservaBE = new ReservaBE();
+                    objReservaBE.reservaId = obj.Reserva_Id;
+                    objReservaBE.nombreReserva = obj.A_Nombre_de;
+                    objReservaBE.telefono = obj.Telefono;
+                    objReservaBE.precio = obj.Precio;
+                    objReservaBE.creadoPor = obj.Creado_por;
+
+                    objReservaBE.fechaCreacion = obj.Fecha_Creacion ?? default(DateTime);
+                    objReservaBE.estado = obj.Estado_Pago;
+
+                    objReservaPorFecha.Add(objReservaBE);
+
+                }
+
+
+
+                return objReservaPorFecha;
+            }
+            catch (EntityException ee)
+            {
+                
+                throw new Exception("Error Entity: " + ee);
             }
         }
 
