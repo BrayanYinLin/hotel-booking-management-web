@@ -444,6 +444,11 @@ advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_usuario' no tiene defi
         </Association>
         <Function Name="sp_graficoReservas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_ObtenerEstadisticasPorMesHuesped" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_ObtenerReservasPorDNIyFechas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DNI" Type="nvarchar" Mode="In" />
+          <Parameter Name="FechaInicio" Type="date" Mode="In" />
+          <Parameter Name="FechaFin" Type="date" Mode="In" />
+        </Function>
         <Function Name="usp_actualizar_estado_usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
@@ -1580,6 +1585,11 @@ advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_usuario' no tiene defi
           <FunctionImport Name="sp_ObtenerEstadisticasPorMesHuesped" ReturnType="Collection(HotelDatabase.sp_ObtenerEstadisticasPorMesHuesped_Result)" />
           <FunctionImport Name="sp_graficoReservas" ReturnType="Collection(HotelDatabase.sp_graficoReservas_Result)" />
           <FunctionImport Name="usp_servicios_mes" ReturnType="Collection(HotelDatabase.usp_servicios_mes_Result)" />
+          <FunctionImport Name="sp_ObtenerReservasPorDNIyFechas" ReturnType="Collection(HotelDatabase.sp_ObtenerReservasPorDNIyFechas_Result)">
+            <Parameter Name="DNI" Mode="In" Type="String" />
+            <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_crear_tb_reserva_Result">
           <Property Type="Int32" Name="reserva_id" Nullable="true" />
@@ -1849,6 +1859,15 @@ advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_usuario' no tiene defi
           <Property Type="String" Name="Periodo" Nullable="true" MaxLength="4000" />
           <Property Type="Int32" Name="Cantidad" Nullable="true" />
           <Property Type="Decimal" Name="Ingreso_Mensual" Nullable="true" Precision="38" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="sp_ObtenerReservasPorDNIyFechas_Result">
+          <Property Type="Int32" Name="Reserva_Id" Nullable="false" />
+          <Property Type="String" Name="A_Nombre_de" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Telefono" Nullable="true" MaxLength="9" />
+          <Property Type="Decimal" Name="Precio" Nullable="false" Precision="8" Scale="2" />
+          <Property Type="String" Name="Creado_por" Nullable="false" MaxLength="99" />
+          <Property Type="DateTime" Name="Fecha_Creacion" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Estado_Pago" Nullable="false" MaxLength="8" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2541,6 +2560,19 @@ advertencia 6002: La tabla o vista 'hotel_database.dbo.vw_usuario' no tiene defi
                 <ScalarProperty Name="Periodo" ColumnName="Periodo" />
                 <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
                 <ScalarProperty Name="Ingreso_Mensual" ColumnName="Ingreso Mensual" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_ObtenerReservasPorDNIyFechas" FunctionName="HotelDatabase.Store.sp_ObtenerReservasPorDNIyFechas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HotelDatabase.sp_ObtenerReservasPorDNIyFechas_Result">
+                <ScalarProperty Name="Reserva_Id" ColumnName="Reserva Id" />
+                <ScalarProperty Name="A_Nombre_de" ColumnName="A Nombre de" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Creado_por" ColumnName="Creado por" />
+                <ScalarProperty Name="Fecha_Creacion" ColumnName="Fecha Creacion" />
+                <ScalarProperty Name="Estado_Pago" ColumnName="Estado Pago" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
